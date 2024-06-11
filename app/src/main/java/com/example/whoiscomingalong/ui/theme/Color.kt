@@ -1,4 +1,4 @@
-package com.example.whoiscomingalong.ui.theme
+package com.example.whoiscomingalong
 
 import androidx.compose.ui.graphics.Color
 
@@ -9,3 +9,6 @@ val Pink80 = Color(0xFFEFB8C8)
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
+val GreyBeige = Color(0xFFCECAA9)
+val GreyBeigeLight = Color(0xFFE0D9C3)
+val LogoRed = Color(0xFFD13E3E)

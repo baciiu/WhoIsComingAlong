@@ -1,4 +1,4 @@
-package com.example.whoiscomingalong.ui.theme
+package com.example.whoiscomingalong
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
