@@ -1,7 +1,7 @@
-#Tue Jun 11 20:16:07 CEST 2024
-base.0=/Users/a.drucks/Documents/GitHub/WhoIsComingAlong/app/build/intermediates/dex/debugAndroidTest/mergeExtDexDebugAndroidTest/classes.dex
-base.1=/Users/a.drucks/Documents/GitHub/WhoIsComingAlong/app/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/0/classes.dex
-base.2=/Users/a.drucks/Documents/GitHub/WhoIsComingAlong/app/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/13/classes.dex
+#Tue Jun 11 21:02:33 CEST 2024
+base.0=/Users/alebaciu/AndroidStudioProjects/WhoIsComingAlong/app/build/intermediates/dex/debugAndroidTest/mergeExtDexDebugAndroidTest/classes.dex
+base.1=/Users/alebaciu/AndroidStudioProjects/WhoIsComingAlong/app/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/0/classes.dex
+base.2=/Users/alebaciu/AndroidStudioProjects/WhoIsComingAlong/app/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/13/classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=13/classes.dex

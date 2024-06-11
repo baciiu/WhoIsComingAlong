@@ -4,7 +4,7 @@
             "outputFile": "com.example.whoiscomingalong.test.app-mergeDebugAndroidTestResources-32:/values-lv/values-lv.xml",
             "map": [
                 {
-                    "source": "/Users/a.drucks/.gradle/caches/transforms-3/b41ed983cbaf631c06b35e2504580edf/transformed/ui-release/res/values-lv/values-lv.xml",
+                    "source": "/Users/alebaciu/.gradle/caches/transforms-3/b41ed983cbaf631c06b35e2504580edf/transformed/ui-release/res/values-lv/values-lv.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,7 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/a.drucks/.gradle/caches/transforms-3/2bf7f91add5d2daab5653deab22bd936/transformed/core-1.13.1/res/values-lv/values-lv.xml",
+                    "source": "/Users/alebaciu/.gradle/caches/transforms-3/2bf7f91add5d2daab5653deab22bd936/transformed/core-1.13.1/res/values-lv/values-lv.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",

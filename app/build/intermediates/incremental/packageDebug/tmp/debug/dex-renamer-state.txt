@@ -1,9 +1,9 @@
-#Tue Jun 11 20:16:15 CEST 2024
-base.0=/Users/a.drucks/Documents/GitHub/WhoIsComingAlong/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
-base.1=/Users/a.drucks/Documents/GitHub/WhoIsComingAlong/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
-base.2=/Users/a.drucks/Documents/GitHub/WhoIsComingAlong/app/build/intermediates/dex/debug/mergeProjectDexDebug/10/classes.dex
-base.3=/Users/a.drucks/Documents/GitHub/WhoIsComingAlong/app/build/intermediates/dex/debug/mergeProjectDexDebug/13/classes.dex
-base.4=/Users/a.drucks/Documents/GitHub/WhoIsComingAlong/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
+#Tue Jun 11 21:03:49 CEST 2024
+base.0=/Users/alebaciu/AndroidStudioProjects/WhoIsComingAlong/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.1=/Users/alebaciu/AndroidStudioProjects/WhoIsComingAlong/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.2=/Users/alebaciu/AndroidStudioProjects/WhoIsComingAlong/app/build/intermediates/dex/debug/mergeProjectDexDebug/10/classes.dex
+base.3=/Users/alebaciu/AndroidStudioProjects/WhoIsComingAlong/app/build/intermediates/dex/debug/mergeProjectDexDebug/13/classes.dex
+base.4=/Users/alebaciu/AndroidStudioProjects/WhoIsComingAlong/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=10/classes.dex
