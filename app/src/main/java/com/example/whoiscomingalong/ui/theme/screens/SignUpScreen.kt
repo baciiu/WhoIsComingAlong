@@ -40,16 +40,17 @@ fun SignUpScreen(navController: NavHostController) {
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.White)
-            .systemBarsPadding()
             .verticalScroll(rememberScrollState()) // Enable scrolling
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 30.dp),
+                .padding(horizontal = 30.dp, vertical = 20.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(40.dp))
+
             Image(
                 painter = painterResource(id = R.drawable.logo_header_transparent),
                 contentDescription = null,
@@ -58,19 +59,22 @@ fun SignUpScreen(navController: NavHostController) {
                     .height(72.dp)
             )
 
-            Spacer(modifier = Modifier.height(5.dp))
+            Spacer(modifier = Modifier.height(0.dp))
+
             HorizontalDivider(
                 modifier = Modifier.width(40.dp),
                 thickness = 1.dp,
                 color = Color.Black
             )
 
+            Spacer(modifier = Modifier.height(5.dp))
+
             OutlinedTextField(
                 value = firstName.value,
                 onValueChange = { firstName.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = 5.dp),
                 label = { Text("First Name") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
@@ -81,7 +85,7 @@ fun SignUpScreen(navController: NavHostController) {
                 onValueChange = { lastName.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = 5.dp),
                 label = { Text("Last Name") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
@@ -92,7 +96,7 @@ fun SignUpScreen(navController: NavHostController) {
                 onValueChange = { dateOfBirth.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = 5.dp),
                 label = { Text("Date of Birth") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
@@ -103,7 +107,7 @@ fun SignUpScreen(navController: NavHostController) {
                 onValueChange = { company.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = 5.dp),
                 label = { Text("Company") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
@@ -114,7 +118,7 @@ fun SignUpScreen(navController: NavHostController) {
                 onValueChange = { department.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = 5.dp),
                 label = { Text("Department") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
@@ -125,7 +129,7 @@ fun SignUpScreen(navController: NavHostController) {
                 onValueChange = { email.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = 5.dp),
                 label = { Text("Email") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
@@ -136,7 +140,7 @@ fun SignUpScreen(navController: NavHostController) {
                 onValueChange = { username.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = 5.dp),
                 label = { Text("Username") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
@@ -147,7 +151,7 @@ fun SignUpScreen(navController: NavHostController) {
                 onValueChange = { password.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 10.dp),
+                    .padding(vertical = 5.dp),
                 label = { Text("Password") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true,

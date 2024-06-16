@@ -32,22 +32,33 @@ fun LoginScreen(navController: NavHostController) {
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.White)
-            .systemBarsPadding()
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 30.dp),
+                .padding(horizontal = 30.dp, vertical = 20.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Spacer(modifier = Modifier.height(40.dp))
+
             Image(
                 painter = painterResource(id = R.drawable.logo_header_transparent),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(137.dp)
+                    .height(72.dp)
             )
+
+            Spacer(modifier = Modifier.height(0.dp))
+
+            HorizontalDivider(
+                modifier = Modifier.width(40.dp),
+                thickness = 1.dp,
+                color = Color.Black
+            )
+
+            Spacer(modifier = Modifier.height(5.dp))
 
             OutlinedTextField(
                 value = email.value,
@@ -65,7 +76,7 @@ fun LoginScreen(navController: NavHostController) {
                 onValueChange = { password.value = it },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(vertical = 20.dp),
+                    .padding(vertical = 5.dp),
                 label = { Text("Password") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true,

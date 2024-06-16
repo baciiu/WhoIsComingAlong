@@ -15,7 +15,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
-import com.example.whoiscomingalone.ui.theme.screens.StartPage
+import com.example.whoiscomingalong.ui.theme.screens.StartPage
 import com.example.whoiscomingalong.ui.theme.components.AddNewAppointmentPage
 import com.example.whoiscomingalong.ui.theme.screens.AllAppointmentsPage
 import com.example.whoiscomingalong.ui.theme.screens.AppointmentPage
@@ -24,12 +24,9 @@ import com.example.whoiscomingalong.ui.theme.screens.LoginScreen
 import com.example.whoiscomingalong.ui.theme.screens.ProfilePage
 import com.example.whoiscomingalong.ui.theme.screens.SearchPage
 import com.example.whoiscomingalong.ui.theme.screens.SignUpScreen
-import java.sql.Date
 
 
 class MainActivity : ComponentActivity() {
-    lateinit var appDatabase: AppDatabase
-
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,41 +40,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        // here is how to call the database; delete or change if necessary (todo)
-        appDatabase = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "appDatabase"
-        ).build()
-        // then with appDatabase it is possible to access the tables (remarks: it
-        // might be necessary to modify or add daos for proper usage of the app!)
-        // Create multiple User instances
-
-        /* val user1 = Users(
-            userId = 1,
-            firstName = "Klemens",
-            lastName = "Vospernik",
-            nickName = "Klemens",
-            dateOfBirth = Date(1973, 6, 19),
-            email = "klemens@example.com",
-            company = "it",
-            department = "development",
-            password = "securepassword1"
-        )
-        val user2 = Users(
-            userId = 1,
-            firstName = "Angie",
-            lastName = "Ducks",
-            nickName = "Angie",
-            dateOfBirth = Date(1998, 1, 1),
-            email = "angie@example.com",
-            company = "it",
-            department = "development",
-            password = "securepassword2"
-        )
-        // Example: call insertAll with one or more Users instances:
-        appDatabase.usersDao().insertAll(user1, user2) */
-
     }
 }
 
@@ -86,8 +48,8 @@ fun NavigationComponent(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "login_page") {
         composable("start_page") { StartPage(navController) }
         composable("profile_page") { ProfilePage(navController) }
-        composable("login_page") { LoginScreen(navController) }
-        composable("signup_page") { SignUpScreen(navController) }
+        composable("login_page") { LoginScreen(navController)}
+        composable("signup_page") { SignUpScreen(navController)}
         composable("appointment_page") { AppointmentPage(navController) }
         composable("search_page") { SearchPage(navController) }
         composable("history_page") { HistoryPage(navController) }
