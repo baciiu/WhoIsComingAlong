@@ -64,23 +64,3 @@ dist/
 
 # macOS hidden files
 .DS_Store
-
-.git.save
-
-gradlew.bat
-
-gradlew
-
-build.gradle.kts
-
-settings.gradle.kts
-gradle/
-gradle.properties
-*.xml
-*.dm
-*.bin
-gc.properties
-
-*.pro
-
-README.md
