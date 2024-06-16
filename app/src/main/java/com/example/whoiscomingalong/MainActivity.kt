@@ -13,6 +13,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.room.Room
 import com.example.whoiscomingalone.ui.theme.screens.StartPage
 import com.example.whoiscomingalong.ui.theme.components.AddNewAppointmentPage
 import com.example.whoiscomingalong.ui.theme.screens.AllAppointmentsPage
@@ -23,6 +24,8 @@ import com.example.whoiscomingalong.ui.theme.screens.SearchPage
 
 
 class MainActivity : ComponentActivity() {
+    lateinit var appDatabase: AppDatabase
+
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +37,14 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+        // here is how to call the database; delete or change if necessary (todo)
+        appDatabase = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java,
+            "appDatabase"
+        ).build()
+        // then with appDatabase it is possible to access the tables (remarks: it
+        // might be necessary to modify or add daos for proper usage of the app!)
     }
 }
 

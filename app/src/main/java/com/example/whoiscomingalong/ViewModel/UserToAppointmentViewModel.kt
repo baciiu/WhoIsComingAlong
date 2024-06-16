@@ -9,19 +9,19 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class AppointmentViewModel(application: Application) : AndroidViewModel(application) {
+class UserToAppointmentViewModel(application: Application) : AndroidViewModel(application) {
     private val db: AppDatabase = Room.databaseBuilder(
         application,
         AppDatabase::class.java,
         "appDatabase"
     ).build()
 
-    val allAppointments: StateFlow<List<Appointment>> = db.appointmentDao().getAll()
+    val allUserToAppointments: StateFlow<List<UserToAppointment>> = db.userToAppointmentDao().getAll()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    fun insertAppointment(appointment: Appointment) {
+    fun insertUserToAppointment(userToAppointment: UserToAppointment) {
         viewModelScope.launch {
-            db.appointmentDao().insertAll(appointment)
+            db.userToAppointmentDao().insertAll(userToAppointment)
         }
     }
 }
