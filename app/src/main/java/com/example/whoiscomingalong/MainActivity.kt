@@ -14,7 +14,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.whoiscomingalone.ui.theme.screens.StartPage
+import com.example.whoiscomingalong.ui.theme.screens.StartPage
 import com.example.whoiscomingalong.ui.theme.components.AddNewAppointmentPage
 import com.example.whoiscomingalong.ui.theme.screens.AllAppointmentsPage
 import com.example.whoiscomingalong.ui.theme.screens.AppointmentPage
@@ -25,12 +25,26 @@ import com.example.whoiscomingalong.ui.theme.screens.SearchPage
 import com.example.whoiscomingalong.ui.theme.screens.SignUpScreen
 
 
+@Suppress("DEPRECATION")
 class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Set the app to draw edge-to-edge
         WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        // Enable full screen mode
+        window.decorView.apply {
+            systemUiVisibility = (
+                    android.view.View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                            or android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            or android.view.View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            or android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            or android.view.View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                            or android.view.View.SYSTEM_UI_FLAG_FULLSCREEN
+                    )
+        }
+
         setContent {
             WhoIsComingAlongTheme {
                 val navController = rememberNavController()
