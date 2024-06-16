@@ -9,6 +9,7 @@ data class Users(
     @PrimaryKey val userId: Int,
     val firstName: String,
     val lastName: String,
+    val nickName: String,
     val dateOfBirth: Date,
     val email: String,
     val password: String,
