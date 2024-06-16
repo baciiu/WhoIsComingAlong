@@ -1,4 +1,16 @@
-package com.example.whoiscomingalong.Database
+package com.example.whoiscomingalong
 
-class AppointmentDao {
+import androidx.room.*
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface AppointmentDao {
+    @Query("SELECT * FROM Appointment")
+    fun getAll(): Flow<List<Appointment>>
+
+    @Insert
+    fun insertAll(vararg appointments: Appointment)
+
+    @Delete
+    fun delete(appointment: Appointment)
 }
