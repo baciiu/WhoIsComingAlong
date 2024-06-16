@@ -84,3 +84,6 @@ gc.properties
 *.pro
 
 README.md
+
+/app/src/androidTest/java/com/example/whoiscomingalong/ExampleInstrumentedTest.kt
+/app/src/test/java/com/example/whoiscomingalong/ExampleUnitTest.kt
