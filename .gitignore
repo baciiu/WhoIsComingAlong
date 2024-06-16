@@ -1,7 +1,8 @@
-# Gradle
+# Gradle files
 .gradle/
 build/
 **/build/
+!gradle/wrapper/gradle-wrapper.jar
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -23,7 +24,11 @@ captures/
 # External native build folder generated in Android Studio 2.2+
 .externalNativeBuild/
 
-# IntelliJ
+# Kotlin specific files
+*.kotlin_metadata/
+*.kotlin_module/
+
+# IntelliJ IDEA
 *.ipr
 *.iws
 *.bak
@@ -64,3 +69,5 @@ dist/
 
 # macOS hidden files
 .DS_Store
+
+.gradle
