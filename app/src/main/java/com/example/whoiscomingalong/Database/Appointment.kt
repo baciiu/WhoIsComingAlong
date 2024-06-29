@@ -2,6 +2,7 @@ package com.example.whoiscomingalong
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.time.LocalTime
 import java.util.*
 
 @Entity
