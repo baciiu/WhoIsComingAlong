@@ -18,6 +18,7 @@ class AppointmentViewModel(application: Application) : AndroidViewModel(applicat
 
     val allAppointments: StateFlow<List<Appointment>> = db.appointmentDao().getAll()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+    // todo: change name to getAllAppointments
 
     fun insertAppointment(appointment: Appointment) {
         viewModelScope.launch {
