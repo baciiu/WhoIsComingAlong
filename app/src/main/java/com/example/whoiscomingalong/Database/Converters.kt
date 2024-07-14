@@ -1,4 +1,4 @@
-package com.example.whoiscomingalong
+package com.example.whoiscomingalong.Database
 
 import android.os.Build
 import androidx.annotation.RequiresApi
