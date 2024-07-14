@@ -18,6 +18,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     val allUsers: StateFlow<List<Users>> = db.usersDao().getAll()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+    // remarks: .stateIn transforms the Flow created in the dao (UsersDao) into a StateFlow
+    // thereby allowing the ViewModel to use the data from the dao,
+    // default is an empty list
 
     fun insertUser(user: Users) {
         viewModelScope.launch {
