@@ -1,27 +1,28 @@
-package com.example.whoiscomingalong
+package com.example.whoiscomingalong.Database.UserToGroup
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
+import com.example.whoiscomingalong.AppDatabase
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class GroupViewModel(application: Application) : AndroidViewModel(application) {
+class UserToGroupViewModel(application: Application) : AndroidViewModel(application) {
     private val db: AppDatabase = Room.databaseBuilder(
         application,
         AppDatabase::class.java,
         "appDatabase"
     ).build()
 
-    val allGroups: StateFlow<List<Group>> = db.groupDao().getAll()
+    val allUserToGroups: StateFlow<List<UserToGroup>> = db.userToGroupDao().getAll()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    fun insertGroup(group: Group) {
+    fun insertUserToGroup(userToGroup: UserToGroup) {
         viewModelScope.launch {
-            db.groupDao().insertAll(group)
+            db.userToGroupDao().insertAll(userToGroup)
         }
     }
 }
