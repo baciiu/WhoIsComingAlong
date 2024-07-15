@@ -1,0 +1,18 @@
+add users (register user)
+login user (query username and password) -> if wrong, provide Toast or Text
+get user info (get user data where userid = ...)
+add appointment
+get all restaurants
+get all users
+get user by id
+(get user by firstName)
+(get user by familyName)
+get user by nickName
+get group by id
+get group by name
+add new appointment
+(get all appointments)
+get appointments where userId = ...
+send invitation
+send invitation response
+get all appointment responses where comingalong = true

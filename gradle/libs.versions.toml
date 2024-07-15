@@ -12,6 +12,7 @@ navigationCompose = "2.7.7"
 ksp = "1.9.10-1.0.13"
 hilt = "2.51.1"
 hilt-compiler = "1.2.0"
+hiltNavigationCompose = "1.2.0"
 room = "2.6.1"
 lifecycle-compose = "2.8.3"
 
@@ -36,6 +37,8 @@ compose-lifecycle-runtime = { module = "androidx.lifecycle:lifecycle-runtime-com
 dagger-hilt = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 dagger-hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
 dagger-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hilt-compiler" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }

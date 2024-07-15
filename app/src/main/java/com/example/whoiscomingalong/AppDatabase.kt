@@ -1,4 +1,5 @@
 package com.example.whoiscomingalong
+
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
@@ -24,7 +25,7 @@ import com.example.whoiscomingalong.Database.Users.UsersDao
         Restaurant::class,
         Appointment::class,
         UserToAppointment::class],
-    version = 1
+    version = 2
 )
 
 @TypeConverters(Converters::class)

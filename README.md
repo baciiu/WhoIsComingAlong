@@ -16,6 +16,7 @@ for each of the tables, the following classes have to be implemented:
 - Entity: defines tables of the database
 - DAO: data access objects
 - Repository: to abstract data operations
-- ViewModel: to interact with the repository
+#### Usage of database tables in the ViewModel and Composable functions
+- ViewModel: to interact with the repository (more than one ViewModel can interact with one Repository)
 - Composable function: creates the UI, to interact with the ViewModel
 

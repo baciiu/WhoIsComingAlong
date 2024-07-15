@@ -1,28 +1,30 @@
-package com.example.whoiscomingalong.Database.UserToAppointment
+package com.example.whoiscomingalong.ViewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import com.example.whoiscomingalong.AppDatabase
+import com.example.whoiscomingalong.Database.Appointment.Appointment
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class UserToAppointmentViewModel(application: Application) : AndroidViewModel(application) {
+class AppointmentViewModel(application: Application) : AndroidViewModel(application) {
     private val db: AppDatabase = Room.databaseBuilder(
         application,
         AppDatabase::class.java,
         "appDatabase"
     ).build()
 
-    val allUserToAppointments: StateFlow<List<UserToAppointment>> = db.userToAppointmentDao().getAll()
+    val allAppointments: StateFlow<List<Appointment>> = db.appointmentDao().getAll()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+    // todo: change name to getAllAppointments
 
-    fun insertUserToAppointment(userToAppointment: UserToAppointment) {
+    fun insertAppointment(appointment: Appointment) {
         viewModelScope.launch {
-            db.userToAppointmentDao().insertAll(userToAppointment)
+            db.appointmentDao().insertAll(appointment)
         }
     }
 }
