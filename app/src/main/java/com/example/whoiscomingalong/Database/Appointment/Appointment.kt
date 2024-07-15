@@ -1,7 +1,8 @@
-package com.example.whoiscomingalong
+package com.example.whoiscomingalong.Database.Appointment
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.time.LocalTime
 import java.util.*
 
 @Entity

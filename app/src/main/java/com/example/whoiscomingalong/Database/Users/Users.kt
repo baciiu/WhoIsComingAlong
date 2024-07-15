@@ -1,4 +1,4 @@
-package com.example.whoiscomingalong
+package com.example.whoiscomingalong.Database.Users
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -6,7 +6,7 @@ import java.util.*
 
 @Entity
 data class Users(
-    @PrimaryKey val userId: Int,
+    @PrimaryKey(autoGenerate = true) val userId: Int = 0,
     val firstName: String,
     val lastName: String,
     val nickName: String,

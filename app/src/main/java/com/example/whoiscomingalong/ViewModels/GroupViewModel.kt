@@ -1,27 +1,29 @@
-package com.example.whoiscomingalong
+package com.example.whoiscomingalong.ViewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
+import com.example.whoiscomingalong.AppDatabase
+import com.example.whoiscomingalong.Database.Group.Group
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class RestaurantViewModel(application: Application) : AndroidViewModel(application) {
+class GroupViewModel(application: Application) : AndroidViewModel(application) {
     private val db: AppDatabase = Room.databaseBuilder(
         application,
         AppDatabase::class.java,
         "appDatabase"
     ).build()
 
-    val allRestaurants: StateFlow<List<Restaurant>> = db.restaurantDao().getAll()
+    val allGroups: StateFlow<List<Group>> = db.groupDao().getAll()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    fun insertRestaurant(restaurant: Restaurant) {
+    fun insertGroup(group: Group) {
         viewModelScope.launch {
-            db.restaurantDao().insertAll(restaurant)
+            db.groupDao().insertAll(group)
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.whoiscomingalong
+package com.example.whoiscomingalong.Database.UserToGroup
 
 import androidx.room.Entity
 

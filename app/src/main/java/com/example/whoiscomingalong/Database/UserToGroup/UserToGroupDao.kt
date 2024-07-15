@@ -1,4 +1,4 @@
-package com.example.whoiscomingalong
+package com.example.whoiscomingalong.Database.UserToGroup
 
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
@@ -7,6 +7,10 @@ import kotlinx.coroutines.flow.Flow
 interface UserToGroupDao {
     @Query("SELECT * FROM UserToGroup")
     fun getAll(): Flow<List<UserToGroup>>
+
+    /*
+    @Query("SELECT * FROM UserToGroup WHERE groupId = :groupId")
+    fun getAll(): Flow<List<UserToGroup>> */
 
     @Insert
     fun insertAll(vararg userToGroups: UserToGroup)

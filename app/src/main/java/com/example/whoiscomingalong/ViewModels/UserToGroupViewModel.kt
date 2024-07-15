@@ -1,9 +1,11 @@
-package com.example.whoiscomingalong
+package com.example.whoiscomingalong.ViewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
+import com.example.whoiscomingalong.AppDatabase
+import com.example.whoiscomingalong.Database.UserToGroup.UserToGroup
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

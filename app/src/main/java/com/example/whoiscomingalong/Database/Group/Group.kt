@@ -1,4 +1,4 @@
-package com.example.whoiscomingalong
+package com.example.whoiscomingalong.Database.Group
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
