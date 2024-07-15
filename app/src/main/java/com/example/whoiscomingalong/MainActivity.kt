@@ -24,10 +24,13 @@ import com.example.whoiscomingalong.ui.theme.screens.LoginScreen
 import com.example.whoiscomingalong.ui.theme.screens.ProfilePage
 import com.example.whoiscomingalong.ui.theme.screens.SearchPage
 import com.example.whoiscomingalong.ui.theme.screens.SignUpScreen
+import dagger.hilt.android.AndroidEntryPoint
 import java.sql.Date
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+    @Inject
     lateinit var appDatabase: AppDatabase
 
     @RequiresApi(Build.VERSION_CODES.S)
@@ -44,11 +47,12 @@ class MainActivity : ComponentActivity() {
             }
         }
         // here is how to call the database; delete or change if necessary (todo)
+        /*
         appDatabase = Room.databaseBuilder(
             applicationContext,
             AppDatabase::class.java,
             "appDatabase"
-        ).build()
+        ).build() */
 
         // appDatabase.usersDao().insertAll()
 

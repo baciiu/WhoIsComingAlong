@@ -1,28 +1,29 @@
-package com.example.whoiscomingalong.Database.UserToGroup
+package com.example.whoiscomingalong.ViewModels
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import com.example.whoiscomingalong.AppDatabase
+import com.example.whoiscomingalong.Database.UserToAppointment.UserToAppointment
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class UserToGroupViewModel(application: Application) : AndroidViewModel(application) {
+class UserToAppointmentViewModel(application: Application) : AndroidViewModel(application) {
     private val db: AppDatabase = Room.databaseBuilder(
         application,
         AppDatabase::class.java,
         "appDatabase"
     ).build()
 
-    val allUserToGroups: StateFlow<List<UserToGroup>> = db.userToGroupDao().getAll()
+    val allUserToAppointments: StateFlow<List<UserToAppointment>> = db.userToAppointmentDao().getAll()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    fun insertUserToGroup(userToGroup: UserToGroup) {
+    fun insertUserToAppointment(userToAppointment: UserToAppointment) {
         viewModelScope.launch {
-            db.userToGroupDao().insertAll(userToGroup)
+            db.userToAppointmentDao().insertAll(userToAppointment)
         }
     }
 }

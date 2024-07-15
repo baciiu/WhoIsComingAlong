@@ -74,8 +74,10 @@ dependencies {
 
     // Hilt
     implementation(libs.dagger.hilt)
+    implementation(libs.hilt.navigation.compose)
     ksp(libs.dagger.hilt.android.compiler)
     ksp(libs.dagger.hilt.compiler)
+
 
     // Room
     implementation(libs.room.runtime)
@@ -85,5 +87,18 @@ dependencies {
     // ViewModel
     implementation(libs.compose.lifecycle.viewmodel)
     implementation(libs.compose.lifecycle.runtime)
+
+    /*
+    // Hilt dependencies
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+
+    // Hilt Lifecycle dependencies
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
+
+    // Hilt Navigation Compose dependency
+    implementation "androidx.hilt:hilt-navigation-compose:1.0.0"
+     */
 
 }
