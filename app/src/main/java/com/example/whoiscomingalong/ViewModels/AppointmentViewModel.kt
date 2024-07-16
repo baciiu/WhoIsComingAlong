@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import com.example.whoiscomingalong.AppDatabase
-import com.example.whoiscomingalong.Database.Appointment.Appointment
+import com.example.whoiscomingalong.database.Appointment.Appointment
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn

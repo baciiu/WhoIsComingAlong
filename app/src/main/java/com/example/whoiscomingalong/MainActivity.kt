@@ -14,18 +14,16 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.room.Room
-import com.example.whoiscomingalong.ui.theme.screens.StartPage
+import com.example.whoiscomingalong.ui.theme.screens.startscreen.StartPage
 import com.example.whoiscomingalong.ui.theme.components.AddNewAppointmentPage
-import com.example.whoiscomingalong.ui.theme.screens.AllAppointmentsPage
-import com.example.whoiscomingalong.ui.theme.screens.AppointmentPage
-import com.example.whoiscomingalong.ui.theme.screens.HistoryPage
-import com.example.whoiscomingalong.ui.theme.screens.LoginScreen
-import com.example.whoiscomingalong.ui.theme.screens.ProfilePage
-import com.example.whoiscomingalong.ui.theme.screens.SearchPage
-import com.example.whoiscomingalong.ui.theme.screens.SignUpScreen
+import com.example.whoiscomingalong.ui.theme.screens.allappointmentsscreen.AllAppointmentsPage
+import com.example.whoiscomingalong.ui.theme.screens.appointmentscreen.AppointmentPage
+import com.example.whoiscomingalong.ui.theme.screens.historyscreen.HistoryPage
+import com.example.whoiscomingalong.ui.theme.screens.loginscreen.LoginScreen
+import com.example.whoiscomingalong.ui.theme.screens.profilescreen.ProfilePage
+import com.example.whoiscomingalong.ui.theme.screens.searchscreen.SearchPage
+import com.example.whoiscomingalong.ui.theme.screens.signupscreen.SignUpScreen
 import dagger.hilt.android.AndroidEntryPoint
-import java.sql.Date
 import javax.inject.Inject
 
 @AndroidEntryPoint

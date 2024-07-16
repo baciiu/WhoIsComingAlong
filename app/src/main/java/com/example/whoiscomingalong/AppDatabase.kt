@@ -3,19 +3,19 @@ package com.example.whoiscomingalong
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.whoiscomingalong.Database.Appointment.Appointment
-import com.example.whoiscomingalong.Database.Appointment.AppointmentDao
-import com.example.whoiscomingalong.Database.Converters
-import com.example.whoiscomingalong.Database.Group.Group
-import com.example.whoiscomingalong.Database.Group.GroupDao
-import com.example.whoiscomingalong.Database.Restaurant.Restaurant
-import com.example.whoiscomingalong.Database.Restaurant.RestaurantDao
-import com.example.whoiscomingalong.Database.UserToAppointment.UserToAppointment
-import com.example.whoiscomingalong.Database.UserToAppointment.UserToAppointmentDao
-import com.example.whoiscomingalong.Database.UserToGroup.UserToGroup
-import com.example.whoiscomingalong.Database.UserToGroup.UserToGroupDao
-import com.example.whoiscomingalong.Database.Users.Users
-import com.example.whoiscomingalong.Database.Users.UsersDao
+import com.example.whoiscomingalong.database.Appointment.Appointment
+import com.example.whoiscomingalong.database.Appointment.AppointmentDao
+import com.example.whoiscomingalong.database.Converters
+import com.example.whoiscomingalong.database.Group.Group
+import com.example.whoiscomingalong.database.Group.GroupDao
+import com.example.whoiscomingalong.database.Restaurant.Restaurant
+import com.example.whoiscomingalong.database.Restaurant.RestaurantDao
+import com.example.whoiscomingalong.database.UserToAppointment.UserToAppointment
+import com.example.whoiscomingalong.database.UserToAppointment.UserToAppointmentDao
+import com.example.whoiscomingalong.database.UserToGroup.UserToGroup
+import com.example.whoiscomingalong.database.UserToGroup.UserToGroupDao
+import com.example.whoiscomingalong.database.Users.Users
+import com.example.whoiscomingalong.database.Users.UsersDao
 
 @Database(
     entities = [
