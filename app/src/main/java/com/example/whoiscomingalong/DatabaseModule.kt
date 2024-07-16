@@ -2,7 +2,7 @@ package com.example.whoiscomingalong
 
 import android.content.Context
 import androidx.room.Room
-import com.example.whoiscomingalong.Database.Users.UsersDao
+import com.example.whoiscomingalong.database.Users.UsersDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
