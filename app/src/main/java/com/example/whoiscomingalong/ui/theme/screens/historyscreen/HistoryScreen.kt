@@ -21,7 +21,7 @@ import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
-fun HistoryPage(navController: NavController) {
+fun HistoryScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -62,6 +62,6 @@ fun HistoryPage(navController: NavController) {
 @Composable
 fun HistoryPagePreview() {
     WhoIsComingAlongTheme {
-        HistoryPage(navController = rememberNavController())
+        HistoryScreen(navController = rememberNavController())
     }
 }

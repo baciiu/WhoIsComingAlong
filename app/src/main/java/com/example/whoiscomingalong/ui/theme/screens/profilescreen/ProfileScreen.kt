@@ -21,7 +21,7 @@ import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
-fun ProfilePage(navController: NavController) {
+fun ProfileScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -62,6 +62,6 @@ fun ProfilePage(navController: NavController) {
 @Composable
 fun ProfilePagePreview() {
     WhoIsComingAlongTheme{
-        ProfilePage(navController = rememberNavController())
+        ProfileScreen(navController = rememberNavController())
     }
 }

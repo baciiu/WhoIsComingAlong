@@ -1,5 +1,25 @@
-add users (register user)
-login user (query username and password) -> if wrong, provide Toast or Text
+User stories belonging to Screens:
+
+LoginScreen
+- login user (query username and password) -> if wrong, provide Toast or Text
+
+SignUpScreen
+- add users (register user)
+- login user (query username and password) -> if wrong, provide Toast or Text
+
+ProfileScreen
+
+AllAppointmentsScreen
+
+AddNewAppointmentScreen
+
+AppointmentScreen
+
+SearchScreen
+
+HistoryScreen
+
+
 get user info (get user data where userid = ...)
 add appointment
 get all restaurants

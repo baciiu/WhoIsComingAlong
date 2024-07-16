@@ -21,7 +21,7 @@ import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
-fun SearchPage(navController: NavController) {
+fun SearchScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -62,6 +62,6 @@ fun SearchPage(navController: NavController) {
 @Composable
 fun SearchPagePreview() {
     WhoIsComingAlongTheme {
-        SearchPage(navController = rememberNavController())
+        SearchScreen(navController = rememberNavController())
     }
 }
