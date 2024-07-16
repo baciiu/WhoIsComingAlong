@@ -22,7 +22,7 @@ import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
-fun AppointmentPage(navController: NavController) {
+fun AppointmentScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -63,6 +63,6 @@ fun AppointmentPage(navController: NavController) {
 @Composable
 fun AppointmentPagePreview() {
     WhoIsComingAlongTheme {
-        AppointmentPage(navController = rememberNavController())
+        AppointmentScreen(navController = rememberNavController())
     }
 }

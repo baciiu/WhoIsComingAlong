@@ -1,4 +1,4 @@
-package com.example.whoiscomingalong.ui.theme.screens.startscreen
+package com.example.whoiscomingalong.ui.theme.screens.centralscreen
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -29,7 +29,7 @@ import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
-fun StartPage(navController: NavController) {
+fun CentralScreen(navController: NavController) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -198,6 +198,6 @@ fun StartPage(navController: NavController) {
 @Composable
 fun StartPagePreview() {
     WhoIsComingAlongTheme {
-        StartPage(navController = rememberNavController())
+        CentralScreen(navController = rememberNavController())
     }
 }
