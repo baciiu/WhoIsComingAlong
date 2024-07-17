@@ -1,30 +1,29 @@
-package com.example.whoiscomingalong.ViewModels
+package com.example.whoiscomingalong.ViewModelsUnused
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import com.example.whoiscomingalong.AppDatabase
-import com.example.whoiscomingalong.database.Appointment.Appointment
+import com.example.whoiscomingalong.database.Restaurant.Restaurant
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class AppointmentViewModel(application: Application) : AndroidViewModel(application) {
+class RestaurantViewModel(application: Application) : AndroidViewModel(application) {
     private val db: AppDatabase = Room.databaseBuilder(
         application,
         AppDatabase::class.java,
         "appDatabase"
     ).build()
 
-    val allAppointments: StateFlow<List<Appointment>> = db.appointmentDao().getAll()
+    val allRestaurants: StateFlow<List<Restaurant>> = db.restaurantDao().getAll()
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
-    // todo: change name to getAllAppointments
 
-    fun insertAppointment(appointment: Appointment) {
+    fun insertRestaurant(restaurant: Restaurant) {
         viewModelScope.launch {
-            db.appointmentDao().insertAll(appointment)
+            db.restaurantDao().insertAll(restaurant)
         }
     }
 }

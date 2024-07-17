@@ -1,5 +1,6 @@
 package com.example.whoiscomingalong.ui.theme.screens.loginscreen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -25,6 +26,8 @@ import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
 fun LoginScreen(navController: NavHostController) {
+    Log.d("TAG", "LoginScreen")
+
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
 

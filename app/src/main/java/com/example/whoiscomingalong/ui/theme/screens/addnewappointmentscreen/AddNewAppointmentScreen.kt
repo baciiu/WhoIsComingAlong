@@ -1,5 +1,6 @@
 package com.example.whoiscomingalong.ui.theme.components
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -20,6 +21,8 @@ import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
 fun AddNewAppointmentScreen(navController: NavController) {
+    Log.d("TAG", "AddNewAppointmentScreen")
+
     Box(
         modifier = Modifier
             .fillMaxSize()

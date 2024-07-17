@@ -6,6 +6,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface UsersDao {
 
+    // queries are *not* called from suspend functions, as they already
+    // return an asynchronous Flow
     @Query("SELECT * FROM Users WHERE userId = :userId")
     fun getUserById(userId: Int): Flow<Users>
 
@@ -13,14 +15,14 @@ interface UsersDao {
     fun getAllUsers(): Flow<List<Users>>
 
     @Insert
-    fun insert(user: Users)
+    suspend fun insert(user: Users)
 
     @Insert // todo: delete insertAll if not needed
-    fun insertAll(vararg users: Users)
+    suspend fun insertAll(vararg users: Users)
 
     @Delete
-    fun delete(user: Users)
+    suspend fun delete(user: Users)
 
     @Update
-    fun update(user: Users)
+    suspend fun update(user: Users)
 }

@@ -1,20 +1,19 @@
-package com.example.whoiscomingalong.ViewModels
+package com.example.whoiscomingalong.ViewModelsUnused
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.whoiscomingalong.database.Users.Users
 import com.example.whoiscomingalong.database.Users.UsersRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class UserViewModel @Inject constructor(
+// @HiltViewModel
+class UserViewModel //@Inject
+ constructor(
     application: Application,
     private val usersRepository: UsersRepository
 ) : AndroidViewModel(application) {
@@ -33,6 +32,7 @@ class UserViewModel @Inject constructor(
     // thereby allowing the ViewModel to use the data from the dao,
     // default is an empty list
 
+    /*
     val allUsers: StateFlow<List<Users>> = usersRepository.allUsers
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
@@ -42,5 +42,5 @@ class UserViewModel @Inject constructor(
             // db.usersDao().insertAll(user)
 
         }
-    }
+    } */
 }

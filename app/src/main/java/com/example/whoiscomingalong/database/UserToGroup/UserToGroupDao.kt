@@ -13,8 +13,8 @@ interface UserToGroupDao {
     fun getAll(): Flow<List<UserToGroup>> */
 
     @Insert
-    fun insertAll(vararg userToGroups: UserToGroup)
+    suspend fun insertAll(vararg userToGroups: UserToGroup)
 
     @Delete
-    fun delete(userToGroup: UserToGroup)
+    suspend fun delete(userToGroup: UserToGroup)
 }

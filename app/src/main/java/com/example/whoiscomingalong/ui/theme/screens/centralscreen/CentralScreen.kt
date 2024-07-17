@@ -1,5 +1,6 @@
 package com.example.whoiscomingalong.ui.theme.screens.centralscreen
 
+import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,6 +31,8 @@ import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
 fun CentralScreen(navController: NavController) {
+    Log.d("TAG", "CentralScreen")
+
     Box(
         modifier = Modifier
             .fillMaxSize()

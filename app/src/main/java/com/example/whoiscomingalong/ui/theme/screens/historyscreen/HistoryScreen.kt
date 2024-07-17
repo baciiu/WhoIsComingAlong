@@ -2,6 +2,7 @@ package com.example.whoiscomingalong.ui.theme.screens.historyscreen
 
 // File: ui/HistoryScreen.kt
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,6 +23,8 @@ import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
 fun HistoryScreen(navController: NavController) {
+    Log.d("TAG", "HistoryScreen")
+
     Box(
         modifier = Modifier
             .fillMaxSize()

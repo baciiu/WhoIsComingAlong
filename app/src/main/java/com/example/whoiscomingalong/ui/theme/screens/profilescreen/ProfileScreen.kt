@@ -2,6 +2,7 @@
 
 package com.example.whoiscomingalong.ui.theme.screens.profilescreen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,6 +23,8 @@ import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
 fun ProfileScreen(navController: NavController) {
+    Log.d("TAG", "ProfileScreen")
+
     Box(
         modifier = Modifier
             .fillMaxSize()
