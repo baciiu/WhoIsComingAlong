@@ -1,4 +1,4 @@
-package com.example.whoiscomingalong.ViewModels
+package com.example.whoiscomingalong.ui.theme.screens.signupscreen
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
@@ -7,27 +7,28 @@ import com.example.whoiscomingalong.database.Users.Users
 import com.example.whoiscomingalong.database.Users.UsersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
+class SignUpScreenViewModel @Inject constructor(
+    application: Application,
+    private val usersRepository: UsersRepository
+) : AndroidViewModel(application) {
+
+    fun insertUser(user: Users) {
+        viewModelScope.launch (Dispatchers.IO){
+            usersRepository.insert(user)
+        }
+    }
+}
+
+/*
 @HiltViewModel
 class UserViewModel @Inject constructor(
     application: Application,
     private val usersRepository: UsersRepository
 ) : AndroidViewModel(application) {
-
-    /* todo: delete later
-    private val db: AppDatabase = Room.databaseBuilder(
-        application,
-        AppDatabase::class.java,
-        "appDatabase"
-    ).build() */
-
-    // val allUsers: StateFlow<List<Users>> = db.usersDao().getAllUsers()
-    //    .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     // remarks: .stateIn transforms the Flow created in the dao (UsersDao) into a StateFlow
     // thereby allowing the ViewModel to use the data from the dao,
@@ -44,3 +45,4 @@ class UserViewModel @Inject constructor(
         }
     }
 }
+ */

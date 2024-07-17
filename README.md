@@ -8,7 +8,7 @@ Group Project for SS24 Course App Development @ Uni Klagenfurt
 ## Room and Hilt
 #### General settings
 - Dependencies: have to be added to libs.versions.toml and build.gradle.kts project and module level
-- Database: sets up the Room databas
+- Database: sets up the Room database
 - Hilt modules: to provide the database and DAO
 - Application class: to initialize Hilt, also set in Android manifest
 #### Database tables
@@ -16,7 +16,8 @@ for each of the tables, the following classes have to be implemented:
 - Entity: defines tables of the database
 - DAO: data access objects
 - Repository: to abstract data operations
-#### Usage of database tables in the ViewModel and Composable functions
+## UI, Screens and ViewModels
+#### Usage of database tables in the ScreensViewModel and Composable functions
 - ViewModel: to interact with the repository (more than one ViewModel can interact with one Repository)
-- Composable function: creates the UI, to interact with the ViewModel
+- Screens: contain the Composable functions: create the UI, to interact with the ViewModel
 
