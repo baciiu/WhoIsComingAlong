@@ -1,38 +1,55 @@
-User stories belonging to Screens:
+User stories belonging to the following Screens:
 
 LoginScreen
-- login user (query username and password) -> if wrong, provide Toast or Text
+- login user (query username and password) -> if wrong, provide Toast and return to LoginScreen
 
 SignUpScreen
-- add users (register user)
-- login user (query username and password) -> if wrong, provide Toast or Text
+- insert users (register user)
+- login user (query username and password) -> if wrong, provide Toast and return to LoginScreen
+
+CentralScreen
+- (needs no database access)
 
 ProfileScreen
+- (what should happen here? change own user data?)
+- delete user
 
 AllAppointmentsScreen
+- get all appointments
+- get all appointment responses where comingalong = true (?)
 
 AddNewAppointmentScreen
+- add appointment
+- (maybe add user stories from AppointmentScreen here? -> please tell me where the function should be)
 
 AppointmentScreen
+- get group by name
+- get group by id
+- get user by id
+- get user by nickName
+- get all restaurants
+- get all users
+- get user where userid = ...
+- delete group
+- delete appointment
+- (or move parts of it to another screen?)
 
 SearchScreen
+- get appointments where userId = ...
+- (other searches?)
 
 HistoryScreen
+- get all appointments
+
+On which Screen should the following user stories happen?
+- get all appointment responses where comingalong = true
+- send invitation
+- send invitation response
+
+Not used for now:
+- (get user by firstName)
+- (get user by familyName)
+- (get all appointments)
 
 
-get user info (get user data where userid = ...)
-add appointment
-get all restaurants
-get all users
-get user by id
-(get user by firstName)
-(get user by familyName)
-get user by nickName
-get group by id
-get group by name
-add new appointment
-(get all appointments)
-get appointments where userId = ...
-send invitation
-send invitation response
-get all appointment responses where comingalong = true
+
