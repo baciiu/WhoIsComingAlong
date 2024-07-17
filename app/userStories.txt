@@ -20,6 +20,9 @@ AllAppointmentsScreen
 
 AddNewAppointmentScreen
 - add appointment
+- get all groups
+- get userToGroup
+- get user by id
 - (maybe add user stories from AppointmentScreen here? -> please tell me where the function should be)
 
 AppointmentScreen

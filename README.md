@@ -14,7 +14,7 @@ Group Project for SS24 Course App Development @ Uni Klagenfurt
 #### Database tables
 for each of the tables, the following classes have to be implemented:
 - Entity: defines tables of the database
-- DAO: data access objects
+- DAO: data access objects (caveat: suspend functions for all non-query functions)
 - Repository: to abstract data operations
 ## UI, Screens and ViewModels
 #### Usage of database tables in the ScreensViewModel and Composable functions

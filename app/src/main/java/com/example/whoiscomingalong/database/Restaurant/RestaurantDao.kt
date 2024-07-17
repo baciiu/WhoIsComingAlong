@@ -9,8 +9,8 @@ interface RestaurantDao {
     fun getAll(): Flow<List<Restaurant>>
 
     @Insert
-    fun insertAll(vararg restaurants: Restaurant)
+    suspend fun insertAll(vararg restaurants: Restaurant)
 
     @Delete
-    fun delete(restaurant: Restaurant)
+    suspend fun delete(restaurant: Restaurant)
 }

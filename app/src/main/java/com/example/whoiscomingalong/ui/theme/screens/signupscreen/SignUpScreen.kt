@@ -1,5 +1,6 @@
 package com.example.whoiscomingalong.ui.theme.screens.signupscreen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,6 +31,8 @@ import java.util.Date
 
 @Composable
 fun SignUpScreen(navController: NavHostController) { //}, userViewModel: UserViewModel = hiltViewModel()) {
+    Log.d("TAG", "SignUpScreen")
+
     val firstName = remember { mutableStateOf("") }
     val lastName = remember { mutableStateOf("") }
     val dateOfBirth = remember { mutableStateOf("") }

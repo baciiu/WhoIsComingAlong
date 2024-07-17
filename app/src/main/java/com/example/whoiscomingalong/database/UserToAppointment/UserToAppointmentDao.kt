@@ -9,8 +9,8 @@ interface UserToAppointmentDao {
     fun getAll(): Flow<List<UserToAppointment>>
 
     @Insert
-    fun insertAll(vararg userToAppointments: UserToAppointment)
+    suspend fun insertAll(vararg userToAppointments: UserToAppointment)
 
     @Delete
-    fun delete(userToAppointment: UserToAppointment)
+    suspend fun delete(userToAppointment: UserToAppointment)
 }

@@ -3,6 +3,7 @@ package com.example.whoiscomingalong.ui.theme.screens.appointmentscreen
 // File: ui/AppointmentScreen.kt
 
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -23,6 +24,8 @@ import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
 fun AppointmentScreen(navController: NavController) {
+    Log.d("TAG", "AppointmentScreen")
+
     Box(
         modifier = Modifier
             .fillMaxSize()

@@ -9,8 +9,8 @@ interface GroupDao {
     fun getAll(): Flow<List<Group>>
 
     @Insert
-    fun insertAll(vararg groups: Group)
+    suspend fun insertAll(vararg groups: Group)
 
     @Delete
-    fun delete(group: Group)
+    suspend fun delete(group: Group)
 }
