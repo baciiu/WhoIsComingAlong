@@ -1,6 +1,6 @@
-package com.example.whoiscomingalong.ui.theme.screens.historyscreen
+package com.example.whoiscomingalong.ui.theme.screens.restaurantscreen
 
-// File: ui/HistoryScreen.kt
+// File: ui/RestaurantScreen.kt
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -22,8 +22,8 @@ import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
-fun HistoryScreen(navController: NavController) {
-    Log.d("TAG", "HistoryScreen")
+fun RestaurantScreen(navController: NavController) {
+    Log.d("TAG", "RestaurantScreen")
 
     Box(
         modifier = Modifier
@@ -63,8 +63,8 @@ fun HistoryScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun HistoryScreenPreview() {
+fun RestaurantScreenPreview() {
     WhoIsComingAlongTheme {
-        HistoryScreen(navController = rememberNavController())
+        RestaurantScreen(navController = rememberNavController())
     }
 }
