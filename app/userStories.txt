@@ -39,9 +39,12 @@ AppointmentScreen
 - delete appointment
 - (or move parts of it to another screen?)
 
-SearchScreen
-- get appointments where userId = ...
-- (other searches?)
+GroupScreen
+- insert group
+- delete group
+- get all users
+- add user to group where groupid = ...
+- delete user from group where groupid = ...
 
 HistoryScreen
 - get all appointments

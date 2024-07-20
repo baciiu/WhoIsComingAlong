@@ -25,7 +25,7 @@ import com.example.whoiscomingalong.database.Users.UsersDao
         Restaurant::class,
         Appointment::class,
         UserToAppointment::class],
-    version = 2
+    version = 3
 )
 
 @TypeConverters(Converters::class)
