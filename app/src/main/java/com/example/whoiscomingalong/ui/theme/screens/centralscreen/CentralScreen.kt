@@ -182,7 +182,7 @@ fun CentralScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Button(
-                    onClick = { navController.navigate("history_screen") },
+                    onClick = { navController.navigate("restaurant_screen") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(80.dp)
@@ -190,7 +190,7 @@ fun CentralScreen(navController: NavController) {
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray)
                 ) {
-                    Text("History", color = Color.Black, fontSize = 20.sp)
+                    Text("Manage Restaurants", color = Color.Black, fontSize = 20.sp)
                 }
             }
         }
