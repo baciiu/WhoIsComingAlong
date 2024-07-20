@@ -12,6 +12,7 @@ CentralScreen
 
 ProfileScreen
 - (what should happen here? change own user data?)
+- get all users
 - delete user
 
 AllAppointmentsScreen
@@ -20,6 +21,7 @@ AllAppointmentsScreen
 
 AddNewAppointmentScreen
 - add appointment
+- add group
 - get all groups
 - get userToGroup
 - get user by id
