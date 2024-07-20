@@ -1,16 +1,24 @@
-package com.example.whoiscomingalong.ui.theme.screens.profilescreen
+package com.example.whoiscomingalong.ui.theme.screens.groupscreen
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.whoiscomingalong.database.Users.Users
+import com.example.whoiscomingalong.database.Group.GroupRepository
+import com.example.whoiscomingalong.database.UserToGroup.UserToGroupRepository
 import com.example.whoiscomingalong.database.Users.UsersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
+class GroupScreenViewModel @Inject constructor(
+    application: Application,
+    private val usersRepository: UsersRepository,
+    private val groupRepository: GroupRepository,
+    private val userToGroupRepository: UserToGroupRepository
+) : AndroidViewModel(application){
+    // todo: continue here
+}
+
+/*
 @HiltViewModel
 class ProfileScreenViewModel @Inject constructor(
     application: Application,
@@ -30,3 +38,5 @@ class ProfileScreenViewModel @Inject constructor(
         }
     }
 }
+
+ */
