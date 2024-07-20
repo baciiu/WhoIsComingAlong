@@ -1,6 +1,6 @@
-package com.example.whoiscomingalong.ui.theme.screens.searchscreen
+package com.example.whoiscomingalong.ui.theme.screens.groupscreen
 
-// File: ui/SearchScreen.kt
+// File: ui/GroupScreen.kt
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -22,8 +22,8 @@ import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
-fun SearchScreen(navController: NavController) {
-    Log.d("TAG", "SearchScreen")
+fun GroupScreen(navController: NavController) {
+    Log.d("TAG", "GroupScreen")
 
     Box(
         modifier = Modifier
@@ -63,8 +63,8 @@ fun SearchScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun SearchScreenPreview() {
+fun GroupScreenPreview() {
     WhoIsComingAlongTheme {
-        SearchScreen(navController = rememberNavController())
+        GroupScreen(navController = rememberNavController())
     }
 }
