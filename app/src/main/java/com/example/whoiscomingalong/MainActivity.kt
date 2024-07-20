@@ -10,6 +10,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -21,6 +22,7 @@ import com.example.whoiscomingalong.ui.theme.screens.appointmentscreen.Appointme
 import com.example.whoiscomingalong.ui.theme.screens.historyscreen.HistoryScreen
 import com.example.whoiscomingalong.ui.theme.screens.loginscreen.LoginScreen
 import com.example.whoiscomingalong.ui.theme.screens.profilescreen.ProfileScreen
+import com.example.whoiscomingalong.ui.theme.screens.profilescreen.ProfileScreenViewModel
 import com.example.whoiscomingalong.ui.theme.screens.searchscreen.SearchScreen
 import com.example.whoiscomingalong.ui.theme.screens.signupscreen.SignUpScreen
 import dagger.hilt.android.AndroidEntryPoint
@@ -90,7 +92,10 @@ class MainActivity : ComponentActivity() {
 fun NavigationComponent(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "login_screen") {
         composable("start_screen") { CentralScreen(navController) }
-        composable("profile_screen") { ProfileScreen(navController) }
+        composable("profile_screen") {
+            val profileScreenViewModel: ProfileScreenViewModel = hiltViewModel()
+            ProfileScreen(navController = navController, profileScreenViewModel = profileScreenViewModel)
+        }
         composable("login_screen") { LoginScreen(navController) }
         composable("signup_screen") { SignUpScreen(navController) }
         composable("appointment_screen") { AppointmentScreen(navController) }
@@ -100,3 +105,18 @@ fun NavigationComponent(navController: NavHostController) {
         composable("all_appointments_screen") { AllAppointmentsScreen(navController) }
     }
 }
+
+/*
+@Composable
+fun NavigationComponent() {
+    val navController = rememberNavController()
+
+    NavHost(navController = navController, startDestination = "profile_screen") {
+        composable("profile_screen") {
+            val viewModel: ProfileScreenViewModel = hiltViewModel()
+            ProfileScreen(navController = navController, viewModel = viewModel)
+        }
+        // Add other destinations here
+    }
+}
+ */
