@@ -61,7 +61,7 @@ fun AllAppointmentsScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun AllAppointmentsPagePreview() {
+fun AllAppointmentsScreenPreview() {
     WhoIsComingAlongTheme {
         AllAppointmentsScreen(navController = rememberNavController())
     }

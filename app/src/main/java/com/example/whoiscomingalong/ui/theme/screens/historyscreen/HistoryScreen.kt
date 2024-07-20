@@ -63,7 +63,7 @@ fun HistoryScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun HistoryPagePreview() {
+fun HistoryScreenPreview() {
     WhoIsComingAlongTheme {
         HistoryScreen(navController = rememberNavController())
     }

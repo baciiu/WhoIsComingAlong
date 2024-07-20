@@ -63,7 +63,7 @@ fun ProfileScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun ProfilePagePreview() {
+fun ProfileScreenPreview() {
     WhoIsComingAlongTheme{
         ProfileScreen(navController = rememberNavController())
     }

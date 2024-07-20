@@ -63,7 +63,7 @@ fun SearchScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun SearchPagePreview() {
+fun SearchScreenPreview() {
     WhoIsComingAlongTheme {
         SearchScreen(navController = rememberNavController())
     }

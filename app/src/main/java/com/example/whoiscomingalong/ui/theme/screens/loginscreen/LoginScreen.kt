@@ -87,7 +87,7 @@ fun LoginScreen(navController: NavHostController) {
             )
 
             Button(
-                onClick = { navController.navigate("start_page") }, // Navigate to the start page
+                onClick = { navController.navigate("start_screen") }, // Navigate to the start screen
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 20.dp),
@@ -114,7 +114,7 @@ fun LoginScreen(navController: NavHostController) {
                     text = "Sign Up",
                     color = LogoRed,
                     fontSize = 20.sp,
-                    modifier = Modifier.clickable { navController.navigate("signup_page") }
+                    modifier = Modifier.clickable { navController.navigate("signup_screen") }
                 )
             }
         }

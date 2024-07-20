@@ -85,7 +85,7 @@ fun CentralScreen(navController: NavController) {
                 )
 
                 FloatingActionButton(
-                    onClick = { navController.navigate("profile_page") },
+                    onClick = { navController.navigate("profile_screen") },
                     modifier = Modifier.size(40.dp),
                     shape = CircleShape,
                     containerColor = Color.White
@@ -107,7 +107,7 @@ fun CentralScreen(navController: NavController) {
                     .background(Color.White, shape = RoundedCornerShape(12.dp))
                     .border(BorderStroke(2.dp, Color.Black), shape = RoundedCornerShape(12.dp)) // Add black border
                     .padding(16.dp)
-                    .clickable { navController.navigate("all_appointments_page") },
+                    .clickable { navController.navigate("all_appointments_screen") },
                 verticalArrangement = Arrangement.Top
             ) {
                 Row(
@@ -121,7 +121,7 @@ fun CentralScreen(navController: NavController) {
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
                     FloatingActionButton(
-                        onClick = { navController.navigate("add_new_appointment_page") },
+                        onClick = { navController.navigate("add_new_appointment_screen") },
                         modifier = Modifier.size(40.dp),
                         shape = CircleShape,
                         containerColor = Color.White
@@ -168,7 +168,7 @@ fun CentralScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Button(
-                    onClick = { navController.navigate("search_page") },
+                    onClick = { navController.navigate("search_screen") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(80.dp)
@@ -182,7 +182,7 @@ fun CentralScreen(navController: NavController) {
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Button(
-                    onClick = { navController.navigate("history_page") },
+                    onClick = { navController.navigate("history_screen") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(80.dp)
@@ -199,7 +199,7 @@ fun CentralScreen(navController: NavController) {
 
 @Preview(showBackground = true)
 @Composable
-fun StartPagePreview() {
+fun StartScreenPreview() {
     WhoIsComingAlongTheme {
         CentralScreen(navController = rememberNavController())
     }

@@ -88,15 +88,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun NavigationComponent(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "login_page") {
-        composable("start_page") { CentralScreen(navController) }
-        composable("profile_page") { ProfileScreen(navController) }
-        composable("login_page") { LoginScreen(navController) }
-        composable("signup_page") { SignUpScreen(navController) }
-        composable("appointment_page") { AppointmentScreen(navController) }
-        composable("search_page") { SearchScreen(navController) }
-        composable("history_page") { HistoryScreen(navController) }
-        composable("add_new_appointment_page") { AddNewAppointmentScreen(navController) }
-        composable("all_appointments_page") { AllAppointmentsScreen(navController) }
+    NavHost(navController = navController, startDestination = "login_screen") {
+        composable("start_screen") { CentralScreen(navController) }
+        composable("profile_screen") { ProfileScreen(navController) }
+        composable("login_screen") { LoginScreen(navController) }
+        composable("signup_screen") { SignUpScreen(navController) }
+        composable("appointment_screen") { AppointmentScreen(navController) }
+        composable("search_screen") { SearchScreen(navController) }
+        composable("history_screen") { HistoryScreen(navController) }
+        composable("add_new_appointment_screen") { AddNewAppointmentScreen(navController) }
+        composable("all_appointments_screen") { AllAppointmentsScreen(navController) }
     }
 }
