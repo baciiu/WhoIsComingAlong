@@ -5,6 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Group(
-    @PrimaryKey val groupId: Int,
+    @PrimaryKey(autoGenerate = true) val groupId: Int = 0,
     val groupName: String
 )

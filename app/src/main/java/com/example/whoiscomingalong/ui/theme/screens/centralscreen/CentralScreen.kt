@@ -168,7 +168,7 @@ fun CentralScreen(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Button(
-                    onClick = { navController.navigate("search_screen") },
+                    onClick = { navController.navigate("group_screen") },
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(80.dp)
@@ -176,7 +176,7 @@ fun CentralScreen(navController: NavController) {
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray)
                 ) {
-                    Text("Search", color = Color.Black, fontSize = 20.sp)
+                    Text("Manage Groups", color = Color.Black, fontSize = 20.sp)
                 }
 
                 Spacer(modifier = Modifier.height(10.dp))
