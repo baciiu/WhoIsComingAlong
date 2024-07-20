@@ -180,7 +180,7 @@ fun SignUpScreen(navController: NavHostController) { //}, userViewModel: UserVie
                         department = department.value
                     )
                     signUpScreenViewModel.insertUser(user)
-                    navController.navigate("start_page") // Navigate to the StartPage
+                    navController.navigate("start_screen") // Navigate to the start screen
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -208,7 +208,7 @@ fun SignUpScreen(navController: NavHostController) { //}, userViewModel: UserVie
                     text = "Sign In",
                     color = LogoRed,
                     fontSize = 20.sp,
-                    modifier = Modifier.clickable { navController.navigate("login_page") }
+                    modifier = Modifier.clickable { navController.navigate("login_screen") }
                 )
             }
         }
