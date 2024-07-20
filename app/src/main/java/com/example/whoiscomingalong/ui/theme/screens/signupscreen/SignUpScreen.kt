@@ -205,7 +205,7 @@ fun SignUpScreen(navController: NavHostController) { //}, userViewModel: UserVie
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
-                    text = "Sign In",
+                    text = "Log In",
                     color = LogoRed,
                     fontSize = 20.sp,
                     modifier = Modifier.clickable { navController.navigate("login_screen") }

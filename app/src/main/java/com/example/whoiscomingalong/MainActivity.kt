@@ -19,11 +19,11 @@ import com.example.whoiscomingalong.ui.theme.screens.centralscreen.CentralScreen
 import com.example.whoiscomingalong.ui.theme.components.AddNewAppointmentScreen
 import com.example.whoiscomingalong.ui.theme.screens.allappointmentsscreen.AllAppointmentsScreen
 import com.example.whoiscomingalong.ui.theme.screens.appointmentscreen.AppointmentScreen
-import com.example.whoiscomingalong.ui.theme.screens.historyscreen.HistoryScreen
 import com.example.whoiscomingalong.ui.theme.screens.loginscreen.LoginScreen
 import com.example.whoiscomingalong.ui.theme.screens.profilescreen.ProfileScreen
 import com.example.whoiscomingalong.ui.theme.screens.profilescreen.ProfileScreenViewModel
 import com.example.whoiscomingalong.ui.theme.screens.groupscreen.GroupScreen
+import com.example.whoiscomingalong.ui.theme.screens.restaurantscreen.RestaurantScreen
 import com.example.whoiscomingalong.ui.theme.screens.signupscreen.SignUpScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -100,7 +100,7 @@ fun NavigationComponent(navController: NavHostController) {
         composable("signup_screen") { SignUpScreen(navController) }
         composable("appointment_screen") { AppointmentScreen(navController) }
         composable("group_screen") { GroupScreen(navController) }
-        composable("history_screen") { HistoryScreen(navController) }
+        composable("restaurant_screen") { RestaurantScreen(navController) }
         composable("add_new_appointment_screen") { AddNewAppointmentScreen(navController) }
         composable("all_appointments_screen") { AllAppointmentsScreen(navController) }
     }
