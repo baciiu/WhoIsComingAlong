@@ -8,6 +8,9 @@ interface RestaurantDao {
     @Query("SELECT * FROM Restaurant")
     fun getAll(): Flow<List<Restaurant>>
 
+    @Query("SELECT * FROM Restaurant WHERE restaurantId = :restaurantId")
+    fun getById(restaurantId: Int): Flow<Restaurant>
+
     @Insert
     suspend fun insertAll(vararg restaurants: Restaurant)
 

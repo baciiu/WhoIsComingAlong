@@ -5,7 +5,6 @@ LoginScreen
 
 SignUpScreen
 - insert users (register user)
-- login user (query username and password) -> if wrong, provide Toast and return to LoginScreen
 
 CentralScreen
 - (needs no database access)
@@ -21,10 +20,12 @@ AllAppointmentsScreen
 
 AddNewAppointmentScreen
 - add appointment
+- delete appointment
 - add group
 - get all groups
 - get userToGroup
 - get user by id
+- get all restaurants
 - (maybe add user stories from AppointmentScreen here? -> please tell me where the function should be)
 
 AppointmentScreen
@@ -47,8 +48,10 @@ GroupScreen
 - add user to group where groupid = ...
 - delete user from group where groupid = ...
 
-HistoryScreen
-- get all appointments
+RestaurantScreen
+- add restaurant
+- delete restaurant
+- get all restaurants
 
 On which Screen should the following user stories happen?
 - get all appointment responses where comingalong = true

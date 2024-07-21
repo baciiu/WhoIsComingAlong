@@ -11,6 +11,10 @@ class RestaurantRepository @Inject constructor(private val restaurantDao: Restau
         return restaurantDao.getAll()
     }
 
+    fun getRestaurantById(restaurantId: Int): Flow<Restaurant> {
+        return restaurantDao.getById(restaurantId)
+    }
+
     suspend fun insert(restaurant: Restaurant) {
         restaurantDao.insertAll(restaurant)
     }
