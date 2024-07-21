@@ -25,6 +25,7 @@ class GroupScreenViewModel @Inject constructor(
     private val groupRepository: GroupRepository,
     private val userToGroupRepository: UserToGroupRepository
 ) : AndroidViewModel(application){
+
     fun getAllGroups(): Flow<List<Group>> {
         return groupRepository.getAllGroups()
     }
@@ -58,8 +59,7 @@ class GroupScreenViewModel @Inject constructor(
         }
     }
 
-
-    // get all users of a specific group
+    // get all users of a specific group (or implement code in Screen-class)
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getUsersOfGroup(groupId: Int): Flow<List<Users>> {
         return userToGroupRepository.getAllUsersToGroup()
@@ -72,26 +72,3 @@ class GroupScreenViewModel @Inject constructor(
             .flatMapLatest { it }
     }
 }
-
-/*
-@HiltViewModel
-class ProfileScreenViewModel @Inject constructor(
-    application: Application,
-    private val usersRepository: UsersRepository
-) : AndroidViewModel(application) {
-    fun getAllUsers() : Flow<List<Users>> {
-        return usersRepository.getAllUsers()
-    }
-
-    fun getUserById(int: Int) : Flow<Users> {
-        return usersRepository.getUserById(int)
-    }
-
-    fun deleteUser(user: Users) {
-        viewModelScope.launch (Dispatchers.IO) {
-            usersRepository.delete(user)
-        }
-    }
-}
-
- */

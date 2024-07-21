@@ -23,6 +23,7 @@ class AllAppointmentsScreenViewModel @Inject constructor(
     private val appointmentRepository: AppointmentRepository,
     private val userToAppointmentRepository: UserToAppointmentRepository
 ) : AndroidViewModel(application) {
+
     fun getAllAppointments(): Flow<List<Appointment>> {
         return appointmentRepository.getAllAppointments()
     }
