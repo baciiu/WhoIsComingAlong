@@ -59,7 +59,7 @@ class GroupScreenViewModel @Inject constructor(
         }
     }
 
-    // get all users of a specific group (or implement code in Screen-class)
+    // todo get all users of a specific group (or implement code in Screen-class)
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getUsersOfGroup(groupId: Int): Flow<List<Users>> {
         return userToGroupRepository.getAllUsersToGroup()
