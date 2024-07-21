@@ -46,45 +46,6 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
-        // here is how to call the database; delete or change if necessary (todo)
-        /*
-        appDatabase = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "appDatabase"
-        ).build() */
-
-        // appDatabase.usersDao().insertAll()
-
-        // then with appDatabase it is possible to access the tables (remarks: it
-        // might be necessary to modify or add daos for proper usage of the app!)
-        // Create multiple User instances
-
-        /* val user1 = Users(
-            userId = 1,
-            firstName = "Klemens",
-            lastName = "Vospernik",
-            nickName = "Klemens",
-            dateOfBirth = Date(1973, 6, 19),
-            email = "klemens@example.com",
-            company = "it",
-            department = "development",
-            password = "securepassword1"
-        )
-        val user2 = Users(
-            userId = 1,
-            firstName = "Angie",
-            lastName = "Ducks",
-            nickName = "Angie",
-            dateOfBirth = Date(1998, 1, 1),
-            email = "angie@example.com",
-            company = "it",
-            department = "development",
-            password = "securepassword2"
-        )
-        // Example: call insertAll with one or more Users instances:
-        appDatabase.usersDao().insertAll(user1, user2) */
-
     }
 }
 
@@ -105,18 +66,3 @@ fun NavigationComponent(navController: NavHostController) {
         composable("all_appointments_screen") { AllAppointmentsScreen(navController) }
     }
 }
-
-/*
-@Composable
-fun NavigationComponent() {
-    val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = "profile_screen") {
-        composable("profile_screen") {
-            val viewModel: ProfileScreenViewModel = hiltViewModel()
-            ProfileScreen(navController = navController, viewModel = viewModel)
-        }
-        // Add other destinations here
-    }
-}
- */

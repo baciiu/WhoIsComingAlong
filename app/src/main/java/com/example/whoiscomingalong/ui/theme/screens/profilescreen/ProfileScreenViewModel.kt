@@ -3,6 +3,7 @@ package com.example.whoiscomingalong.ui.theme.screens.profilescreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.whoiscomingalong.database.Group.GroupRepository
 import com.example.whoiscomingalong.database.Users.Users
 import com.example.whoiscomingalong.database.Users.UsersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,17 +17,24 @@ class ProfileScreenViewModel @Inject constructor(
     application: Application,
     private val usersRepository: UsersRepository
 ) : AndroidViewModel(application) {
-    fun getAllUsers() : Flow<List<Users>> {
+
+    fun getAllUsers(): Flow<List<Users>> {
         return usersRepository.getAllUsers()
     }
 
-    fun getUserById(int: Int) : Flow<Users> {
+    fun getUserById(int: Int): Flow<Users> {
         return usersRepository.getUserById(int)
     }
 
     fun deleteUser(user: Users) {
-        viewModelScope.launch (Dispatchers.IO) {
+        viewModelScope.launch(Dispatchers.IO) {
             usersRepository.delete(user)
+        }
+    }
+
+    fun updateUser(user: Users) {
+        viewModelScope.launch(Dispatchers.IO) {
+            usersRepository.update(user)
         }
     }
 }

@@ -61,6 +61,7 @@ fun GroupScreen(navController: NavController) {
     }
 }
 
+
 @Preview(showBackground = true)
 @Composable
 fun GroupScreenPreview() {
