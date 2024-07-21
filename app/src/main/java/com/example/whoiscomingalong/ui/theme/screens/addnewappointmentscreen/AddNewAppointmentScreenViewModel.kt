@@ -30,6 +30,7 @@ class AddNewAppointmentScreenViewModel @Inject constructor(
     private val appointmentRepository: AppointmentRepository,
     private val userToAppointmentRepository: UserToAppointmentRepository
 ) : AndroidViewModel(application) {
+
     fun addAppointment(appointment: Appointment) {
         viewModelScope.launch(Dispatchers.IO) {
             appointmentRepository.insert(appointment)
@@ -41,6 +42,7 @@ class AddNewAppointmentScreenViewModel @Inject constructor(
             appointmentRepository.delete(appointment)
         }
     }
+
     fun getAllRestaurants(): Flow<List<Restaurant>> {
         return restaurantRepository.getAllRestaurants()
     }

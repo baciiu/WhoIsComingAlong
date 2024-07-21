@@ -13,6 +13,7 @@ class LoginScreenViewModel @Inject constructor(
     application: Application,
     private val usersRepository: UsersRepository
 ) : AndroidViewModel(application){
+
     fun getAllUsers(): Flow<List<Users>> {
         return usersRepository.getAllUsers()
     }

@@ -13,6 +13,7 @@ class CentralScreenViewModel @Inject constructor(
     application: Application,
     private val appointmentRepository: AppointmentRepository
 ) : AndroidViewModel(application) {
+
     fun getAllAppointments(): Flow<List<Appointment>> {
         return appointmentRepository.getAllAppointments()
     }
