@@ -6,8 +6,6 @@ import javax.inject.Singleton
 
 @Singleton
 class UsersRepository @Inject constructor(private val usersDao: UsersDao) {
-    // val allUsers: Flow<List<Users>> = usersDao.getAllUsers()
-
 
     fun getUserById(userId: Int): Flow<Users> {
         return usersDao.getUserById(userId)
@@ -20,6 +18,7 @@ class UsersRepository @Inject constructor(private val usersDao: UsersDao) {
     suspend fun insert(user: Users) {
         usersDao.insert(user)
     }
+
     suspend fun insertAll(vararg users: Users) {
         usersDao.insertAll(*users)
     }
