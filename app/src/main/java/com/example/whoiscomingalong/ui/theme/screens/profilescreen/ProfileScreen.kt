@@ -30,7 +30,9 @@ import com.example.whoiscomingalong.WhoIsComingAlongTheme
 import com.example.whoiscomingalong.database.Users.Users
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
+import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 @Composable
 fun ProfileScreen(
@@ -41,6 +43,8 @@ fun ProfileScreen(
 
     var isEditing by remember { mutableStateOf(false) }
     val user by profileScreenViewModel.getUserById(1).collectAsState(initial = null) // Assuming 1 is the userId of the current user
+
+    val dateFormatter = remember { SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) }
 
     Box(
         modifier = Modifier
@@ -99,10 +103,16 @@ fun ProfileScreen(
                     }
                     ProfileTextField(
                         label = "Date of Birth",
-                        value = it.dateOfBirth.toString(),
+                        value = dateFormatter.format(it.dateOfBirth),
                         isEditing = isEditing
                     ) { newValue ->
-                        profileScreenViewModel.updateUser(it.copy(dateOfBirth = Date(newValue)))
+                        try {
+                            val parsedDate = dateFormatter.parse(newValue)
+                            profileScreenViewModel.updateUser(it.copy(dateOfBirth = parsedDate))
+                        } catch (e: Exception) {
+                            // Handle the exception (e.g., show an error message)
+                            Log.e("ProfileScreen", "Failed to parse date: ${e.message}")
+                        }
                     }
                     ProfileTextField(
                         label = "Email",

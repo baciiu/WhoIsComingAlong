@@ -16,11 +16,14 @@ class GroupRepository @Inject constructor(private val groupDao: GroupDao) {
 
     suspend fun insert(group: Group): Long {
         return groupDao.insert(group)
-        //groupDao.insertAll(group)
     }
 
     suspend fun insertAll(vararg groups: Group) {
         groupDao.insertAll(*groups)
+    }
+
+    suspend fun update(group: Group) {
+        groupDao.update(group)
     }
 
     suspend fun delete(group: Group) {

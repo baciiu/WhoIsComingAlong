@@ -1,18 +1,11 @@
 package com.example.whoiscomingalong.ui.theme.screens.groupscreen
 
 import android.util.Log
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -35,18 +28,25 @@ import com.example.whoiscomingalong.database.Users.Users
 import kotlinx.coroutines.launch
 
 @Composable
-fun GroupScreen(
+fun EditGroupScreen(
     navController: NavController,
+    groupId: Int,
     groupScreenViewModel: GroupScreenViewModel = hiltViewModel()
 ) {
-    Log.d("TAG", "GroupScreen")
+    Log.d("TAG", "EditGroupScreen")
 
+    val group by groupScreenViewModel.getGroupById(groupId).collectAsState(initial = null)
     var groupName by remember { mutableStateOf("") }
     var selectedUsers by remember { mutableStateOf(listOf<Users>()) }
     val allUsers by groupScreenViewModel.getAllUsers().collectAsState(initial = emptyList())
-    val allGroups by groupScreenViewModel.getAllGroups().collectAsState(initial = emptyList())
+    val usersOfGroup by groupScreenViewModel.getUsersOfGroup(groupId).collectAsState(initial = emptyList())
 
-    val coroutineScope = rememberCoroutineScope()
+    LaunchedEffect(group) {
+        group?.let {
+            groupName = it.groupName
+            selectedUsers = usersOfGroup
+        }
+    }
 
     Box(
         modifier = Modifier
@@ -80,6 +80,15 @@ fun GroupScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
+            // Edit group section
+            Text(
+                text = "Edit Group",
+                style = MaterialTheme.typography.headlineSmall,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 10.dp),
+                textAlign = TextAlign.Left
+            )
 
             OutlinedTextField(
                 value = groupName,
@@ -94,7 +103,7 @@ fun GroupScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            Text(text = "Select Users to add to Group", style = MaterialTheme.typography.bodyLarge, modifier = Modifier.align(Alignment.Start))
+            Text(text = "Select Users to Add to Group", style = MaterialTheme.typography.bodyLarge)
 
             Spacer(modifier = Modifier.height(10.dp))
 
@@ -123,13 +132,13 @@ fun GroupScreen(
 
             Button(
                 onClick = {
-                    coroutineScope.launch {
-                        val newGroup = Group(groupName = groupName)
-                        val groupId = groupScreenViewModel.insertGroup(newGroup).toInt()
+                    group?.let {
+                        val updatedGroup = it.copy(groupName = groupName)
+                        groupScreenViewModel.updateGroup(updatedGroup)
                         selectedUsers.forEach { user ->
-                            groupScreenViewModel.addUserToGroup(user.userId, groupId)
+                            groupScreenViewModel.addUserToGroup(user.userId, updatedGroup.groupId)
                         }
-                        navController.navigate("start_screen")
+                        navController.navigate("group_screen")
                     }
                 },
                 modifier = Modifier
@@ -138,61 +147,12 @@ fun GroupScreen(
                 colors = ButtonDefaults.buttonColors(containerColor = LogoRed)
             ) {
                 Text(
-                    text = "CREATE GROUP",
+                    text = "Update Group",
                     color = Color.White,
                     fontSize = 16.sp,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth()
                 )
-            }
-
-            Spacer(modifier = Modifier.height(40.dp))
-
-            // Display existing groups
-
-            Text(
-                text = "Existing Groups",
-                style = MaterialTheme.typography.headlineSmall,
-                modifier = Modifier
-                    .padding(vertical = 10.dp)
-                    .align(Alignment.Start)
-            )
-
-
-            allGroups.forEach { group ->
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 4.dp)
-                        .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
-                        .border(BorderStroke(1.dp, Color.Gray), shape = RoundedCornerShape(8.dp))
-                        .padding(16.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            text = group.groupName,
-                            style = MaterialTheme.typography.bodyLarge.copy(color = Color.Black),
-                        )
-                        Row {
-                            IconButton(onClick = {
-                                navController.navigate("edit_group_screen/${group.groupId}")
-                            }) {
-                                Icon(Icons.Default.Edit, contentDescription = "Edit Group")
-                            }
-                            IconButton(onClick = {
-                                coroutineScope.launch {
-                                    groupScreenViewModel.deleteGroup(group)
-                                }
-                            }) {
-                                Icon(Icons.Default.Delete, contentDescription = "Delete Group")
-                            }
-                        }
-                    }
-                }
             }
         }
     }
@@ -200,8 +160,8 @@ fun GroupScreen(
 
 @Preview(showBackground = true)
 @Composable
-fun GroupScreenPreview() {
+fun EditGroupScreenPreview() {
     WhoIsComingAlongTheme {
-        GroupScreen(navController = rememberNavController())
+        EditGroupScreen(navController = rememberNavController(), groupId = 0)
     }
 }

@@ -34,8 +34,18 @@ class GroupScreenViewModel @Inject constructor(
         return usersRepository.getAllUsers()
     }
 
+    fun getGroupById(groupId: Int): Flow<Group> {
+        return groupRepository.getGroupById(groupId)
+    }
+
     suspend fun insertGroup(group: Group): Long {
         return groupRepository.insert(group)
+    }
+
+    fun updateGroup(group: Group) {
+        viewModelScope.launch(Dispatchers.IO) {
+            groupRepository.update(group)
+        }
     }
 
     fun deleteGroup(group: Group) {
@@ -45,11 +55,14 @@ class GroupScreenViewModel @Inject constructor(
     }
 
     fun addUserToGroup(userId: Int, groupId: Int) {
-        val userToGroup = UserToGroup(userId = userId, groupId = groupId)
         viewModelScope.launch(Dispatchers.IO) {
-            userToGroupRepository.insert(userToGroup)
+            if (userToGroupRepository.countUserToGroup(userId, groupId) == 0) {
+                val userToGroup = UserToGroup(userId = userId, groupId = groupId)
+                userToGroupRepository.insert(userToGroup)
+            }
         }
     }
+
 
     fun removeUserFromGroup(userToGroup: UserToGroup) {
         viewModelScope.launch(Dispatchers.IO) {

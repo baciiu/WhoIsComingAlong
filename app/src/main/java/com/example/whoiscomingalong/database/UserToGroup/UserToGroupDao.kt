@@ -11,6 +11,9 @@ interface UserToGroupDao {
     @Query("SELECT * FROM UserToGroup WHERE groupId = :groupId")
     fun getAllUsersToGroupById(groupId: Int): Flow<List<UserToGroup>>
 
+    @Query("SELECT COUNT(*) FROM UserToGroup WHERE userId = :userId AND groupId = :groupId")
+    suspend fun countUserToGroup(userId: Int, groupId: Int): Int
+
     @Insert
     suspend fun insertAll(vararg userToGroups: UserToGroup)
 
