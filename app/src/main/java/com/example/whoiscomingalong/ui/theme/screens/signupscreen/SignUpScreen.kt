@@ -48,7 +48,7 @@ fun SignUpScreen(navController: NavHostController) { //}, userViewModel: UserVie
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.White)
-            .verticalScroll(rememberScrollState()) // Enable scrolling
+            .verticalScroll(rememberScrollState())
     ) {
         Column(
             modifier = Modifier
@@ -105,7 +105,7 @@ fun SignUpScreen(navController: NavHostController) { //}, userViewModel: UserVie
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 5.dp),
-                label = { Text("Date of Birth") },
+                label = { Text("Date of Birth(yyyy-MM-dd)") },  // Placeholder for date format
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
             )

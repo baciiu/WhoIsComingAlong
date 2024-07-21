@@ -14,8 +14,9 @@ class GroupRepository @Inject constructor(private val groupDao: GroupDao) {
         return groupDao.getById(groupId)
     }
 
-    suspend fun insert(group: Group) {
-        groupDao.insertAll(group)
+    suspend fun insert(group: Group): Long {
+        return groupDao.insert(group)
+        //groupDao.insertAll(group)
     }
 
     suspend fun insertAll(vararg groups: Group) {
