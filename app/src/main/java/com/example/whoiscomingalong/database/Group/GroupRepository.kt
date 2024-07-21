@@ -10,6 +10,10 @@ class GroupRepository @Inject constructor(private val groupDao: GroupDao) {
         return groupDao.getAll()
     }
 
+    fun getGroupById(groupId: Int): Flow<Group> {
+        return groupDao.getById(groupId)
+    }
+
     suspend fun insert(group: Group) {
         groupDao.insertAll(group)
     }
