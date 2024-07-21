@@ -26,4 +26,8 @@ class UserToGroupRepository @Inject constructor(private val userToGroupDao: User
     suspend fun delete(userToGroup: UserToGroup) {
         userToGroupDao.delete(userToGroup)
     }
+
+    suspend fun countUserToGroup(userId: Int, groupId: Int): Int {
+        return userToGroupDao.countUserToGroup(userId, groupId)
+    }
 }

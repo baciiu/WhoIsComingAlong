@@ -14,6 +14,12 @@ interface GroupDao {
     @Insert
     suspend fun insertAll(vararg groups: Group)
 
+    @Insert
+    suspend fun insert(group: Group): Long
+
+    @Update
+    suspend fun update(group: Group)
+
     @Delete
     suspend fun delete(group: Group)
 }

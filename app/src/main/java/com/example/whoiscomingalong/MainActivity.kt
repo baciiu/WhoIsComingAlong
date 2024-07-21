@@ -12,13 +12,16 @@ import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.example.whoiscomingalong.ui.theme.screens.centralscreen.CentralScreen
 import com.example.whoiscomingalong.ui.theme.components.AddNewAppointmentScreen
 import com.example.whoiscomingalong.ui.theme.screens.allappointmentsscreen.AllAppointmentsScreen
 import com.example.whoiscomingalong.ui.theme.screens.appointmentscreen.AppointmentScreen
+import com.example.whoiscomingalong.ui.theme.screens.groupscreen.EditGroupScreen
 import com.example.whoiscomingalong.ui.theme.screens.loginscreen.LoginScreen
 import com.example.whoiscomingalong.ui.theme.screens.profilescreen.ProfileScreen
 import com.example.whoiscomingalong.ui.theme.screens.profilescreen.ProfileScreenViewModel
@@ -64,5 +67,12 @@ fun NavigationComponent(navController: NavHostController) {
         composable("restaurant_screen") { RestaurantScreen(navController) }
         composable("add_new_appointment_screen") { AddNewAppointmentScreen(navController) }
         composable("all_appointments_screen") { AllAppointmentsScreen(navController) }
+        composable(
+            "edit_group_screen/{groupId}",
+            arguments = listOf(navArgument("groupId") { type = NavType.IntType })
+        ) { backStackEntry ->
+            val groupId = backStackEntry.arguments?.getInt("groupId") ?: 0
+            EditGroupScreen(navController = navController, groupId = groupId)
+        }
     }
 }

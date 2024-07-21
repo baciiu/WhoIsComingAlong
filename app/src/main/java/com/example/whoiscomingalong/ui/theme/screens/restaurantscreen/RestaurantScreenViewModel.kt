@@ -16,8 +16,13 @@ class RestaurantScreenViewModel @Inject constructor(
     application: Application,
     private val restaurantRepository: RestaurantRepository
 ) : AndroidViewModel(application) {
+
     fun getAllRestaurants(): Flow<List<Restaurant>> {
         return restaurantRepository.getAllRestaurants()
+    }
+
+    fun getRestaurantById(restaurantId: Int): Flow<Restaurant> {
+        return restaurantRepository.getRestaurantById(restaurantId)
     }
 
     fun insertRestaurant(restaurant: Restaurant) {

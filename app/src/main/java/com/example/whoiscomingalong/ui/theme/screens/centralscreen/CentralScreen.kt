@@ -23,6 +23,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.ui.text.style.TextAlign
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.whoiscomingalong.LogoRed
@@ -30,14 +34,19 @@ import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
-fun CentralScreen(navController: NavController) {
+fun CentralScreen(
+    navController: NavController,
+    centralScreenViewModel: CentralScreenViewModel = hiltViewModel()
+) {
     Log.d("TAG", "CentralScreen")
+
+    val appointments by centralScreenViewModel.appointments.collectAsState()
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.White)
-            .verticalScroll(rememberScrollState()) // Enable scrolling if content overflows
+            .verticalScroll(rememberScrollState())
     ) {
         Column(
             modifier = Modifier
@@ -46,7 +55,7 @@ fun CentralScreen(navController: NavController) {
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(40.dp)) // Add more space at the top
+            Spacer(modifier = Modifier.height(40.dp))
 
             Image(
                 painter = painterResource(id = R.drawable.logo_header_transparent),
@@ -56,7 +65,7 @@ fun CentralScreen(navController: NavController) {
                     .height(72.dp)
             )
 
-            Spacer(modifier = Modifier.height(0.dp)) // Add more space
+            Spacer(modifier = Modifier.height(0.dp))
 
             HorizontalDivider(
                 modifier = Modifier.width(40.dp),
@@ -64,7 +73,7 @@ fun CentralScreen(navController: NavController) {
                 color = Color.Black
             )
 
-            Spacer(modifier = Modifier.height(20.dp)) // Add more space
+            Spacer(modifier = Modifier.height(20.dp))
 
             // Box for Profile + Settings
             Row(
@@ -86,7 +95,8 @@ fun CentralScreen(navController: NavController) {
 
                 FloatingActionButton(
                     onClick = { navController.navigate("profile_screen") },
-                    modifier = Modifier.size(40.dp),
+                    modifier = Modifier
+                        .size(40.dp),
                     shape = CircleShape,
                     containerColor = Color.White
                 ) {
@@ -111,7 +121,9 @@ fun CentralScreen(navController: NavController) {
                 verticalArrangement = Arrangement.Top
             ) {
                 Row(
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp),
                     horizontalArrangement = Arrangement.SpaceBetween,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -136,22 +148,20 @@ fun CentralScreen(navController: NavController) {
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                // Placeholder for Appointments
-                val restaurants = listOf("Uni Mensa", "Bits und Bytes", "Uniwirt")
-
+                // Display Appointments
                 Column(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    restaurants.forEach { restaurant ->
+                    appointments.forEach { appointment ->
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .height(40.dp)
+                                .height(60.dp)
                                 .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
                                 .padding(8.dp),
                             contentAlignment = Alignment.CenterStart
                         ) {
-                            Text(restaurant, color = Color.DarkGray)
+                            Text(appointment.appointmentName, color = Color.DarkGray)
                         }
                     }
                 }
@@ -161,7 +171,6 @@ fun CentralScreen(navController: NavController) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Space for the remaining buttons
             Column(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -176,8 +185,15 @@ fun CentralScreen(navController: NavController) {
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray)
                 ) {
-                    Text("Manage Groups", color = Color.Black, fontSize = 20.sp)
-                }
+                    Text(
+                        text = "Manage Groups",
+                        color = Color.Black,
+                        fontSize = 20.sp,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentWidth(Alignment.Start),
+                        textAlign = TextAlign.Left
+                    )}
 
                 Spacer(modifier = Modifier.height(10.dp))
 
@@ -190,8 +206,15 @@ fun CentralScreen(navController: NavController) {
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = Color.LightGray)
                 ) {
-                    Text("Manage Restaurants", color = Color.Black, fontSize = 20.sp)
-                }
+                    Text(
+                        text = "Manage Restaurants",
+                        color = Color.Black,
+                        fontSize = 20.sp,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentWidth(Alignment.Start),
+                        textAlign = TextAlign.Left
+                    )}
             }
         }
     }
