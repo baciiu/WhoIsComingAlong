@@ -62,7 +62,7 @@ class GroupScreenViewModel @Inject constructor(
     // get all users of a specific group
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getUsersOfGroup(groupId: Int): Flow<List<Users>> {
-        return userToGroupRepository.getAllUserToGroups()
+        return userToGroupRepository.getAllUsersToGroup()
             .map { userToGroups ->
                 val userIds = userToGroups.filter { it.groupId == groupId }.map { it.userId }
                 usersRepository.getAllUsers().map { users ->

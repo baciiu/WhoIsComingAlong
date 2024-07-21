@@ -8,9 +8,8 @@ interface UserToGroupDao {
     @Query("SELECT * FROM UserToGroup")
     fun getAll(): Flow<List<UserToGroup>>
 
-    /*
     @Query("SELECT * FROM UserToGroup WHERE groupId = :groupId")
-    fun getAll(): Flow<List<UserToGroup>> */
+    fun getAllUsersToGroupById(groupId: Int): Flow<List<UserToGroup>>
 
     @Insert
     suspend fun insertAll(vararg userToGroups: UserToGroup)

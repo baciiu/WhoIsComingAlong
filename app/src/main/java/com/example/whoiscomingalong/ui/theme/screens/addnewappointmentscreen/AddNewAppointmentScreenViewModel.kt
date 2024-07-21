@@ -56,7 +56,7 @@ class AddNewAppointmentScreenViewModel @Inject constructor(
     }
 
     fun getUserToGroupMappings(): Flow<List<UserToGroup>> {
-        return userToGroupRepository.getAllUserToGroups()
+        return userToGroupRepository.getAllUsersToGroup()
     }
 
     fun getUserById(userId: Int): Flow<Users> {

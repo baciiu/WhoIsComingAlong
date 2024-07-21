@@ -7,14 +7,13 @@ import javax.inject.Singleton
 @Singleton
 class UserToGroupRepository @Inject constructor(private val userToGroupDao: UserToGroupDao) {
 
-    fun getAllUserToGroups(): Flow<List<UserToGroup>> {
+    fun getAllUsersToGroup(): Flow<List<UserToGroup>> {
         return userToGroupDao.getAll()
     }
 
-    // uncomment if needed:
-    // fun getAllByGroup(groupId: Int): Flow<List<UserToGroup>> {
-    //     return userToGroupDao.getAllByGroup(groupId)
-    // }
+    fun getAllUsersToGroupById(groupId: Int): Flow<List<UserToGroup>> {
+        return userToGroupDao.getAllUsersToGroupById(groupId)
+    }
 
     suspend fun insert(userToGroup: UserToGroup) {
         userToGroupDao.insertAll(userToGroup)
