@@ -33,6 +33,7 @@ fun RestaurantScreen(
     Log.d("TAG", "RestaurantScreen")
 
     var restaurantName by remember { mutableStateOf("") }
+    var restaurantAddress by remember { mutableStateOf("") }
     var longitude by remember { mutableStateOf("") }
     var latitude by remember { mutableStateOf("") }
     val coroutineScope = rememberCoroutineScope()
@@ -114,6 +115,7 @@ fun RestaurantScreen(
                     coroutineScope.launch {
                         val newRestaurant = Restaurant(
                             restaurantName = restaurantName,
+                            restaurantAddress = restaurantAddress,
                             restaurantLongitude = longitude.toDoubleOrNull() ?: 0.0,
                             restaurantLatitude = latitude.toDoubleOrNull() ?: 0.0
                         )
