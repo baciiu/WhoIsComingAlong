@@ -4,6 +4,11 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 import javax.inject.Singleton
 
+// repositories are classes used by Hilt to create functions that
+// can be used by the view models
+// they are created only once during the application, the DAOs of the
+// corresponding DAO classes are injected during initialization
+
 @Singleton
 class UsersRepository @Inject constructor(private val usersDao: UsersDao) {
 

@@ -4,6 +4,11 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
 
+// entities are the structure of the tables, in our application
+// six tables are defined, all have a primary key or a
+// composite primary key (consisting of 2 foreign key, whose
+// combination is unique
+
 @Entity
 data class Users(
     @PrimaryKey(autoGenerate = true) val userId: Int = 0,

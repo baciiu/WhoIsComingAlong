@@ -7,9 +7,13 @@ import com.example.whoiscomingalong.database.Users.Users
 import com.example.whoiscomingalong.database.Users.UsersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
+// each of the view models has to be declared a HiltViewModel for Hilt to
+// know which view models to use
+// additionally, Hilt works with constructor injection, where all the later used
+// repositories are injected into the view model
 
 @HiltViewModel
 class SignUpScreenViewModel @Inject constructor(

@@ -17,9 +17,17 @@ import javax.inject.Singleton
 
 // this object is the Hilt module, it sets up and configures
 // the dependencies, so they can be injected wherever needed in the application
+// the module contains methods tha provide dependencies
+// SingletonComponent means that application-wide only one instance of the
+// module is created
+
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {
+
+    // the @Provides annotation shows Hilt which database and which
+    // DAOs to use
+
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): AppDatabase {
@@ -28,7 +36,7 @@ object DatabaseModule {
             AppDatabase::class.java,
             "app_database"
         )
-            .fallbackToDestructiveMigration()
+            .fallbackToDestructiveMigration() // needed if database is changed
             .build()
     }
 

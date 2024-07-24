@@ -3,6 +3,12 @@ package com.example.whoiscomingalong.database.Users
 import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
+// DAOs or data access obejcts define which actions can be applied on
+// entities (i.e. tables) of the database, one is created for each of
+// the entities
+// Room provides abstracted functionality for database usage, examples
+// are: @Query("... SQL command ..."), @Insert, @Update, @Delete
+
 @Dao
 interface UsersDao {
 

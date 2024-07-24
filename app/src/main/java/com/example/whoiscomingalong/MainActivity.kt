@@ -31,6 +31,8 @@ import com.example.whoiscomingalong.ui.theme.screens.signupscreen.SignUpScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+// the entry point has to be declared by a Hilt annotation
+
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @Inject
