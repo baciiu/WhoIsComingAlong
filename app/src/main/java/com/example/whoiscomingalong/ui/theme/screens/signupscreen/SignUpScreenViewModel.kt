@@ -26,4 +26,12 @@ class SignUpScreenViewModel @Inject constructor(
             usersRepository.insert(user)
         }
     }
+
+    // Retrieves a user by nickname to check for duplicates
+    fun getUserByNickName(nickName: String, onResult: (Users?) -> Unit) {
+        viewModelScope.launch {
+            val user = usersRepository.getUserByNickName(nickName)
+            onResult(user)
+        }
+    }
 }

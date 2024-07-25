@@ -8,9 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -32,7 +30,7 @@ import java.util.Date
 import java.util.Locale
 
 @Composable
-fun SignUpScreen(navController: NavHostController) { //}, userViewModel: UserViewModel = hiltViewModel()) {
+fun SignUpScreen(navController: NavHostController) {
     Log.d("TAG", "SignUpScreen")
 
     val firstName = remember { mutableStateOf("") }
@@ -43,6 +41,7 @@ fun SignUpScreen(navController: NavHostController) { //}, userViewModel: UserVie
     val email = remember { mutableStateOf("") }
     val username = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
+    var errorMessage by remember { mutableStateOf("") }
 
     val dateFormatter = remember { SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) }
 
@@ -170,6 +169,15 @@ fun SignUpScreen(navController: NavHostController) { //}, userViewModel: UserVie
                 visualTransformation = PasswordVisualTransformation()
             )
 
+            if (errorMessage.isNotEmpty()) {
+                Text(
+                    text = errorMessage,
+                    color = Color.Red,
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+            }
+
             Button(
                 onClick = {
                     try {
@@ -185,10 +193,15 @@ fun SignUpScreen(navController: NavHostController) { //}, userViewModel: UserVie
                             company = company.value,
                             department = department.value
                         )
-                        signUpScreenViewModel.insertUser(user)
-                        navController.navigate("start_screen") // Navigate to the start screen
+                        signUpScreenViewModel.getUserByNickName(username.value) { existingUser ->
+                            if (existingUser != null) {
+                                errorMessage = "Username already exists"
+                            } else {
+                                signUpScreenViewModel.insertUser(user)
+                                navController.navigate("start_screen") // Navigate to the start screen
+                            }
+                        }
                     } catch (e: Exception) {
-                        // Handle the exception (e.g., show an error message)
                         Log.e("SignUpScreen", "Failed to parse date: ${e.message}")
                     }
                 },
