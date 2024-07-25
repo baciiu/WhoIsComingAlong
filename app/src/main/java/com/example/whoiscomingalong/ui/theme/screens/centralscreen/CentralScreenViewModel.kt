@@ -32,4 +32,9 @@ class CentralScreenViewModel @Inject constructor(
     fun getAllAppointments(): Flow<List<Appointment>> {
         return appointmentRepository.getAllAppointments()
     }
+
+    fun logout(onLogout: () -> Unit) {
+        // TODO: Implement the logic to logout the user (clearing the session or token)
+        onLogout()
+    }
 }

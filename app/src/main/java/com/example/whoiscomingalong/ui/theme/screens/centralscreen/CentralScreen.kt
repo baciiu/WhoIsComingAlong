@@ -110,6 +110,7 @@ fun CentralScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
+
             // Box for current, open Appointments and Add "+" Button
             Column(
                 modifier = Modifier
@@ -174,7 +175,7 @@ fun CentralScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Button(
                     onClick = { navController.navigate("group_screen") },
@@ -215,6 +216,38 @@ fun CentralScreen(
                             .wrapContentWidth(Alignment.Start),
                         textAlign = TextAlign.Left
                     )}
+            }
+            Spacer(modifier = Modifier.height(20.dp))
+
+            // Logout Button
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(end = 16.dp),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Button(
+                    onClick = {
+                        centralScreenViewModel.logout {
+                            navController.navigate("login_screen") {
+                                popUpTo(navController.graph.startDestinationId) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    },
+                    modifier = Modifier
+                        .width(120.dp)
+                        .height(50.dp),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = LogoRed)
+                ) {
+                    Text(
+                        text = "Logout",
+                        color = Color.White,
+                        fontSize = 20.sp
+                    )
+                }
             }
         }
     }
