@@ -6,9 +6,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,6 +16,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.whoiscomingalong.LogoRed
@@ -25,11 +24,12 @@ import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
 
 @Composable
-fun LoginScreen(navController: NavHostController) {
-    Log.d("TAG", "LoginScreen")
+fun LoginScreen(navController: NavHostController, viewModel: LoginScreenViewModel = hiltViewModel()) {
+    Log.d("LoginScreen", "LoginScreen displayed")
 
     val email = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
+    var errorMessage by remember { mutableStateOf("") }
 
     Box(
         modifier = Modifier
@@ -86,8 +86,35 @@ fun LoginScreen(navController: NavHostController) {
                 visualTransformation = PasswordVisualTransformation()
             )
 
+            if (errorMessage.isNotEmpty()) {
+                Text(
+                    text = errorMessage,
+                    color = Color.Red,
+                    fontSize = 16.sp,
+                    modifier = Modifier.padding(vertical = 8.dp)
+                )
+            }
+
             Button(
-                onClick = { navController.navigate("start_screen") }, // Navigate to the start screen
+                onClick = {
+                    Log.d("LoginScreen", "Login button clicked")
+                    viewModel.authenticateUser(email.value, password.value) { user ->
+                        if (user != null) {
+                            Log.d("LoginScreen", "User authenticated successfully")
+                            navController.navigate("start_screen") // Navigate to the central screen
+                        } else {
+                            viewModel.getUserByNickName(email.value) { existingUser ->
+                                errorMessage = if (existingUser != null) {
+                                    Log.d("LoginScreen", "Incorrect password")
+                                    "Incorrect password"
+                                } else {
+                                    Log.d("LoginScreen", "User does not exist")
+                                    "User does not exist"
+                                }
+                            }
+                        }
+                    }
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 20.dp),

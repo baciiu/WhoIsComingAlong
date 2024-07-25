@@ -32,4 +32,10 @@ interface UsersDao {
 
     @Update
     suspend fun update(user: Users)
+
+    @Query("SELECT * FROM Users WHERE nickName = :nickName AND password = :password")
+    suspend fun authenticateUser(nickName: String, password: String): Users?
+
+    @Query("SELECT * FROM Users WHERE nickName = :nickName")
+    suspend fun getUserByNickName(nickName: String): Users?
 }
