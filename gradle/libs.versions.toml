@@ -15,6 +15,9 @@ hilt-compiler = "1.2.0"
 hiltNavigationCompose = "1.2.0"
 room = "2.6.1"
 lifecycle-compose = "2.8.3"
+firebaseFirestoreKtx = "25.0.0"
+retrofit = "2.9.0"
+gson = "2.3.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,6 +45,10 @@ hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", ve
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
+firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
+
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "gson" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
