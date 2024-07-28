@@ -64,6 +64,7 @@ dependencies {
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.retrofit)
     implementation(libs.gson)
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.0")
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
