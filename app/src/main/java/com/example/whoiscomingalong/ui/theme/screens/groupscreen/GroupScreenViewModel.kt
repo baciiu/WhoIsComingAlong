@@ -38,8 +38,9 @@ class GroupScreenViewModel @Inject constructor(
         return groupRepository.getGroupById(groupId)
     }
 
-    suspend fun insertGroup(group: Group): Long {
-        return groupRepository.insert(group)
+    suspend fun insertGroup(group: Group):Int {
+        groupRepository.insert(group)
+        return group.groupId
     }
 
     fun updateGroup(group: Group) {

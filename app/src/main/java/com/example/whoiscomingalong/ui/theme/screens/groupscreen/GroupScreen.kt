@@ -125,7 +125,7 @@ fun GroupScreen(
                 onClick = {
                     coroutineScope.launch {
                         val newGroup = Group(groupName = groupName)
-                        val groupId = groupScreenViewModel.insertGroup(newGroup).toInt()
+                        val groupId = groupScreenViewModel.insertGroup(newGroup)
                         selectedUsers.forEach { user ->
                             groupScreenViewModel.addUserToGroup(user.userId, groupId)
                         }
