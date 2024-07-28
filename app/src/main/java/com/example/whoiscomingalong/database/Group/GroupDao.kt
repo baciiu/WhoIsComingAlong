@@ -11,11 +11,11 @@ interface GroupDao {
     @Query("SELECT * FROM `Group` WHERE groupId = :groupId")
     fun getById(groupId: Int): Flow<Group>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg groups: Group)
 
-    @Insert
-    suspend fun insert(group: Group): Long
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(group: Group)
 
     @Update
     suspend fun update(group: Group)
