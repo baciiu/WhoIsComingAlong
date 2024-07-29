@@ -21,10 +21,10 @@ interface UsersDao {
     @Query("SELECT * FROM Users")
     fun getAllUsers(): Flow<List<Users>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(user: Users)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg users: Users)
 
     @Delete

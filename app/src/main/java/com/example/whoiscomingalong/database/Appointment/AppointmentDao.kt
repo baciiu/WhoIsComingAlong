@@ -11,10 +11,10 @@ interface AppointmentDao {
     @Query("SELECT * FROM Appointment WHERE appointmentId = :appointmentId")
     fun getById(appointmentId: Int): Flow<Appointment>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg appointments: Appointment)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(appointment: Appointment)
 
 

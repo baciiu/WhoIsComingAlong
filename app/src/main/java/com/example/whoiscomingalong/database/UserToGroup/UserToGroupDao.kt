@@ -14,7 +14,7 @@ interface UserToGroupDao {
     @Query("SELECT COUNT(*) FROM UserToGroup WHERE userId = :userId AND groupId = :groupId")
     suspend fun countUserToGroup(userId: Int, groupId: Int): Int
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg userToGroups: UserToGroup)
 
     @Delete

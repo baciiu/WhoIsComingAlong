@@ -83,8 +83,8 @@ class AppointmentRepository @Inject constructor(
         val appointmentReq = AppointmentRequest(
             appointmentName = appointment.appointmentName,
             groupId = appointment.groupId,
-            appointmentDate = appointment.date.toString(),
-            appointmentTime = appointment.hourMinute.toString(),
+            appointmentDate = appointment.date,
+            appointmentTime = appointment.hourMinute,
             restaurantId = appointment.restaurantID
             )
         apiService.createAppointment(appointmentReq).enqueue(object : Callback<Appointment> {
