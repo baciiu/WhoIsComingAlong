@@ -3,34 +3,46 @@ package com.example.whoiscomingalong.ui.theme.screens.signupscreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.whoiscomingalong.database.Users.Users
-import com.example.whoiscomingalong.database.Users.UsersRepository
+import com.example.whoiscomingalong.mocks.MockUserRepository
+import com.example.whoiscomingalong.mocks.MockSignUpRequest
+import com.example.whoiscomingalong.mocks.MockSignUpResponse
+import com.example.whoiscomingalong.mocks.MockUsers
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
-// each of the view models has to be declared a HiltViewModel for Hilt to
-// know which view models to use
-// additionally, Hilt works with constructor injection, where all the later used
-// repositories are injected into the view model
 
 @HiltViewModel
 class SignUpScreenViewModel @Inject constructor(
     application: Application,
-    private val usersRepository: UsersRepository
+    private val userRepository: MockUserRepository
 ) : AndroidViewModel(application) {
 
-    fun insertUser(user: Users) {
-        viewModelScope.launch (Dispatchers.IO){
-            usersRepository.insert(user)
+    fun signUp(
+        firstName: String,
+        lastName: String,
+        dateOfBirth: String,
+        company: String,
+        department: String,
+        email: String,
+        nickName: String,
+        password: String,
+        onResult: (MockSignUpResponse?) -> Unit
+    ) {
+        viewModelScope.launch {
+            try {
+                val response = userRepository.signUp(
+                    MockSignUpRequest(firstName, lastName, dateOfBirth, company, department, email, nickName, password)
+                )
+                onResult(response)
+            } catch (e: Exception) {
+                onResult(null)
+            }
         }
     }
 
-    // Retrieves a user by nickname to check for duplicates
-    fun getUserByNickName(nickName: String, onResult: (Users?) -> Unit) {
+    fun getUserByNickName(nickName: String, onResult: (MockUsers?) -> Unit) {
         viewModelScope.launch {
-            val user = usersRepository.getUserByNickName(nickName)
+            val user = userRepository.getUserByNickName(nickName)
             onResult(user)
         }
     }
