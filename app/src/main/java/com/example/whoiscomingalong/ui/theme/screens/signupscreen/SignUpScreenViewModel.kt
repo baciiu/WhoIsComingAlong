@@ -3,9 +3,9 @@ package com.example.whoiscomingalong.ui.theme.screens.signupscreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.whoiscomingalong.mocks.MockUserRepository
 import com.example.whoiscomingalong.mocks.MockSignUpRequest
 import com.example.whoiscomingalong.mocks.MockSignUpResponse
+import com.example.whoiscomingalong.mocks.MockUserRepository
 import com.example.whoiscomingalong.mocks.MockUsers
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

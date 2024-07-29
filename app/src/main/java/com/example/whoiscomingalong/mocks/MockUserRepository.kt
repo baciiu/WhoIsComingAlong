@@ -16,28 +16,40 @@ class MockUserRepository {
         ),
         MockUsers(
             userId = 2,
-            firstName = "Jane",
-            lastName = "Smith",
-            nickName = "janesmith",
+            firstName = "Admin",
+            lastName = "Test",
+            nickName = "admin",
             dateOfBirth = "1992-02-02",
-            email = "jane.smith@example.com",
-            password = "password456",
+            email = "admin@mail.de",
+            password = "admin123",
             company = "ExampleCorp",
             department = "Marketing"
         )
     )
 
     fun signUp(request: MockSignUpRequest): MockSignUpResponse {
-        // Mock implementation
-        return MockSignUpResponse(
-            userId = "mock_user_id",
+        val newUser = MockUsers(
+            userId = mockUsers.size + 1,
             firstName = request.firstName,
             lastName = request.lastName,
-            dateOfBirth = request.dateOfBirth,
-            company = request.company,
-            department = request.department,
-            email = request.email,
             nickName = request.nickName,
+            dateOfBirth = request.dateOfBirth,
+            email = request.email,
+            password = request.password,
+            company = request.company,
+            department = request.department
+        )
+        mockUsers.add(newUser)
+
+        return MockSignUpResponse(
+            userId = newUser.userId.toString(),
+            firstName = newUser.firstName,
+            lastName = newUser.lastName,
+            dateOfBirth = newUser.dateOfBirth,
+            company = newUser.company,
+            department = newUser.department,
+            email = newUser.email,
+            nickName = newUser.nickName,
             token = "mock_token"
         )
     }
@@ -50,7 +62,6 @@ class MockUserRepository {
         return mockUsers.find { it.userId == userId }
     }
 
-
     fun authenticateUser(nickName: String, password: String): MockUsers? {
         return mockUsers.find { it.nickName == nickName && it.password == password }
     }
@@ -61,5 +72,4 @@ class MockUserRepository {
             mockUsers[index] = user
         }
     }
-
 }

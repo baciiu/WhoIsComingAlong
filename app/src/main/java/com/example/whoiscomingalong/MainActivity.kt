@@ -17,15 +17,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.whoiscomingalong.ui.theme.screens.centralscreen.CentralScreen
 import com.example.whoiscomingalong.ui.theme.components.AddNewAppointmentScreen
 import com.example.whoiscomingalong.ui.theme.screens.allappointmentsscreen.AllAppointmentsScreen
 import com.example.whoiscomingalong.ui.theme.screens.appointmentscreen.AppointmentScreen
+import com.example.whoiscomingalong.ui.theme.screens.centralscreen.CentralScreen
 import com.example.whoiscomingalong.ui.theme.screens.groupscreen.EditGroupScreen
+import com.example.whoiscomingalong.ui.theme.screens.groupscreen.GroupScreen
 import com.example.whoiscomingalong.ui.theme.screens.loginscreen.LoginScreen
 import com.example.whoiscomingalong.ui.theme.screens.profilescreen.ProfileScreen
 import com.example.whoiscomingalong.ui.theme.screens.profilescreen.ProfileScreenViewModel
-import com.example.whoiscomingalong.ui.theme.screens.groupscreen.GroupScreen
 import com.example.whoiscomingalong.ui.theme.screens.restaurantscreen.RestaurantScreen
 import com.example.whoiscomingalong.ui.theme.screens.signupscreen.SignUpScreen
 import dagger.hilt.android.AndroidEntryPoint
