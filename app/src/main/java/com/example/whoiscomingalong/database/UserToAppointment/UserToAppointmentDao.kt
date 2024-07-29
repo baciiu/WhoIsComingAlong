@@ -8,7 +8,7 @@ interface UserToAppointmentDao {
     @Query("SELECT * FROM UserToAppointment")
     fun getAll(): Flow<List<UserToAppointment>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg userToAppointments: UserToAppointment)
 
     @Delete
