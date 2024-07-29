@@ -1,4 +1,4 @@
-package com.example.whoiscomingalong.di
+package com.example.whoiscomingalong.dependencyinjection
 
 import com.example.whoiscomingalong.mocks.MockUserRepository
 import com.example.whoiscomingalong.mocks.appointment.MockAppointmentRepository
