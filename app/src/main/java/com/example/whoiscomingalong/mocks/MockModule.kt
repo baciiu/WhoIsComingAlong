@@ -1,6 +1,7 @@
 package com.example.whoiscomingalong.di
 
 import com.example.whoiscomingalong.mocks.MockUserRepository
+import com.example.whoiscomingalong.mocks.appointment.MockAppointmentRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,5 +16,11 @@ object MockModule {
     @Singleton
     fun provideMockUserRepository(): MockUserRepository {
         return MockUserRepository()
+    }
+
+    @Provides
+    @Singleton
+    fun provideMockAppointmentRepository(): MockAppointmentRepository {
+        return MockAppointmentRepository()
     }
 }

@@ -17,7 +17,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.whoiscomingalong.ui.theme.components.AddNewAppointmentScreen
+import com.example.whoiscomingalong.ui.theme.screens.addnewappointmentscreen.AddNewAppointmentScreen
 import com.example.whoiscomingalong.ui.theme.screens.allappointmentsscreen.AllAppointmentsScreen
 import com.example.whoiscomingalong.ui.theme.screens.appointmentscreen.AppointmentScreen
 import com.example.whoiscomingalong.ui.theme.screens.centralscreen.CentralScreen
@@ -31,8 +31,6 @@ import com.example.whoiscomingalong.ui.theme.screens.signupscreen.SignUpScreen
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-// the entry point has to be declared by a Hilt annotation
-
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     @Inject
@@ -41,7 +39,6 @@ class MainActivity : ComponentActivity() {
     @RequiresApi(Build.VERSION_CODES.S)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // Set the app to draw edge-to-edge
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             WhoIsComingAlongTheme {

@@ -3,41 +3,72 @@ package com.example.whoiscomingalong.ui.theme.screens.addnewappointmentscreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.whoiscomingalong.database.Appointment.Appointment
-import com.example.whoiscomingalong.database.Appointment.AppointmentRepository
-import com.example.whoiscomingalong.database.Group.Group
-import com.example.whoiscomingalong.database.Group.GroupRepository
-import com.example.whoiscomingalong.database.Restaurant.RestaurantRepository
-import com.example.whoiscomingalong.database.UserToGroup.UserToGroup
-import com.example.whoiscomingalong.database.UserToGroup.UserToGroupRepository
-import com.example.whoiscomingalong.database.Users.UsersRepository
+import com.example.whoiscomingalong.mocks.MockUsers
+import com.example.whoiscomingalong.mocks.appointment.MockAppointment
+import com.example.whoiscomingalong.mocks.appointment.MockAppointmentRepository
+import com.example.whoiscomingalong.mocks.appointment.MockGroup
+import com.example.whoiscomingalong.mocks.appointment.MockRestaurant
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
 class AddNewAppointmentScreenViewModel @Inject constructor(
     application: Application,
-    private val usersRepository: UsersRepository,
-    private val groupRepository: GroupRepository,
-    private val userToGroupRepository: UserToGroupRepository,
-    private val restaurantRepository: RestaurantRepository,
-    private val appointmentRepository: AppointmentRepository
+    private val appointmentRepository: MockAppointmentRepository
 ) : AndroidViewModel(application) {
 
-    fun getAllGroups(): Flow<List<Group>> {
-        return groupRepository.getAllGroups()
+    fun getAllGroups(): Flow<List<MockGroup>> {
+        return appointmentRepository.getAllGroups()
     }
 
-    fun getAllRestaurants(): Flow<List<com.example.whoiscomingalong.database.Restaurant.Restaurant>> {
-        return restaurantRepository.getAllRestaurants()
+    fun getAllRestaurants(): Flow<List<MockRestaurant>> {
+        return appointmentRepository.getAllRestaurants()
     }
 
-    fun insertAppointment(appointment: Appointment) {
+    fun insertAppointment(
+        appointmentName: String,
+        groupId: Int,
+        restaurantId: Int,
+        date: Date,
+        hourMinute: Date
+    ) {
+        val newAppointment = MockAppointment(
+            appointmentId = 0, // Placeholder ID, should be set appropriately
+            appointmentName = appointmentName,
+            creator = MockUsers(
+                userId = 1, // Assuming the creator is the first user
+                firstName = "John",
+                lastName = "Doe",
+                nickName = "johndoe",
+                dateOfBirth = "1990-01-01",
+                email = "john.doe@example.com",
+                password = "password123",
+                company = "ExampleCorp",
+                department = "Engineering"
+            ),
+            participants = listOf(
+                MockUsers(
+                    userId = 1,
+                    firstName = "John",
+                    lastName = "Doe",
+                    nickName = "johndoe",
+                    dateOfBirth = "1990-01-01",
+                    email = "john.doe@example.com",
+                    password = "password123",
+                    company = "ExampleCorp",
+                    department = "Engineering"
+                )
+            ),
+            date = date,
+            hourMinute = hourMinute
+        )
+
         viewModelScope.launch(Dispatchers.IO) {
-            appointmentRepository.insert(appointment)
+            appointmentRepository.addAppointment(newAppointment)
         }
     }
 }

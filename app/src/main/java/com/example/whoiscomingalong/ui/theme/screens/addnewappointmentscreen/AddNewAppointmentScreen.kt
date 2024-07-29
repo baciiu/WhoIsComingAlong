@@ -1,12 +1,27 @@
-package com.example.whoiscomingalong.ui.theme.components
+package com.example.whoiscomingalong.ui.theme.screens.addnewappointmentscreen
 
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -28,13 +43,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.whoiscomingalong.LogoRed
 import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
-import com.example.whoiscomingalong.database.Appointment.Appointment
-import com.example.whoiscomingalong.database.Group.Group
-import com.example.whoiscomingalong.database.Restaurant.Restaurant
-import com.example.whoiscomingalong.ui.theme.screens.addnewappointmentscreen.AddNewAppointmentScreenViewModel
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 @Composable
@@ -45,8 +55,8 @@ fun AddNewAppointmentScreen(
     Log.d("TAG", "AppointmentScreen")
 
     var appointmentName by remember { mutableStateOf("") }
-    var selectedGroup by remember { mutableStateOf<Group?>(null) }
-    var selectedRestaurant by remember { mutableStateOf<Restaurant?>(null) }
+    var selectedGroup by remember { mutableStateOf<Int?>(null) }
+    var selectedRestaurant by remember { mutableStateOf<Int?>(null) }
     var date by remember { mutableStateOf("") }
     var time by remember { mutableStateOf("") }
 
@@ -116,8 +126,8 @@ fun AddNewAppointmentScreen(
                         .padding(vertical = 4.dp)
                 ) {
                     RadioButton(
-                        selected = selectedGroup == group,
-                        onClick = { selectedGroup = group }
+                        selected = selectedGroup == group.groupId,
+                        onClick = { selectedGroup = group.groupId }
                     )
                     Text(text = group.groupName)
                 }
@@ -137,8 +147,8 @@ fun AddNewAppointmentScreen(
                         .padding(vertical = 4.dp)
                 ) {
                     RadioButton(
-                        selected = selectedRestaurant == restaurant,
-                        onClick = { selectedRestaurant = restaurant }
+                        selected = selectedRestaurant == restaurant.restaurantId,
+                        onClick = { selectedRestaurant = restaurant.restaurantId }
                     )
                     Text(text = restaurant.restaurantName)
                 }
@@ -180,14 +190,13 @@ fun AddNewAppointmentScreen(
                                 val parsedDate = dateFormat.parse(date)
                                 val parsedTime = timeFormat.parse(time)
                                 if (parsedDate != null && parsedTime != null) {
-                                    val newAppointment = Appointment(
+                                    addNewAppointmentScreenViewModel.insertAppointment(
                                         appointmentName = appointmentName,
-                                        groupId = selectedGroup!!.groupId,
-                                        restaurantID = selectedRestaurant!!.restaurantId,
+                                        groupId = selectedGroup!!,
+                                        restaurantId = selectedRestaurant!!,
                                         date = parsedDate,
                                         hourMinute = parsedTime
                                     )
-                                    addNewAppointmentScreenViewModel.insertAppointment(newAppointment)
                                     navController.navigate("start_screen")
                                 }
                             } catch (e: Exception) {
