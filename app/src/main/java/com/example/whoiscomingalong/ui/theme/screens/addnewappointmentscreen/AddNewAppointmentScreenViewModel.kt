@@ -3,6 +3,7 @@ package com.example.whoiscomingalong.ui.theme.screens.addnewappointmentscreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.whoiscomingalong.dependencyinjection.MockRepository
 import com.example.whoiscomingalong.mocks.MockUsers
 import com.example.whoiscomingalong.mocks.appointment.MockAppointment
 import com.example.whoiscomingalong.mocks.appointment.MockAppointmentRepository
@@ -18,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AddNewAppointmentScreenViewModel @Inject constructor(
     application: Application,
-    private val appointmentRepository: MockAppointmentRepository
+    @MockRepository private val appointmentRepository: MockAppointmentRepository
 ) : AndroidViewModel(application) {
 
     fun getAllGroups(): Flow<List<MockGroup>> {

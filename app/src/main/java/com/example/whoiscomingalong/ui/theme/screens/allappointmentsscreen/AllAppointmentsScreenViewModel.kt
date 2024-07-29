@@ -3,6 +3,7 @@ package com.example.whoiscomingalong.ui.theme.screens.allappointmentsscreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.whoiscomingalong.dependencyinjection.MockRepository
 import com.example.whoiscomingalong.mocks.appointment.MockAppointment
 import com.example.whoiscomingalong.mocks.appointment.MockAppointmentRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AllAppointmentsScreenViewModel @Inject constructor(
     application: Application,
-    private val appointmentRepository: MockAppointmentRepository
+    @MockRepository private val appointmentRepository: MockAppointmentRepository
 ) : AndroidViewModel(application) {
 
     private val _appointments = MutableStateFlow<List<MockAppointment>>(emptyList())

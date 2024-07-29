@@ -1,6 +1,8 @@
 package com.example.whoiscomingalong.mocks
 
-class MockUserRepository {
+import javax.inject.Inject
+
+class MockUserRepository @Inject constructor() {
 
     private val mockUsers = mutableListOf(
         MockUsers(

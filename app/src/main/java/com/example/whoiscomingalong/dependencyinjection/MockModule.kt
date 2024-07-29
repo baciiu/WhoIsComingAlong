@@ -14,12 +14,14 @@ object MockModule {
 
     @Provides
     @Singleton
+    @MockRepository
     fun provideMockUserRepository(): MockUserRepository {
         return MockUserRepository()
     }
 
     @Provides
     @Singleton
+    @MockRepository
     fun provideMockAppointmentRepository(): MockAppointmentRepository {
         return MockAppointmentRepository()
     }

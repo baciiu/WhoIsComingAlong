@@ -4,6 +4,7 @@ import com.example.whoiscomingalong.mocks.MockUsers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import java.util.Date
+import javax.inject.Inject
 
 data class MockAppointment(
     val appointmentId: Int,
@@ -14,7 +15,7 @@ data class MockAppointment(
     val hourMinute: Date
 )
 
-class MockAppointmentRepository {
+class MockAppointmentRepository @Inject constructor() {
 
     private val mockAppointments = mutableListOf(
         MockAppointment(
