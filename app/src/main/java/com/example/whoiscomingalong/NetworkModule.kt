@@ -1,6 +1,10 @@
 package com.example.whoiscomingalong
 
+import com.example.whoiscomingalong.Network.Api.AppointmentApiService
+import com.example.whoiscomingalong.Network.Api.AuthApiService
 import com.example.whoiscomingalong.Network.Api.GroupApiService
+import com.example.whoiscomingalong.Network.Api.RestaurantApiService
+import com.example.whoiscomingalong.Network.Api.UsersApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -65,5 +69,26 @@ object NetworkModule {
     @Singleton
     fun provideGroupApiService(retrofit: Retrofit): GroupApiService {
         return retrofit.create(GroupApiService::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideRestaurantApiService(retrofit: Retrofit): RestaurantApiService {
+        return retrofit.create(RestaurantApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAppointmentApiService(retrofit: Retrofit): AppointmentApiService {
+        return retrofit.create(AppointmentApiService::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideUsersApiService(retrofit: Retrofit): UsersApiService {
+        return retrofit.create(UsersApiService::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideAuthApiService(retrofit: Retrofit): AuthApiService {
+        return retrofit.create(AuthApiService::class.java)
     }
 }
