@@ -28,7 +28,6 @@ import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
 import com.example.whoiscomingalong.mocks.MockSignUpResponse
 
-
 @Composable
 fun SignUpScreen(navController: NavHostController) {
     val firstName = remember { mutableStateOf("") }
@@ -177,7 +176,7 @@ fun SignUpScreen(navController: NavHostController) {
                         password.value
                     ) { response: MockSignUpResponse? ->
                         if (response != null) {
-                            navController.navigate("start_screen")
+                            navController.navigate("login_screen")
                         } else {
                             Log.e("SignUpScreen", "Sign up failed")
                         }
