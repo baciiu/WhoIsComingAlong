@@ -14,6 +14,10 @@ interface AppointmentDao {
     @Insert
     suspend fun insertAll(vararg appointments: Appointment)
 
+    @Insert
+    suspend fun insert(appointment: Appointment)
+
+
     @Delete
     suspend fun delete(appointment: Appointment)
 }
