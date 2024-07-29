@@ -47,7 +47,7 @@ class GroupRepository @Inject constructor(
         deleteGroupFromServer(group)
     }
 
-    fun fetchGroupsFromServer() {
+    private fun fetchGroupsFromServer() {
         apiService.getAllGroups().enqueue(object : Callback<List<Group>> {
             override fun onResponse(call: Call<List<Group>>, response: Response<List<Group>>) {
                 if (response.isSuccessful) {
