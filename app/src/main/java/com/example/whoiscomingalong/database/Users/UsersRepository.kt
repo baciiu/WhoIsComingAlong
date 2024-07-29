@@ -55,7 +55,9 @@ class UsersRepository @Inject constructor(
                 if (response.isSuccessful) {
                     CoroutineScope(Dispatchers.IO).launch {
                         response.body()?.let { users ->
-                            usersDao.insertAll(*users.toTypedArray())
+                            usersDao.insertAll(*users.map { user ->
+                                user.copy(userId = 0)  // Reset userId to let Room handle the ID assignment
+                            }.toTypedArray())
                         }
                     }
                 }
