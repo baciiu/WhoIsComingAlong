@@ -1,7 +1,21 @@
 package com.example.whoiscomingalong.mocks
 
-
 class MockUserRepository {
+
+    private val mockUsers = listOf(
+        MockUsers(
+            userId = 1,
+            firstName = "John",
+            lastName = "Doe",
+            nickName = "johndoe",
+            dateOfBirth = "1990-01-01",
+            email = "john.doe@example.com",
+            password = "password123",
+            company = "ExampleCorp",
+            department = "Engineering"
+        )
+    )
+
     suspend fun signUp(request: MockSignUpRequest): MockSignUpResponse {
         // Mock implementation
         return MockSignUpResponse(
@@ -18,23 +32,9 @@ class MockUserRepository {
     }
 
     suspend fun getUserByNickName(nickName: String): MockUsers? {
-        // Mock implementation
-        return null
+        return mockUsers.find { it.nickName == nickName }
     }
 
-    private val mockUsers = listOf(
-        MockUsers(
-            userId = 1,
-            firstName = "John",
-            lastName = "Doe",
-            nickName = "johndoe",
-            dateOfBirth = "1990-01-01",
-            email = "john.doe@example.com",
-            password = "password123",
-            company = "ExampleCorp",
-            department = "Engineering"
-        )
-    )
 
     suspend fun authenticateUser(nickName: String, password: String): MockUsers? {
         return mockUsers.find { it.nickName == nickName && it.password == password }
