@@ -2,7 +2,7 @@ package com.example.whoiscomingalong.mocks
 
 class MockUserRepository {
 
-    private val mockUsers = listOf(
+    private val mockUsers = mutableListOf(
         MockUsers(
             userId = 1,
             firstName = "John",
@@ -13,10 +13,21 @@ class MockUserRepository {
             password = "password123",
             company = "ExampleCorp",
             department = "Engineering"
+        ),
+        MockUsers(
+            userId = 2,
+            firstName = "Jane",
+            lastName = "Smith",
+            nickName = "janesmith",
+            dateOfBirth = "1992-02-02",
+            email = "jane.smith@example.com",
+            password = "password456",
+            company = "ExampleCorp",
+            department = "Marketing"
         )
     )
 
-    suspend fun signUp(request: MockSignUpRequest): MockSignUpResponse {
+    fun signUp(request: MockSignUpRequest): MockSignUpResponse {
         // Mock implementation
         return MockSignUpResponse(
             userId = "mock_user_id",
@@ -31,14 +42,24 @@ class MockUserRepository {
         )
     }
 
-    suspend fun getUserByNickName(nickName: String): MockUsers? {
+    fun getUserByNickName(nickName: String): MockUsers? {
         return mockUsers.find { it.nickName == nickName }
     }
 
+    fun getUserById(userId: Int): MockUsers? {
+        return mockUsers.find { it.userId == userId }
+    }
 
-    suspend fun authenticateUser(nickName: String, password: String): MockUsers? {
+
+    fun authenticateUser(nickName: String, password: String): MockUsers? {
         return mockUsers.find { it.nickName == nickName && it.password == password }
     }
 
+    fun updateUser(user: MockUsers) {
+        val index = mockUsers.indexOfFirst { it.userId == user.userId }
+        if (index != -1) {
+            mockUsers[index] = user
+        }
+    }
 
 }

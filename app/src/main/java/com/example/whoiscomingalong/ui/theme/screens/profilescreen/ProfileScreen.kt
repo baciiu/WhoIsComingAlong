@@ -1,18 +1,33 @@
 package com.example.whoiscomingalong.ui.theme.screens.profilescreen
 
-import android.media.tv.TvContract.Channels.Logo
 import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,11 +42,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.whoiscomingalong.LogoRed
 import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
-import com.example.whoiscomingalong.database.Users.Users
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 @Composable
@@ -50,7 +61,6 @@ fun ProfileScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.White)
-
     ) {
         LazyColumn(
             modifier = Modifier
@@ -108,9 +118,10 @@ fun ProfileScreen(
                     ) { newValue ->
                         try {
                             val parsedDate = dateFormatter.parse(newValue)
-                            profileScreenViewModel.updateUser(it.copy(dateOfBirth = parsedDate))
+                            if (parsedDate != null) {
+                                profileScreenViewModel.updateUser(it.copy(dateOfBirth = parsedDate.toString()))
+                            }
                         } catch (e: Exception) {
-                            // Handle the exception (e.g., show an error message)
                             Log.e("ProfileScreen", "Failed to parse date: ${e.message}")
                         }
                     }
@@ -139,31 +150,38 @@ fun ProfileScreen(
                     Spacer(modifier = Modifier.height(20.dp))
                 }
                 Button(
-                        onClick = { isEditing = !isEditing },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 20.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = LogoRed),
-                        contentPadding = PaddingValues()
-
-                    ) {
-                        Text(
-                            text = if (isEditing) "Save Changes" else "Edit Profile",
-                            color = Color.White,
-                            fontSize = 16.sp
-                        )
-                    }
+                    onClick = {
+                        if (isEditing) {
+                            isEditing = false
+                            navController.navigate("start_screen") // Navigate back to the start screen after saving changes
+                        } else {
+                            isEditing = true
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = 20.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = LogoRed),
+                    contentPadding = PaddingValues()
+                ) {
+                    Text(
+                        text = if (isEditing) "Save Changes" else "Edit Profile",
+                        color = Color.White,
+                        fontSize = 16.sp
+                    )
                 }
             }
         }
     }
-
+}
 
 @Composable
 fun ProfileTextField(label: String, value: String, isEditing: Boolean, onValueChange: (String) -> Unit) {
-    Column(modifier = Modifier
-        .fillMaxWidth()
-        .padding(vertical = 5.dp)) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 5.dp)
+    ) {
         Text(text = label, style = MaterialTheme.typography.bodyLarge.copy(fontSize = 16.sp, color = Color.Gray))
         if (isEditing) {
             OutlinedTextField(

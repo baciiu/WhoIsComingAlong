@@ -3,38 +3,29 @@ package com.example.whoiscomingalong.ui.theme.screens.profilescreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.whoiscomingalong.database.Group.GroupRepository
-import com.example.whoiscomingalong.database.Users.Users
-import com.example.whoiscomingalong.database.Users.UsersRepository
+import com.example.whoiscomingalong.mocks.MockUserRepository
+import com.example.whoiscomingalong.mocks.MockUsers
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileScreenViewModel @Inject constructor(
     application: Application,
-    private val usersRepository: UsersRepository
+    private val userRepository: MockUserRepository
 ) : AndroidViewModel(application) {
 
-    fun getAllUsers(): Flow<List<Users>> {
-        return usersRepository.getAllUsers()
-    }
-
-    fun getUserById(int: Int): Flow<Users> {
-        return usersRepository.getUserById(int)
-    }
-
-    fun deleteUser(user: Users) {
-        viewModelScope.launch(Dispatchers.IO) {
-            usersRepository.delete(user)
+    fun getUserById(userId: Int): Flow<MockUsers?> {
+        return flow {
+            emit(userRepository.getUserById(userId))
         }
     }
 
-    fun updateUser(user: Users) {
-        viewModelScope.launch(Dispatchers.IO) {
-            usersRepository.update(user)
+    fun updateUser(user: MockUsers) {
+        viewModelScope.launch {
+            userRepository.updateUser(user)
         }
     }
 }
