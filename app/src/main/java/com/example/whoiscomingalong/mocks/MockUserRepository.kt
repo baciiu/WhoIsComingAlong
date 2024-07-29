@@ -21,4 +21,24 @@ class MockUserRepository {
         // Mock implementation
         return null
     }
+
+    private val mockUsers = listOf(
+        MockUsers(
+            userId = 1,
+            firstName = "John",
+            lastName = "Doe",
+            nickName = "johndoe",
+            dateOfBirth = "1990-01-01",
+            email = "john.doe@example.com",
+            password = "password123",
+            company = "ExampleCorp",
+            department = "Engineering"
+        )
+    )
+
+    suspend fun authenticateUser(nickName: String, password: String): MockUsers? {
+        return mockUsers.find { it.nickName == nickName && it.password == password }
+    }
+
+
 }
