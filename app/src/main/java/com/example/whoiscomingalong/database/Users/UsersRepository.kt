@@ -47,14 +47,17 @@ class UsersRepository @Inject constructor(
     }
 
     suspend fun update(user: Users) {
+        fetchUserFromServer(userId = user.userId)
         usersDao.update(user)
     }
 
     suspend fun authenticateUser(nickName: String, password: String): Users? {
-        return usersDao.authenticateUser(nickName, password)
+        fetchUsersFromServer()
+        return usersDao.getUserByNickName(nickName)
     }
 
     suspend fun getUserByNickName(nickName: String): Users? {
+        fetchUsersFromServer()
         return usersDao.getUserByNickName(nickName)
     }
 
