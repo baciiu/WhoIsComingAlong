@@ -25,6 +25,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -43,6 +44,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.whoiscomingalong.LogoRed
 import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
+import com.example.whoiscomingalong.database.Appointment.Appointment
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Locale
@@ -60,6 +62,7 @@ fun AddNewAppointmentScreen(
     var date by remember { mutableStateOf("") }
     var time by remember { mutableStateOf("") }
     var location by remember { mutableStateOf("") }
+    var creatorId by remember { mutableIntStateOf(0) }
 
     val allGroups by addNewAppointmentScreenViewModel.getAllGroups().collectAsState(initial = emptyList())
     val allRestaurants by addNewAppointmentScreenViewModel.getAllRestaurants().collectAsState(initial = emptyList())
@@ -200,24 +203,22 @@ fun AddNewAppointmentScreen(
                 onClick = {
                     coroutineScope.launch {
                         if (selectedGroup != null && selectedRestaurant != null) {
-                            try {
                                 val parsedDate = dateFormat.parse(date)
                                 val parsedTime = timeFormat.parse(time)
-                                if (parsedDate != null && parsedTime != null) {
-                                    addNewAppointmentScreenViewModel.insertAppointment(
-                                        appointmentName = appointmentName,
-                                        groupId = selectedGroup!!,
-                                        restaurantId = selectedRestaurant!!,
-                                        date = parsedDate,
-                                        hourMinute = parsedTime,
-                                        location = location
-                                    )
-                                    navController.navigate("start_screen")
-                                }
-                            } catch (e: Exception) {
-                                Log.e("TAG", "Error parsing date/time: ${e.message}")
+                                val appointment = Appointment(
+                                    appointmentId = 0,
+                                    appointmentName = appointmentName,
+                                    groupId = selectedGroup!!,
+                                    restaurantID = selectedRestaurant!!,
+                                    date = parsedDate,
+                                    hourMinute = parsedTime,
+                                    location = location,
+                                    creatorId = creatorId
+                                )
+                                addNewAppointmentScreenViewModel.insertAppointment(appointment)
+
+                                navController.navigate("start_screen")
                             }
-                        }
                     }
                 },
                 modifier = Modifier
