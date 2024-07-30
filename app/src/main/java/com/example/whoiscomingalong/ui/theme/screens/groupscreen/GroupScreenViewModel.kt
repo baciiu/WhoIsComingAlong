@@ -13,6 +13,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -25,6 +27,33 @@ class GroupScreenViewModel @Inject constructor(
     private val groupRepository: GroupRepository,
     private val userToGroupRepository: UserToGroupRepository
 ) : AndroidViewModel(application) {
+
+    private val _allUsers = MutableStateFlow<List<Users>>(emptyList())
+    val allUsers: StateFlow<List<Users>> = _allUsers
+
+    private val _allGroups = MutableStateFlow<List<Group>>(emptyList())
+    val allGroups: StateFlow<List<Group>> = _allGroups
+
+    init {
+        loadAllUsers()
+        loadAllGroups()
+    }
+
+    private fun loadAllUsers() {
+        viewModelScope.launch {
+            usersRepository.getAllUsers().collect { users ->
+                _allUsers.value = users
+            }
+        }
+    }
+
+    private fun loadAllGroups() {
+        viewModelScope.launch {
+            groupRepository.getAllGroups().collect { groups ->
+                _allGroups.value = groups
+            }
+        }
+    }
 
     fun getAllGroups(): Flow<List<Group>> {
         return groupRepository.getAllGroups()
