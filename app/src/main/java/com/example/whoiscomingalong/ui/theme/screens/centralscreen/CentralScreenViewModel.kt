@@ -32,7 +32,9 @@ class CentralScreenViewModel @Inject constructor(
                         date = mockAppointment.date,
                         groupId = 0, // or appropriate value
                         hourMinute = mockAppointment.hourMinute,
-                        restaurantID = 0 // or appropriate value
+                        restaurantID = 0, // or appropriate value,
+                        location = "location",
+                        creatorId = 3
                     )
                 }
                 _appointments.value = convertedAppointments
