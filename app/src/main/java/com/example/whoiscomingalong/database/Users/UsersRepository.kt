@@ -49,6 +49,7 @@ class UsersRepository @Inject constructor(
     suspend fun update(user: Users) {
         usersDao.update(user)
     }
+
     suspend fun authenticateUser(nickName: String, password: String): Users? {
         return usersDao.authenticateUser(nickName, password)
     }
@@ -56,6 +57,7 @@ class UsersRepository @Inject constructor(
     suspend fun getUserByNickName(nickName: String): Users? {
         return usersDao.getUserByNickName(nickName)
     }
+
 
     fun fetchUsersFromServer() {
         apiService.getAllUsers().enqueue(object : Callback<List<Users>> {
