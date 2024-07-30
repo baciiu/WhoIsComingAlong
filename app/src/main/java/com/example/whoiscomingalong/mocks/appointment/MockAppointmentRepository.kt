@@ -15,6 +15,15 @@ data class MockAppointment(
     val hourMinute: Date
 )
 
+data class UserToAppointment(
+    val userId: Int,
+    val appointmentId: Int,
+    val isComingAlong: Boolean
+)
+
+data class MockGroup(val groupId: Int, val groupName: String)
+data class MockRestaurant(val restaurantId: Int, val restaurantName: String)
+
 class MockAppointmentRepository @Inject constructor() {
 
     private val mockAppointments = mutableListOf(
@@ -80,8 +89,25 @@ class MockAppointmentRepository @Inject constructor() {
         )
     )
 
+    private val userToAppointments = mutableListOf(
+        UserToAppointment(
+            userId = 1,
+            appointmentId = 1,
+            isComingAlong = true
+        ),
+        UserToAppointment(
+            userId = 2,
+            appointmentId = 2,
+            isComingAlong = false
+        )
+    )
+
     fun getAllAppointmentsForUser(userId: Int): Flow<List<MockAppointment>> {
         return flowOf(mockAppointments.filter { it.participants.any { user -> user.userId == userId } })
+    }
+
+    fun getAppointmentById(appointmentId: Int): Flow<MockAppointment> {
+        return flowOf(mockAppointments.first { it.appointmentId == appointmentId })
     }
 
     fun addAppointment(appointment: MockAppointment) {
@@ -102,7 +128,23 @@ class MockAppointmentRepository @Inject constructor() {
     fun getAllRestaurants(): Flow<List<MockRestaurant>> {
         return flowOf(listOf(MockRestaurant(1, "Restaurant 1"), MockRestaurant(2, "Restaurant 2")))
     }
-}
 
-data class MockGroup(val groupId: Int, val groupName: String)
-data class MockRestaurant(val restaurantId: Int, val restaurantName: String)
+    fun getAllUserToAppointments(): Flow<List<UserToAppointment>> {
+        return flowOf(userToAppointments)
+    }
+
+    fun updateUserToAppointment(userToAppointment: UserToAppointment) {
+        val index = userToAppointments.indexOfFirst { it.userId == userToAppointment.userId && it.appointmentId == userToAppointment.appointmentId }
+        if (index != -1) {
+            userToAppointments[index] = userToAppointment
+        }
+    }
+
+    fun getGroupById(groupId: Int): Flow<MockGroup> {
+        return flowOf(MockGroup(groupId, "Group $groupId"))
+    }
+
+    fun getRestaurantById(restaurantId: Int): Flow<MockRestaurant> {
+        return flowOf(MockRestaurant(restaurantId, "Restaurant $restaurantId"))
+    }
+}
