@@ -85,7 +85,9 @@ class AppointmentRepository @Inject constructor(
             groupId = appointment.groupId,
             appointmentDate = appointment.date,
             appointmentTime = appointment.hourMinute,
-            restaurantId = appointment.restaurantID
+            restaurantId = appointment.restaurantID,
+            location = appointment.location,
+            creatorId = appointment.creatorId
             )
         apiService.createAppointment(appointmentReq).enqueue(object : Callback<Appointment> {
             override fun onResponse(call: Call<Appointment>, response: Response<Appointment>) {
