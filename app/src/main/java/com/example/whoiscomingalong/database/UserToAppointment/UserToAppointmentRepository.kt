@@ -22,4 +22,8 @@ class UserToAppointmentRepository @Inject constructor(private val userToAppointm
     suspend fun delete(userToAppointment: UserToAppointment) {
         userToAppointmentDao.delete(userToAppointment)
     }
+
+    suspend fun updateUserToAppointment(userToAppointment: UserToAppointment) {
+        userToAppointmentDao.update(userToAppointment)
+    }
 }

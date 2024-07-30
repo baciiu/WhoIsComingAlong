@@ -11,6 +11,9 @@ interface UserToAppointmentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg userToAppointments: UserToAppointment)
 
+    @Update
+    suspend fun update(userToAppointment: UserToAppointment)
+
     @Delete
     suspend fun delete(userToAppointment: UserToAppointment)
 }
