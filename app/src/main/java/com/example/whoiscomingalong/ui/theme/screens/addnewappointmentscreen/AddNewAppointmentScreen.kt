@@ -59,6 +59,7 @@ fun AddNewAppointmentScreen(
     var selectedRestaurant by remember { mutableStateOf<Int?>(null) }
     var date by remember { mutableStateOf("") }
     var time by remember { mutableStateOf("") }
+    var location by remember { mutableStateOf("") }
 
     val allGroups by addNewAppointmentScreenViewModel.getAllGroups().collectAsState(initial = emptyList())
     val allRestaurants by addNewAppointmentScreenViewModel.getAllRestaurants().collectAsState(initial = emptyList())
@@ -182,6 +183,19 @@ fun AddNewAppointmentScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
+            OutlinedTextField(
+                value = location,
+                onValueChange = { location = it },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 5.dp),
+                label = { Text("Location") },
+                textStyle = TextStyle(color = Color.Black),
+                singleLine = true
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
             Button(
                 onClick = {
                     coroutineScope.launch {
@@ -195,7 +209,8 @@ fun AddNewAppointmentScreen(
                                         groupId = selectedGroup!!,
                                         restaurantId = selectedRestaurant!!,
                                         date = parsedDate,
-                                        hourMinute = parsedTime
+                                        hourMinute = parsedTime,
+                                        location = location
                                     )
                                     navController.navigate("start_screen")
                                 }

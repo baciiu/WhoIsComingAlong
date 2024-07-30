@@ -1,7 +1,5 @@
 package com.example.whoiscomingalong.ui.theme.screens.appointmentscreen
 
-// File: ui/AppointmentScreen.kt
-
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -14,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -43,23 +42,36 @@ import androidx.navigation.compose.rememberNavController
 import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
 import com.example.whoiscomingalong.mocks.appointment.UserToAppointment
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun AppointmentScreen(
     navController: NavController,
+    appointmentId: Int,
     viewModel: AppointmentScreenViewModel = hiltViewModel()
 ) {
     Log.d("TAG", "AppointmentScreen")
 
     val currentUserId = 1 // Replace with actual current user ID
     val appointments by viewModel.getAllUserToAppointments().collectAsState(initial = emptyList())
+    val appointmentDetails by viewModel.appointmentDetails.collectAsState()
     var isComingAlong by remember { mutableStateOf(false) }
 
     // Load the isComingAlong status for the current user and appointment
     LaunchedEffect(appointments) {
-        val userAppointment = appointments.find { it.userId == currentUserId }
+        val userAppointment = appointments.find { it.userId == currentUserId && it.appointmentId == appointmentId }
         isComingAlong = userAppointment?.isComingAlong ?: false
     }
+
+    // Load the appointment details
+    LaunchedEffect(appointmentId) {
+        viewModel.getAppointmentById(appointmentId)
+    }
+
+    val dateFormat = SimpleDateFormat("EEE, d MMM yyyy", Locale.getDefault())
+    val timeFormat = SimpleDateFormat("h:mm a", Locale.getDefault())
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -93,6 +105,43 @@ fun AppointmentScreen(
 
             Spacer(modifier = Modifier.height(5.dp))
 
+            appointmentDetails?.let { appointment ->
+                Text(
+                    text = appointment.appointmentName,
+                    style = TextStyle(
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                )
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(text = "Creator: ${appointment.creator.nickName}")
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(text = "Date: ${dateFormat.format(appointment.date)}")
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(text = "Time: ${timeFormat.format(appointment.hourMinute)}")
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(text = "Location: ${appointment.location}")
+
+                Spacer(modifier = Modifier.height(10.dp))
+
+                Text(text = "Participants:")
+                appointment.participants.forEach { participant ->
+                    Text(text = participant.nickName)
+                }
+
+                Spacer(modifier = Modifier.height(20.dp))
+            }
+
+            Spacer(modifier = Modifier.weight(1f))
+
             Text(
                 text = "Are you coming along?",
                 style = TextStyle(
@@ -109,13 +158,15 @@ fun AppointmentScreen(
                     Icon(
                         painter = painterResource(id = R.drawable.true_icon),
                         contentDescription = null,
-                        tint = Color.Green
+                        tint = Color.Green,
+                        modifier = Modifier.size(24.dp) // Smaller icon size
                     )
                 } else {
                     Icon(
                         painter = painterResource(id = R.drawable.false_icon),
                         contentDescription = null,
-                        tint = Color.Red
+                        tint = Color.Red,
+                        modifier = Modifier.size(24.dp) // Smaller icon size
                     )
                 }
 
@@ -126,7 +177,7 @@ fun AppointmentScreen(
                     viewModel.updateUserToAppointment(
                         UserToAppointment(
                             userId = currentUserId,
-                            appointmentId = 1, // Replace with actual appointment ID
+                            appointmentId = appointmentId, // Replace with actual appointment ID
                             isComingAlong = isComingAlong
                         )
                     )
@@ -134,6 +185,8 @@ fun AppointmentScreen(
                     Text(text = "Edit")
                 }
             }
+
+            Spacer(modifier = Modifier.height(20.dp))
         }
     }
 }
@@ -142,6 +195,6 @@ fun AppointmentScreen(
 @Composable
 fun AppointmentScreenPreview() {
     WhoIsComingAlongTheme {
-        AppointmentScreen(navController = rememberNavController())
+        AppointmentScreen(navController = rememberNavController(), appointmentId = 1)
     }
 }

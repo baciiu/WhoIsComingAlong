@@ -12,7 +12,8 @@ data class MockAppointment(
     val creator: MockUsers,
     val participants: List<MockUsers>,
     val date: Date,
-    val hourMinute: Date
+    val hourMinute: Date,
+    val location : String
 )
 
 data class UserToAppointment(
@@ -29,7 +30,7 @@ class MockAppointmentRepository @Inject constructor() {
     private val mockAppointments = mutableListOf(
         MockAppointment(
             appointmentId = 1,
-            appointmentName = "Meeting with Team",
+            appointmentName = "Dinner with Team",
             creator = MockUsers(
                 userId = 1,
                 firstName = "John",
@@ -55,7 +56,8 @@ class MockAppointmentRepository @Inject constructor() {
                 )
             ),
             date = Date(),
-            hourMinute = Date()
+            hourMinute = Date(),
+            location = "Steakhouse Giuseppe"
         ),
         MockAppointment(
             appointmentId = 2,
@@ -85,7 +87,8 @@ class MockAppointmentRepository @Inject constructor() {
                 )
             ),
             date = Date(),
-            hourMinute = Date()
+            hourMinute = Date(),
+            location = "Vegan Cuisine Club"
         )
     )
 

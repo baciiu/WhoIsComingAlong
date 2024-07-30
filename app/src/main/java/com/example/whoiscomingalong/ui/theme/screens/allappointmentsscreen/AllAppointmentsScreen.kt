@@ -3,6 +3,7 @@ package com.example.whoiscomingalong.ui.theme.screens.allappointmentsscreen
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -88,6 +89,9 @@ fun AllAppointmentsScreen(
                                 .padding(8.dp)
                                 .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
                                 .padding(8.dp)
+                                .clickable {
+                                    navController.navigate("appointment_screen/${appointment.appointmentId}")
+                                }
                         ) {
                             Column {
                                 Text(appointment.appointmentName, color = Color.DarkGray)

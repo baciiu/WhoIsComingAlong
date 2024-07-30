@@ -24,6 +24,9 @@ class AppointmentScreenViewModel @Inject constructor(
     private val _appointments = MutableStateFlow<List<UserToAppointment>>(emptyList())
     val appointments: StateFlow<List<UserToAppointment>> = _appointments
 
+    private val _appointmentDetails = MutableStateFlow<MockAppointment?>(null)
+    val appointmentDetails: StateFlow<MockAppointment?> = _appointmentDetails
+
     init {
         // Initialize by fetching all UserToAppointments
         viewModelScope.launch {
@@ -50,7 +53,11 @@ class AppointmentScreenViewModel @Inject constructor(
     }
 
     // Function to get a specific appointment by its ID
-    fun getAppointmentById(appointmentId: Int): Flow<MockAppointment> {
-        return mockAppointmentRepository.getAppointmentById(appointmentId)
+    fun getAppointmentById(appointmentId: Int) {
+        viewModelScope.launch {
+            mockAppointmentRepository.getAppointmentById(appointmentId).collect { appointment ->
+                _appointmentDetails.value = appointment
+            }
+        }
     }
 }

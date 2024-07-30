@@ -35,7 +35,8 @@ class AddNewAppointmentScreenViewModel @Inject constructor(
         groupId: Int,
         restaurantId: Int,
         date: Date,
-        hourMinute: Date
+        hourMinute: Date,
+        location: String
     ) {
         val newAppointment = MockAppointment(
             appointmentId = 0, // Placeholder ID, should be set appropriately
@@ -65,7 +66,8 @@ class AddNewAppointmentScreenViewModel @Inject constructor(
                 )
             ),
             date = date,
-            hourMinute = hourMinute
+            hourMinute = hourMinute,
+            location = location
         )
 
         viewModelScope.launch(Dispatchers.IO) {

@@ -61,7 +61,10 @@ fun NavigationComponent(navController: NavHostController) {
         }
         composable("login_screen") { LoginScreen(navController) }
         composable("signup_screen") { SignUpScreen(navController) }
-        composable("appointment_screen") { AppointmentScreen(navController) }
+        composable("appointment_screen/{appointmentId}", arguments = listOf(navArgument("appointmentId") { type = NavType.IntType })) { backStackEntry ->
+            val appointmentId = backStackEntry.arguments?.getInt("appointmentId") ?: 0
+            AppointmentScreen(navController = navController, appointmentId = appointmentId)
+        }
         composable("group_screen") { GroupScreen(navController) }
         composable("restaurant_screen") { RestaurantScreen(navController) }
         composable("add_new_appointment_screen") { AddNewAppointmentScreen(navController) }
