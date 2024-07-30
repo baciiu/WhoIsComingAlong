@@ -4,8 +4,8 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.whoiscomingalong.mocks.MockUserRepository
-import com.example.whoiscomingalong.mocks.MockUsers
+import com.example.whoiscomingalong.database.Users.Users
+import com.example.whoiscomingalong.database.Users.UsersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -13,10 +13,10 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginScreenViewModel @Inject constructor(
     application: Application,
-    private val usersRepository: MockUserRepository
+    private val usersRepository: UsersRepository
 ) : AndroidViewModel(application) {
 
-    fun authenticateUser(nickName: String, password: String, onResult: (MockUsers?) -> Unit) {
+    fun authenticateUser(nickName: String, password: String, onResult: (Users?) -> Unit) {
         Log.d("LoginScreenViewModel", "authenticateUser called with nickName: $nickName")
         viewModelScope.launch {
             val user = usersRepository.authenticateUser(nickName, password)
@@ -25,7 +25,7 @@ class LoginScreenViewModel @Inject constructor(
         }
     }
 
-    fun getUserByNickName(nickName: String, onResult: (MockUsers?) -> Unit) {
+    fun getUserByNickName(nickName: String, onResult: (Users?) -> Unit) {
         Log.d("LoginScreenViewModel", "getUserByNickName called with nickName: $nickName")
         viewModelScope.launch {
             val user = usersRepository.getUserByNickName(nickName)
