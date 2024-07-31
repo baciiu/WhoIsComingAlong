@@ -82,14 +82,10 @@ Edit Restaurant Screen
 - UI Elements: Restaurant Name, Address, Latitude, Longitude fields, Update Restaurant button.
 - Logic: Fetches restaurant data for editing, updates restaurant information in the database.
 
-Components
-- Buttons: Standardized buttons for actions like Create, Update, Delete, Edit.
-- TextFields: Standardized input fields with validation.
-- Navigation: Navigation between screens is handled using Jetpack Navigation Compose.
-
 Styling
 - Theme: Custom theme using Material3 components.
 - Colors: Consistent color scheme using primary, secondary, and accent colors.
 - Typography: Consistent text styles for headings, body text, and input fields.
 
-This structure ensures a consistent and cohesive user experience throughout the app, leveraging Jetpack Compose's capabilities for modern, reactive UI development.
+The app features a consistent design language across all screens, using a specific color palette and styling elements to maintain a cohesive look and feel. The primary colors used are red, gray, black, and white, which are applied to buttons, text fields, and other UI components. The design aims for clarity and simplicity, ensuring that users can navigate and interact with the app easily.
+
