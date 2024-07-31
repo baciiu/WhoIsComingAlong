@@ -16,6 +16,8 @@ class LoginScreenViewModel @Inject constructor(
     private val usersRepository: UsersRepository
 ) : AndroidViewModel(application) {
 
+    private val TAG = "LoginScreenValidation"
+
     fun authenticateUser(nickName: String, password: String, onResult: (Users?) -> Unit) {
         Log.d("LoginScreenViewModel", "authenticateUser called with nickName: $nickName")
         viewModelScope.launch {
@@ -27,10 +29,40 @@ class LoginScreenViewModel @Inject constructor(
 
     fun getUserByNickName(nickName: String, onResult: (Users?) -> Unit) {
         Log.d("LoginScreenViewModel", "getUserByNickName called with nickName: $nickName")
-        viewModelScope.launch {
+            viewModelScope.launch {
             val user = usersRepository.getUserByNickName(nickName)
             Log.d("LoginScreenViewModel", "getUserByNickName result: $user")
             onResult(user)
+        }
+    }
+
+    private fun validateCredentials(nickName: String, password: String): Boolean {
+        var isValid = true
+
+        if (nickName.isBlank()) {
+            Log.e(TAG, "Nickname is blank")
+            isValid = false
+        } else {
+            Log.d(TAG, "Nickname is valid")
+        }
+
+        if (password.isBlank()) {
+            Log.e(TAG, "Password is blank")
+            isValid = false
+        } else {
+            Log.d(TAG, "Password is valid")
+        }
+
+        return isValid
+    }
+
+    private fun validateNickName(nickName: String): Boolean {
+        return if (nickName.isBlank()) {
+            Log.e(TAG, "Nickname is blank")
+            false
+        } else {
+            Log.d(TAG, "Nickname is valid")
+            true
         }
     }
 }
