@@ -3,35 +3,36 @@ package com.example.whoiscomingalong.ui.theme.screens.signupscreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.whoiscomingalong.mocks.MockSignUpRequest
-import com.example.whoiscomingalong.mocks.MockSignUpResponse
-import com.example.whoiscomingalong.mocks.MockUserRepository
-import com.example.whoiscomingalong.mocks.MockUsers
+import com.example.whoiscomingalong.Network.HelperData.SignUpRequest
+import com.example.whoiscomingalong.database.Users.UsersRepository
+import com.example.whoiscomingalong.Network.HelperData.SignUpResponse
+import com.example.whoiscomingalong.database.Users.Users
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpScreenViewModel @Inject constructor(
     application: Application,
-    private val userRepository: MockUserRepository
+    private val userRepository: UsersRepository
 ) : AndroidViewModel(application) {
 
     fun signUp(
         firstName: String,
         lastName: String,
-        dateOfBirth: String,
+        dateOfBirth: Date,
         company: String,
         department: String,
         email: String,
         nickName: String,
         password: String,
-        onResult: (MockSignUpResponse?) -> Unit
+        onResult: (SignUpResponse?) -> Unit
     ) {
         viewModelScope.launch {
             try {
                 val response = userRepository.signUp(
-                    MockSignUpRequest(firstName, lastName, dateOfBirth, company, department, email, nickName, password)
+                    SignUpRequest(firstName, lastName, dateOfBirth, company, department, email, nickName, password)
                 )
                 onResult(response)
             } catch (e: Exception) {
@@ -40,7 +41,7 @@ class SignUpScreenViewModel @Inject constructor(
         }
     }
 
-    fun getUserByNickName(nickName: String, onResult: (MockUsers?) -> Unit) {
+    fun getUserByNickName(nickName: String, onResult: (Users?) -> Unit) {
         viewModelScope.launch {
             val user = userRepository.getUserByNickName(nickName)
             onResult(user)

@@ -5,6 +5,7 @@ import com.example.whoiscomingalong.Network.HelperData.AppointmentRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -109,7 +110,7 @@ class AppointmentRepository @Inject constructor(
     }
 
     fun deleteAppointmentFromServer(appointment: Appointment) {
-        apiService.deleteAppointment(appointment.appointmentId!!).enqueue(object : Callback<Void> {
+        apiService.deleteAppointment(appointment.appointmentId).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     // Handle the response

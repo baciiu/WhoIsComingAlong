@@ -1,9 +1,12 @@
 package com.example.whoiscomingalong.database.Users
 
 import com.example.whoiscomingalong.Network.Api.UsersApiService
+import com.example.whoiscomingalong.Network.HelperData.SignUpRequest
+import com.example.whoiscomingalong.Network.HelperData.SignUpResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -49,6 +52,32 @@ class UsersRepository @Inject constructor(
     suspend fun update(user: Users) {
         fetchUserFromServer(userId = user.userId)
         usersDao.update(user)
+    }
+    suspend fun signUp(request: SignUpRequest): SignUpResponse {
+        val newUser = Users(
+            userId = 0,
+            firstName = request.firstName,
+            lastName = request.lastName,
+            nickName = request.nickName,
+            dateOfBirth = request.dateOfBirth,
+            email = request.email,
+            password = request.password,
+            company = request.company,
+            department = request.department
+        )
+        usersDao.insert(newUser)
+
+        return SignUpResponse(
+            userId = newUser.userId.toString(),
+            firstName = newUser.firstName,
+            lastName = newUser.lastName,
+            dateOfBirth = newUser.dateOfBirth,
+            company = newUser.company,
+            department = newUser.department,
+            email = newUser.email,
+            nickName = newUser.nickName,
+            token = "mock_token"
+        )
     }
 
     suspend fun authenticateUser(nickName: String, password: String): Users? {

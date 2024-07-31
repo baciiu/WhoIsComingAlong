@@ -41,7 +41,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
-import com.example.whoiscomingalong.mocks.appointment.UserToAppointment
+import com.example.whoiscomingalong.database.UserToAppointment.UserToAppointment
 import java.text.SimpleDateFormat
 import java.util.Locale
 
@@ -57,6 +57,9 @@ fun AppointmentScreen(
     val appointments by viewModel.getAllUserToAppointments().collectAsState(initial = emptyList())
     val appointmentDetails by viewModel.appointmentDetails.collectAsState()
     var isComingAlong by remember { mutableStateOf(false) }
+
+    val participants = appointmentId?.let { viewModel.getUsersOfAppointment(it) }
+
 
     // Load the isComingAlong status for the current user and appointment
     LaunchedEffect(appointments) {
@@ -116,7 +119,7 @@ fun AppointmentScreen(
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                Text(text = "Creator: ${appointment.creator.nickName}")
+                Text(text = "Creator: ")
 
                 Spacer(modifier = Modifier.height(10.dp))
 
@@ -133,9 +136,10 @@ fun AppointmentScreen(
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(text = "Participants:")
-                appointment.participants.forEach { participant ->
+                /*appointment.participants.forEach { participant ->
                     Text(text = participant.nickName)
-                }
+                }*/
+                Text(text = participants.toString())
 
                 Spacer(modifier = Modifier.height(20.dp))
             }

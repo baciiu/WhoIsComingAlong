@@ -95,11 +95,12 @@ fun AllAppointmentsScreen(
                         ) {
                             Column {
                                 Text(appointment.appointmentName, color = Color.DarkGray)
-                                Text("Creator: ${appointment.creator.nickName}", color = Color.DarkGray)
+                                Text("Creator: ${appointment.creatorId}", color = Color.DarkGray)
                                 Row {
-                                    appointment.participants.forEach { participant ->
+                                  /*  participants.forEach { participant ->
                                         Text("Participant: ${participant.nickName}", color = Color.DarkGray)
-                                    }
+                                    }*/
+                                    Text("Participant: ", color = Color.DarkGray)
                                 }
                             }
                         }

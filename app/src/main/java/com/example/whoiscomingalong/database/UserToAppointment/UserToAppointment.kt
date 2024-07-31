@@ -2,6 +2,7 @@ package com.example.whoiscomingalong.database.UserToAppointment
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import com.example.whoiscomingalong.database.Appointment.Appointment
 import com.example.whoiscomingalong.database.Users.Users
 
@@ -20,7 +21,8 @@ import com.example.whoiscomingalong.database.Users.Users
             childColumns = ["appointmentId"],
             onDelete = ForeignKey.CASCADE
         )
-    ]
+    ],
+    indices = [Index(value = ["appointmentId"])]
 )
 data class UserToAppointment(
     val userId: Int,

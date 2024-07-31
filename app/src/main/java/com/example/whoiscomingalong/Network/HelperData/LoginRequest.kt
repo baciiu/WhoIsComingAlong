@@ -1,6 +1,6 @@
 package com.example.whoiscomingalong.Network.HelperData
 
-data class LoginDto(
-    val username: String,
+data class LoginRequest(
+    val nickName: String,
     val password: String
 )

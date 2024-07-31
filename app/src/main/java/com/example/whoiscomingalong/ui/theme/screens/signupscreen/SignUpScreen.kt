@@ -37,9 +37,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.whoiscomingalong.LogoRed
+import com.example.whoiscomingalong.Network.HelperData.SignUpResponse
 import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
-import com.example.whoiscomingalong.mocks.MockSignUpResponse
+import java.util.Date
 
 @Composable
 fun SignUpScreen(navController: NavHostController) {
@@ -181,13 +182,13 @@ fun SignUpScreen(navController: NavHostController) {
                     signUpScreenViewModel.signUp(
                         firstName.value,
                         lastName.value,
-                        dateOfBirth.value,
+                        dateOfBirth.value as Date,
                         company.value,
                         department.value,
                         email.value,
                         nickName.value,
                         password.value
-                    ) { response: MockSignUpResponse? ->
+                    ) { response: SignUpResponse? ->
                         if (response != null) {
                             navController.navigate("login_screen")
                         } else {

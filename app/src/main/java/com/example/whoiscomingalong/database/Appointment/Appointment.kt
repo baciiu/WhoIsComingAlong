@@ -2,6 +2,7 @@ package com.example.whoiscomingalong.database.Appointment
 
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.example.whoiscomingalong.database.Group.Group
 import com.example.whoiscomingalong.database.Restaurant.Restaurant
@@ -21,6 +22,10 @@ import java.util.*
             childColumns = ["restaurantID"],
             onDelete = ForeignKey.CASCADE
         )
+    ],
+    indices = [
+        Index(value = ["groupId"]),
+        Index(value = ["restaurantID"])
     ]
 )
 data class Appointment(

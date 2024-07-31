@@ -1,10 +1,12 @@
-package com.example.whoiscomingalong.mocks
+package com.example.whoiscomingalong.Network.HelperData
 
-data class MockSignUpResponse(
+import java.util.Date
+
+data class SignUpResponse(
     val userId: String,
     val firstName: String,
     val lastName: String,
-    val dateOfBirth: String,
+    val dateOfBirth: Date,
     val company: String,
     val department: String,
     val email: String,
