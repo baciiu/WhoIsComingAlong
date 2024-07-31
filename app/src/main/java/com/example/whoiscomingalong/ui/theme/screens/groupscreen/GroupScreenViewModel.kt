@@ -1,6 +1,7 @@
 package com.example.whoiscomingalong.ui.theme.screens.groupscreen
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.whoiscomingalong.database.Group.Group
@@ -33,6 +34,9 @@ class GroupScreenViewModel @Inject constructor(
 
     private val _allGroups = MutableStateFlow<List<Group>>(emptyList())
     val allGroups: StateFlow<List<Group>> = _allGroups
+
+    private val TAG = "GroupScreenValidation"
+
 
     init {
         loadAllUsers()
@@ -69,18 +73,21 @@ class GroupScreenViewModel @Inject constructor(
 
     suspend fun insertGroup(group: Group):Int {
         groupRepository.insert(group)
+        Log.d(TAG, "Group inserted successfully with ID: ${group.groupId}")
         return group.groupId
     }
 
     fun updateGroup(group: Group) {
         viewModelScope.launch(Dispatchers.IO) {
             groupRepository.update(group)
+            Log.d(TAG, "Group updated successfully with ID: ${group.groupId}")
         }
     }
 
     fun deleteGroup(group: Group) {
         viewModelScope.launch(Dispatchers.IO) {
             groupRepository.delete(group)
+            Log.d(TAG, "Group deleted successfully with ID: ${group.groupId}")
         }
     }
 
@@ -89,6 +96,10 @@ class GroupScreenViewModel @Inject constructor(
             if (userToGroupRepository.countUserToGroup(userId, groupId) == 0) {
                 val userToGroup = UserToGroup(userId = userId, groupId = groupId)
                 userToGroupRepository.insert(userToGroup)
+                Log.d(TAG, "User added to group successfully with userID: $userId and groupID: $groupId")
+            }
+            else {
+                Log.w(TAG, "User already exists in group with userID: $userId and groupID: $groupId")
             }
         }
     }
@@ -97,6 +108,7 @@ class GroupScreenViewModel @Inject constructor(
     fun removeUserFromGroup(userToGroup: UserToGroup) {
         viewModelScope.launch(Dispatchers.IO) {
             userToGroupRepository.delete(userToGroup)
+            Log.d(TAG, "User removed from group successfully with userID: ${userToGroup.userId} and groupID: ${userToGroup.groupId}")
         }
     }
 
@@ -110,5 +122,41 @@ class GroupScreenViewModel @Inject constructor(
                 }
             }
             .flatMapLatest { it }
+    }
+
+    private fun validateGroup(group: Group): Group {
+        var validGroup = group
+
+        // Check if group name is not empty
+        if (group.groupName.isBlank()) {
+            Log.e(TAG, "Group name is blank, setting default value")
+            validGroup = validGroup.copy(groupName = "Default Group Name")
+        } else {
+            Log.d(TAG, "Group name is valid")
+        }
+
+        return validGroup
+    }
+
+    private fun validateUserToGroup(userToGroup: UserToGroup): UserToGroup {
+        var validUserToGroup = userToGroup
+
+        // Check if userId is a positive integer
+        if (userToGroup.userId <= 0) {
+            Log.e(TAG, "User ID is not valid: ${userToGroup.userId}, setting default value")
+            validUserToGroup = validUserToGroup.copy(userId = 1)
+        } else {
+            Log.d(TAG, "User ID is valid: ${userToGroup.userId}")
+        }
+
+        // Check if groupId is a positive integer
+        if (userToGroup.groupId <= 0) {
+            Log.e(TAG, "Group ID is not valid: ${userToGroup.groupId}, setting default value")
+            validUserToGroup = validUserToGroup.copy(groupId = 1)
+        } else {
+            Log.d(TAG, "Group ID is valid: ${userToGroup.groupId}")
+        }
+
+        return validUserToGroup
     }
 }
