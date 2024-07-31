@@ -1,6 +1,7 @@
 package com.example.whoiscomingalong.ui.theme.screens.appointmentscreen
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.whoiscomingalong.database.Appointment.Appointment
@@ -34,6 +35,8 @@ class AppointmentScreenViewModel @Inject constructor(
     private val _appointmentDetails = MutableStateFlow<Appointment?>(null)
     val appointmentDetails: StateFlow<Appointment?> = _appointmentDetails
 
+    private val TAG = "AppointmentValidation"
+
     init {
         // Initialize by fetching all UserToAppointments
         viewModelScope.launch {
@@ -47,11 +50,37 @@ class AppointmentScreenViewModel @Inject constructor(
     fun updateUserToAppointment(userToAppointment: UserToAppointment) {
         viewModelScope.launch {
             userToAppointmentRepository.updateUserToAppointment(userToAppointment)
+            Log.d(TAG, "UserToAppointment updated successfully with User ID: ${userToAppointment.userId} and Appointment ID: ${userToAppointment.appointmentId}")
             // Optionally re-fetch data after update to ensure the UI is up-to-date
             userToAppointmentRepository.getAllUserToAppointments().collect { userToAppointments ->
                 _appointments.value = userToAppointments
             }
         }
+    }
+
+    fun checkIfUserToAppointmentValid(userToAppointment: UserToAppointment): UserToAppointment {
+        var updatedUserToAppointment = userToAppointment
+
+        // Check if userId is a positive integer
+        if (userToAppointment.userId <= 0) {
+            Log.e(TAG, "User ID is not valid: ${userToAppointment.userId}, setting default value")
+            updatedUserToAppointment = updatedUserToAppointment.copy(userId = 1)
+        } else {
+            Log.d(TAG, "User ID is valid: ${userToAppointment.userId}")
+        }
+
+        // Check if appointmentId is a positive integer
+        if (userToAppointment.appointmentId <= 0) {
+            Log.e(TAG, "Appointment ID is not valid: ${userToAppointment.appointmentId}, setting default value")
+            updatedUserToAppointment = updatedUserToAppointment.copy(appointmentId = 1)
+        } else {
+            Log.d(TAG, "Appointment ID is valid: ${userToAppointment.appointmentId}")
+        }
+
+        // No additional validation needed for isComingAlong as it's a boolean
+        Log.d(TAG, "isComingAlong is valid: ${userToAppointment.isComingAlong}")
+
+        return updatedUserToAppointment
     }
 
     // Function to get all UserToAppointments
