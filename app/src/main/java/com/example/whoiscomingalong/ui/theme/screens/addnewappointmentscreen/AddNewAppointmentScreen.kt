@@ -167,7 +167,7 @@ fun AddNewAppointmentScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 5.dp),
-                label = { Text("Date (yyyy-MM-dd)") },  // Placeholder for date format
+                label = { Text("Date (yyyy-MM-dd)") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
             )
@@ -180,7 +180,7 @@ fun AddNewAppointmentScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 5.dp),
-                label = { Text("Time (HH:mm)") },  // Placeholder for time format
+                label = { Text("Time (HH:mm)") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
             )

@@ -29,8 +29,16 @@ For each of the tables, the following classes have to be implemented:
 - ViewModel: to interact with the repository (more than one ViewModel can interact with one Repository)
 - Screens: contain the Composable functions: create the UI, to interact with the ViewModel
 
-#### UI
-The UI of the app is built using Jetpack Compose, following a modern, user-friendly design. Each screen is implemented as a Composable function that interacts with its respective ViewModel. Below are the details of each screen:
+#### User Interface and Design
+The app features a consistent design language across all screens, using a specific color palette and styling elements to maintain a cohesive look and feel. The primary colors used are red, gray, black, and white, which are applied to buttons, text fields, and other UI components. The design aims for clarity and simplicity, ensuring that users can navigate and interact with the app easily.
+
+Styling
+- Theme: Custom theme using Material3 components.
+- Colors: Consistent color scheme using primary, secondary, and accent colors.
+- Typography: Consistent text styles for headings, body text, and input fields.
+
+#### Screens
+Each screen is implemented as a Composable function that interacts with its respective ViewModel. Below are the details of each screen:
 
 Login Screen
 - Purpose: Allows users to log in.
@@ -82,11 +90,4 @@ Edit Restaurant Screen
 - UI Elements: Restaurant Name, Address, Latitude, Longitude fields, Update Restaurant button.
 - Logic: Fetches restaurant data for editing, updates restaurant information in the database.
 
-Styling
-- Theme: Custom theme using Material3 components.
-- Colors: Consistent color scheme using primary, secondary, and accent colors.
-- Typography: Consistent text styles for headings, body text, and input fields.
-
-Design
-The app features a consistent design language across all screens, using a specific color palette and styling elements to maintain a cohesive look and feel. The primary colors used are red, gray, black, and white, which are applied to buttons, text fields, and other UI components. The design aims for clarity and simplicity, ensuring that users can navigate and interact with the app easily.
 
