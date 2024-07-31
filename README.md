@@ -87,5 +87,6 @@ Styling
 - Colors: Consistent color scheme using primary, secondary, and accent colors.
 - Typography: Consistent text styles for headings, body text, and input fields.
 
+Design
 The app features a consistent design language across all screens, using a specific color palette and styling elements to maintain a cohesive look and feel. The primary colors used are red, gray, black, and white, which are applied to buttons, text fields, and other UI components. The design aims for clarity and simplicity, ensuring that users can navigate and interact with the app easily.
 
