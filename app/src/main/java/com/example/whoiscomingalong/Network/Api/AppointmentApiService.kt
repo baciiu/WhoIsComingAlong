@@ -1,6 +1,5 @@
 package com.example.whoiscomingalong.Network.Api
 
-import com.example.whoiscomingalong.Network.HelperData.AppointmentRequest
 import com.example.whoiscomingalong.database.Appointment.Appointment
 import retrofit2.Call
 import retrofit2.http.Body
@@ -18,7 +17,7 @@ interface AppointmentApiService {
     fun getAppointmentById(@Path("id") id: Int): Call<Appointment>
 
     @POST("/appointments")
-    fun createAppointment(@Body appointmentRequest: AppointmentRequest): Call<Appointment>
+    fun createAppointment(@Body appointment: Appointment): Call<Appointment>
 
     @PUT("/appointments/{id}")
     fun updateAppointment(@Path("id") id: Int, @Body appointment: Appointment): Call<Appointment>

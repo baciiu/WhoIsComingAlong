@@ -47,6 +47,7 @@ import com.example.whoiscomingalong.WhoIsComingAlongTheme
 import com.example.whoiscomingalong.database.Appointment.Appointment
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 @Composable

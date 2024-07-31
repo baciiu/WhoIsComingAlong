@@ -1,11 +1,9 @@
 package com.example.whoiscomingalong.database.Appointment
 
 import com.example.whoiscomingalong.Network.Api.AppointmentApiService
-import com.example.whoiscomingalong.Network.HelperData.AppointmentRequest
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -81,16 +79,16 @@ class AppointmentRepository @Inject constructor(
 
     fun syncAppointmentWithServer(appointment: Appointment) {
 
-        val appointmentReq = AppointmentRequest(
+        val newApp = Appointment(
             appointmentName = appointment.appointmentName,
             groupId = appointment.groupId,
-            appointmentDate = appointment.date,
-            appointmentTime = appointment.hourMinute,
-            restaurantId = appointment.restaurantID,
+            date = appointment.date,
+            hourMinute = appointment.hourMinute,
+            restaurantID = appointment.restaurantID,
             location = appointment.location,
             creatorId = appointment.creatorId
             )
-        apiService.createAppointment(appointmentReq).enqueue(object : Callback<Appointment> {
+        apiService.createAppointment(newApp).enqueue(object : Callback<Appointment> {
             override fun onResponse(call: Call<Appointment>, response: Response<Appointment>) {
                 if (response.isSuccessful) {
                     // Handle the response
