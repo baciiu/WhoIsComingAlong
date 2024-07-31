@@ -4,8 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.whoiscomingalong.database.Appointment.Appointment
-import com.example.whoiscomingalong.dependencyinjection.MockRepository
-import com.example.whoiscomingalong.mocks.appointment.MockAppointmentRepository
+import com.example.whoiscomingalong.database.Appointment.AppointmentRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CentralScreenViewModel @Inject constructor(
     application: Application,
-    @MockRepository private val mockAppointmentRepository: MockAppointmentRepository
+    private val appointmentRepository: AppointmentRepository
 ) : AndroidViewModel(application) {
 
     private val _appointments = MutableStateFlow<List<Appointment>>(emptyList())
@@ -24,24 +23,14 @@ class CentralScreenViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            mockAppointmentRepository.getAllAppointmentsForUser(1).collect { mockAppointments ->
-                val convertedAppointments = mockAppointments.map { mockAppointment ->
-                    Appointment(
-                        appointmentId = mockAppointment.appointmentId,
-                        appointmentName = mockAppointment.appointmentName,
-                        date = mockAppointment.date,
-                        groupId = 0, // or appropriate value
-                        hourMinute = mockAppointment.hourMinute,
-                        restaurantID = 0 // or appropriate value
-                    )
-                }
-                _appointments.value = convertedAppointments
+            appointmentRepository.getAllAppointments().collect { appointments ->
+                _appointments.value = appointments
             }
         }
     }
 
     fun getAllAppointments(): Flow<List<Appointment>> {
-        return _appointments
+        return appointmentRepository.getAllAppointments()
     }
 
     fun logout(onLogout: () -> Unit) {
