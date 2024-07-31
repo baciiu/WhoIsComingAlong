@@ -1,6 +1,7 @@
 package com.example.whoiscomingalong.ui.theme.screens.allappointmentsscreen
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.whoiscomingalong.database.Appointment.Appointment
@@ -17,6 +18,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,6 +31,8 @@ class AllAppointmentsScreenViewModel @Inject constructor(
 
     private val _appointments = MutableStateFlow<List<Appointment>>(emptyList())
     val appointments: StateFlow<List<Appointment>> = _appointments
+
+    private val TAG = "AppointmentsFetching"
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getUsersOfAppointment(appointmentId: Int): Flow<List<Users>> {
@@ -58,10 +62,31 @@ class AllAppointmentsScreenViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             appointmentRepository.getAllAppointments()
+            Log.d(TAG, "All appointments fetched successfully")
+
 
             getAllAppointmentsForUser(1).collect { appointments ->
                 _appointments.value = appointments
+                Log.d(TAG, "Appointments for user 1 fetched successfully")
+
             }
         }
+    }
+
+    fun validateAppointmentData(appointments: List<Appointment>): List<Appointment> {
+        val validAppointments = appointments.filter { appointment ->
+            val isValid = appointment.appointmentName.isNotBlank() &&
+                    appointment.groupId > 0 &&
+                    appointment.restaurantID > 0 &&
+                    appointment.date.after(Date()) &&
+                    appointment.hourMinute.after(Date()) &&
+                    appointment.creatorId > 0 &&
+                    appointment.location.isNotBlank()
+            if (!isValid) {
+                Log.e(TAG, "Invalid appointment found: $appointment")
+            }
+            isValid
+        }
+        return validAppointments
     }
 }
