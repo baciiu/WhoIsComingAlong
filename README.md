@@ -28,3 +28,68 @@ For each of the tables, the following classes have to be implemented:
 #### Usage of database tables in the ScreensViewModel and Composable functions
 - ViewModel: to interact with the repository (more than one ViewModel can interact with one Repository)
 - Screens: contain the Composable functions: create the UI, to interact with the ViewModel
+
+#### UI
+The UI of the app is built using Jetpack Compose, following a modern, user-friendly design. Each screen is implemented as a Composable function that interacts with its respective ViewModel. Below are the details of each screen:
+
+Login Screen
+- Purpose: Allows users to log in.
+- UI Elements: Username and Password fields, Login button, Navigation to Sign Up screen.
+- Logic: Authenticates the user against the database.
+
+Sign Up Screen
+- Purpose: Allows new users to register.
+- UI Elements: Fields for First Name, Last Name, Date of Birth, Company, Department, Email, Nick Name, Password, Sign Up button.
+- Logic: Validates input and creates a new user in the database.
+
+Central Screen (Start Screen)
+- Purpose: Main screen showing current appointments and providing access to other features.
+- UI Elements: Profile section, Appointments list, Navigation buttons for managing groups and restaurants, Logout button.
+- Logic: Fetches and displays appointments, handles user navigation.
+
+Profile Screen
+- Purpose: Displays and allows editing of the user profile.
+- UI Elements: Fields for First Name, Last Name, Nick Name, Date of Birth, Email, Company, Department, Edit/Save button.
+- Logic: Fetches and updates user data in the database.
+
+Group Screen
+- Purpose: Allows creation and management of groups.
+- UI Elements: Group Name field, User selection list, Create Group button, List of existing groups with Edit/Delete options.
+- Logic: Handles creation, update, and deletion of groups, as well as adding/removing users from groups.
+
+Edit Group Screen
+- Purpose: Allows editing of an existing group.
+- UI Elements: Group Name field, User selection list, Update Group button.
+- Logic: Fetches group data for editing, updates group information in the database.
+
+All Appointments Screen
+- Purpose: Displays all appointments for the user.
+- UI Elements: List of appointments, Navigation to detailed appointment view.
+- Logic: Fetches and displays appointments from the database.
+
+Appointment Screen
+- Purpose: Displays details of a specific appointment.
+- UI Elements: Appointment details (name, date, time, location, participants), Toggle for user's participation status.
+- Logic: Fetches appointment details and updates user's participation status.
+
+Restaurant Screen
+- Purpose: Allows creation and management of restaurants.
+- UI Elements: Restaurant Name, Address, Latitude, Longitude fields, Create Restaurant button.
+- Logic: Validates input and creates a new restaurant in the database.
+
+Edit Restaurant Screen
+- Purpose: Allows editing of an existing restaurant.
+- UI Elements: Restaurant Name, Address, Latitude, Longitude fields, Update Restaurant button.
+- Logic: Fetches restaurant data for editing, updates restaurant information in the database.
+
+Components
+- Buttons: Standardized buttons for actions like Create, Update, Delete, Edit.
+- TextFields: Standardized input fields with validation.
+- Navigation: Navigation between screens is handled using Jetpack Navigation Compose.
+
+Styling
+- Theme: Custom theme using Material3 components.
+- Colors: Consistent color scheme using primary, secondary, and accent colors.
+- Typography: Consistent text styles for headings, body text, and input fields.
+
+This structure ensures a consistent and cohesive user experience throughout the app, leveraging Jetpack Compose's capabilities for modern, reactive UI development.
