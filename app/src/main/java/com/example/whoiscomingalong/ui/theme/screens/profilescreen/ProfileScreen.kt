@@ -113,13 +113,13 @@ fun ProfileScreen(
                     }
                     ProfileTextField(
                         label = "Date of Birth",
-                        value = it.dateOfBirth,
+                        value = dateFormatter.format(it.dateOfBirth),
                         isEditing = isEditing
                     ) { newValue ->
                         try {
                             val parsedDate = dateFormatter.parse(newValue)
                             if (parsedDate != null) {
-                                profileScreenViewModel.updateUser(it.copy(dateOfBirth = dateFormatter.format(parsedDate)))
+                                profileScreenViewModel.updateUser(it.copy(dateOfBirth = parsedDate))
                             }
                         } catch (e: Exception) {
                             Log.e("ProfileScreen", "Failed to parse date: ${e.message}")
