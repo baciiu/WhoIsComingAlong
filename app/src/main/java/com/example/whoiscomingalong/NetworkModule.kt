@@ -4,12 +4,12 @@ import com.example.whoiscomingalong.Network.Api.AppointmentApiService
 import com.example.whoiscomingalong.Network.Api.AuthApiService
 import com.example.whoiscomingalong.Network.Api.GroupApiService
 import com.example.whoiscomingalong.Network.Api.RestaurantApiService
+import com.example.whoiscomingalong.Network.Api.UserToAppointmentApiService
 import com.example.whoiscomingalong.Network.Api.UsersApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -90,5 +90,10 @@ object NetworkModule {
     @Singleton
     fun provideAuthApiService(retrofit: Retrofit): AuthApiService {
         return retrofit.create(AuthApiService::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideUserToAppointment(retrofit: Retrofit): UserToAppointmentApiService {
+        return retrofit.create(UserToAppointmentApiService::class.java)
     }
 }
