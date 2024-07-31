@@ -3,46 +3,53 @@ package com.example.whoiscomingalong.ui.theme.screens.signupscreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.whoiscomingalong.mocks.MockSignUpRequest
-import com.example.whoiscomingalong.mocks.MockSignUpResponse
-import com.example.whoiscomingalong.mocks.MockUserRepository
-import com.example.whoiscomingalong.mocks.MockUsers
+import com.example.whoiscomingalong.database.Users.Users
+import com.example.whoiscomingalong.database.Users.UsersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.util.Date
 import javax.inject.Inject
 
 @HiltViewModel
 class SignUpScreenViewModel @Inject constructor(
     application: Application,
-    private val userRepository: MockUserRepository
+    private val usersRepository: UsersRepository
 ) : AndroidViewModel(application) {
 
     fun signUp(
         firstName: String,
         lastName: String,
-        dateOfBirth: String,
+        dateOfBirth: Date,
         company: String,
         department: String,
         email: String,
         nickName: String,
         password: String,
-        onResult: (MockSignUpResponse?) -> Unit
+        onResult: (Boolean) -> Unit
     ) {
         viewModelScope.launch {
             try {
-                val response = userRepository.signUp(
-                    MockSignUpRequest(firstName, lastName, dateOfBirth, company, department, email, nickName, password)
+                val newUser = Users(
+                    firstName = firstName,
+                    lastName = lastName,
+                    dateOfBirth = dateOfBirth,
+                    company = company,
+                    department = department,
+                    email = email,
+                    nickName = nickName,
+                    password = password
                 )
-                onResult(response)
+                usersRepository.insert(newUser)
+                onResult(true)
             } catch (e: Exception) {
-                onResult(null)
+                onResult(false)
             }
         }
     }
 
-    fun getUserByNickName(nickName: String, onResult: (MockUsers?) -> Unit) {
+    fun getUserByNickName(nickName: String, onResult: (Users?) -> Unit) {
         viewModelScope.launch {
-            val user = userRepository.getUserByNickName(nickName)
+            val user = usersRepository.getUserByNickName(nickName)
             onResult(user)
         }
     }
