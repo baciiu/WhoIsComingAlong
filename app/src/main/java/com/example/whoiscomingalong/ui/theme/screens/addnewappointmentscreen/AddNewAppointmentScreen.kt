@@ -3,25 +3,10 @@ package com.example.whoiscomingalong.ui.theme.screens.addnewappointmentscreen
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -59,7 +44,6 @@ fun AddNewAppointmentScreen(
     var selectedRestaurant by remember { mutableStateOf<Int?>(null) }
     var date by remember { mutableStateOf("") }
     var time by remember { mutableStateOf("") }
-    var location by remember { mutableStateOf("") }
 
     val allGroups by addNewAppointmentScreenViewModel.getAllGroups().collectAsState(initial = emptyList())
     val allRestaurants by addNewAppointmentScreenViewModel.getAllRestaurants().collectAsState(initial = emptyList())
@@ -163,7 +147,7 @@ fun AddNewAppointmentScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 5.dp),
-                label = { Text("Date (yyyy-MM-dd)") },  // Placeholder for date format
+                label = { Text("Date (yyyy-MM-dd)") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
             )
@@ -176,20 +160,7 @@ fun AddNewAppointmentScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 5.dp),
-                label = { Text("Time (HH:mm)") },  // Placeholder for time format
-                textStyle = TextStyle(color = Color.Black),
-                singleLine = true
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
-            OutlinedTextField(
-                value = location,
-                onValueChange = { location = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 5.dp),
-                label = { Text("Location") },
+                label = { Text("Time (HH:mm)") },
                 textStyle = TextStyle(color = Color.Black),
                 singleLine = true
             )
@@ -209,8 +180,7 @@ fun AddNewAppointmentScreen(
                                         groupId = selectedGroup!!,
                                         restaurantId = selectedRestaurant!!,
                                         date = parsedDate,
-                                        hourMinute = parsedTime,
-                                        location = location
+                                        hourMinute = parsedTime
                                     )
                                     navController.navigate("start_screen")
                                 }
