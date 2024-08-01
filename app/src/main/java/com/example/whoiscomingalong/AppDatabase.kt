@@ -37,4 +37,7 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun restaurantDao(): RestaurantDao
     abstract fun appointmentDao(): AppointmentDao
     abstract fun userToAppointmentDao(): UserToAppointmentDao
+    suspend fun clearAllData() {
+        clearAllTables()
+    }
 }

@@ -34,8 +34,8 @@ class AppointmentRepository @Inject constructor(
     }
 
     suspend fun insertAll(vararg appointments: Appointment) {
-        appointmentDao.insertAll(*appointments)
         syncAppointmentsWithServer(appointments.toList())
+        appointmentDao.insertAll(*appointments)
     }
 
     suspend fun delete(appointment: Appointment) {

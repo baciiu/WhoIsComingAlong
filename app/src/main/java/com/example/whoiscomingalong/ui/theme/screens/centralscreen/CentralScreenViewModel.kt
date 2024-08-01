@@ -1,8 +1,10 @@
 package com.example.whoiscomingalong.ui.theme.screens.centralscreen
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.whoiscomingalong.AppDatabase
 import com.example.whoiscomingalong.Network.Session.SessionManager
 import com.example.whoiscomingalong.database.Appointment.Appointment
 import com.example.whoiscomingalong.database.Appointment.AppointmentRepository
@@ -17,16 +19,26 @@ import javax.inject.Inject
 class CentralScreenViewModel @Inject constructor(
     application: Application,
     private val appointmentRepository: AppointmentRepository,
-    private val sessionManager: SessionManager
+    private val sessionManager: SessionManager,
+    private val appDatabase:AppDatabase
 ) : AndroidViewModel(application) {
 
     private val _appointments = MutableStateFlow<List<Appointment>>(emptyList())
     val appointments: StateFlow<List<Appointment>> = _appointments
 
+    fun resetDatabase() {
+        viewModelScope.launch {
+            // Clear all tables
+            appDatabase.clearAllData()
+
+        }
+    }
     init {
+        resetDatabase()
         viewModelScope.launch {
             appointmentRepository.getAllAppointments().collect { appointments ->
                 _appointments.value = appointments
+                Log.d("CentralScreenViewModel", "Collected appointments: $appointments")
             }
         }
     }

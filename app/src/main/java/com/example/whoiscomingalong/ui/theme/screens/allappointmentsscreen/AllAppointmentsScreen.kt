@@ -91,7 +91,7 @@ fun AppointmentItem(
     navController: NavController,
     allAppointmentsScreenViewModel: AllAppointmentsScreenViewModel
 ) {
-    val creator by allAppointmentsScreenViewModel.getUserById(appointment.groupId).collectAsState()
+    val creator by allAppointmentsScreenViewModel.getUserFromSession().collectAsState()
 
     Box(
         modifier = Modifier

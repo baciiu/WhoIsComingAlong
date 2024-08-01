@@ -1,6 +1,7 @@
 package com.example.whoiscomingalong.ui.theme.screens.addnewappointmentscreen
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.whoiscomingalong.database.Group.GroupRepository
@@ -42,10 +43,12 @@ class AddNewAppointmentScreenViewModel @Inject constructor(
         val newAppointment = Appointment(
             appointmentName = appointmentName,
             groupId = groupId,
-            restaurantID = restaurantId,
-            date = date,
-            hourMinute = hourMinute
+            restaurantID = 1,
+            date = Date(),
+            hourMinute = Date()
         )
+
+        Log.d("APPOINTMENT", newAppointment.toString())
 
         viewModelScope.launch(Dispatchers.IO) {
             appointmentRepository.insert(newAppointment)
