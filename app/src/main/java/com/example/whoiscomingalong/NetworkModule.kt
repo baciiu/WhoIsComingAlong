@@ -5,6 +5,8 @@ import com.example.whoiscomingalong.Network.Api.AppointmentApiService
 import com.example.whoiscomingalong.Network.Api.AuthApiService
 import com.example.whoiscomingalong.Network.Api.GroupApiService
 import com.example.whoiscomingalong.Network.Api.RestaurantApiService
+import com.example.whoiscomingalong.Network.Api.UserToAppointmentApiService
+import com.example.whoiscomingalong.Network.Api.UserToGroupApiService
 import com.example.whoiscomingalong.Network.Api.UsersApiService
 import com.example.whoiscomingalong.Network.Session.SessionManager
 import dagger.Module
@@ -88,6 +90,20 @@ object NetworkModule {
     fun provideUsersApiService(retrofit: Retrofit): UsersApiService {
         return retrofit.create(UsersApiService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideUserToAppointmentApiService(retrofit: Retrofit): UserToAppointmentApiService {
+        return retrofit.create(UserToAppointmentApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserToGroupApiService(retrofit: Retrofit): UserToGroupApiService {
+        return retrofit.create(UserToGroupApiService::class.java)
+    }
+
+
     @Provides
     @Singleton
     fun provideAuthApiService(retrofit: Retrofit): AuthApiService {

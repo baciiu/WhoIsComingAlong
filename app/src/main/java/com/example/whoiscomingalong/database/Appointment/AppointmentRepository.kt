@@ -10,6 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
+import android.util.Log
 
 @Singleton
 class AppointmentRepository @Inject constructor(
@@ -27,6 +28,7 @@ class AppointmentRepository @Inject constructor(
     }
 
     suspend fun insert(appointment: Appointment) {
+        Log.d("APPOINTMENT",appointment.toString())
         appointmentDao.insertAll(appointment)
         syncAppointmentWithServer(appointment)
     }
