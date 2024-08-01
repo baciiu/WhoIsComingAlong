@@ -66,6 +66,7 @@ class UsersRepository @Inject constructor(
             department = request.department
         )
         usersDao.insert(newUser)
+        syncUserWithServer(newUser)
 
         return SignUpResponse(
             userId = newUser.userId.toString(),
@@ -82,7 +83,7 @@ class UsersRepository @Inject constructor(
 
     suspend fun authenticateUser(nickName: String, password: String): Users? {
         fetchUsersFromServer()
-        return usersDao.getUserByNickName(nickName)
+        return usersDao.authenticateUser(nickName,password)
     }
 
     suspend fun getUserByNickName(nickName: String): Users? {
