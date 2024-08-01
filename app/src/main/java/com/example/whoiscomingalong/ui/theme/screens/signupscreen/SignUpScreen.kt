@@ -4,16 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
@@ -21,9 +12,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,10 +26,10 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.whoiscomingalong.LogoRed
-import com.example.whoiscomingalong.Network.HelperData.SignUpResponse
 import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
-import java.util.Date
+import java.text.SimpleDateFormat
+import java.util.*
 
 @Composable
 fun SignUpScreen(navController: NavHostController) {
@@ -179,21 +168,27 @@ fun SignUpScreen(navController: NavHostController) {
 
             Button(
                 onClick = {
-                    signUpScreenViewModel.signUp(
-                        firstName.value,
-                        lastName.value,
-                        dateOfBirth.value as Date,
-                        company.value,
-                        department.value,
-                        email.value,
-                        nickName.value,
-                        password.value
-                    ) { response: SignUpResponse? ->
-                        if (response != null) {
-                            navController.navigate("login_screen")
-                        } else {
-                            Log.e("SignUpScreen", "Sign up failed")
+                    try {
+                        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                        val parsedDateOfBirth = dateFormat.parse(dateOfBirth.value) ?: throw IllegalArgumentException("Invalid date format")
+                        signUpScreenViewModel.signUp(
+                            firstName.value,
+                            lastName.value,
+                            parsedDateOfBirth,
+                            company.value,
+                            department.value,
+                            email.value,
+                            nickName.value,
+                            password.value
+                        ) { success ->
+                            if (success) {
+                                navController.navigate("login_screen")
+                            } else {
+                                Log.e("SignUpScreen", "Sign up failed")
+                            }
                         }
+                    } catch (e: Exception) {
+                        Log.e("SignUpScreen", "Invalid date format")
                     }
                 },
                 modifier = Modifier

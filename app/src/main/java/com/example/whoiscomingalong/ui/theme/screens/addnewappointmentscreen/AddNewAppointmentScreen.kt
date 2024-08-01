@@ -3,29 +3,13 @@ package com.example.whoiscomingalong.ui.theme.screens.addnewappointmentscreen
 import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -44,10 +28,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.whoiscomingalong.LogoRed
 import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
-import com.example.whoiscomingalong.database.Appointment.Appointment
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Date
 import java.util.Locale
 
 @Composable
@@ -62,8 +44,6 @@ fun AddNewAppointmentScreen(
     var selectedRestaurant by remember { mutableStateOf<Int?>(null) }
     var date by remember { mutableStateOf("") }
     var time by remember { mutableStateOf("") }
-    var location by remember { mutableStateOf("") }
-    var creatorId by remember { mutableIntStateOf(0) }
 
     val allGroups by addNewAppointmentScreenViewModel.getAllGroups().collectAsState(initial = emptyList())
     val allRestaurants by addNewAppointmentScreenViewModel.getAllRestaurants().collectAsState(initial = emptyList())
@@ -187,39 +167,27 @@ fun AddNewAppointmentScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            OutlinedTextField(
-                value = location,
-                onValueChange = { location = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 5.dp),
-                label = { Text("Location") },
-                textStyle = TextStyle(color = Color.Black),
-                singleLine = true
-            )
-
-            Spacer(modifier = Modifier.height(20.dp))
-
             Button(
                 onClick = {
                     coroutineScope.launch {
                         if (selectedGroup != null && selectedRestaurant != null) {
+                            try {
                                 val parsedDate = dateFormat.parse(date)
                                 val parsedTime = timeFormat.parse(time)
-                                val appointment = Appointment(
-                                    appointmentId = 0,
-                                    appointmentName = appointmentName,
-                                    groupId = selectedGroup!!,
-                                    restaurantID = selectedRestaurant!!,
-                                    date = parsedDate,
-                                    hourMinute = parsedTime,
-                                    location = location,
-                                    creatorId = creatorId
-                                )
-                                addNewAppointmentScreenViewModel.insertAppointment(appointment)
-
-                                navController.navigate("start_screen")
+                                if (parsedDate != null && parsedTime != null) {
+                                    addNewAppointmentScreenViewModel.insertAppointment(
+                                        appointmentName = appointmentName,
+                                        groupId = selectedGroup!!,
+                                        restaurantId = selectedRestaurant!!,
+                                        date = parsedDate,
+                                        hourMinute = parsedTime
+                                    )
+                                    navController.navigate("start_screen")
+                                }
+                            } catch (e: Exception) {
+                                Log.e("TAG", "Error parsing date/time: ${e.message}")
                             }
+                        }
                     }
                 },
                 modifier = Modifier

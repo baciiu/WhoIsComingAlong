@@ -113,7 +113,7 @@ fun ProfileScreen(
                     }
                     ProfileTextField(
                         label = "Date of Birth",
-                        value = it.dateOfBirth.toString(),
+                        value = dateFormatter.format(it.dateOfBirth),
                         isEditing = isEditing
                     ) { newValue ->
                         try {
