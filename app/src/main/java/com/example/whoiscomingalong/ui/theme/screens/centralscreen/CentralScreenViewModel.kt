@@ -26,15 +26,7 @@ class CentralScreenViewModel @Inject constructor(
     private val _appointments = MutableStateFlow<List<Appointment>>(emptyList())
     val appointments: StateFlow<List<Appointment>> = _appointments
 
-    fun resetDatabase() {
-        viewModelScope.launch {
-            // Clear all tables
-            appDatabase.clearAllData()
-
-        }
-    }
     init {
-        resetDatabase()
         viewModelScope.launch {
             appointmentRepository.getAllAppointments().collect { appointments ->
                 _appointments.value = appointments
