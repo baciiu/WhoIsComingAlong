@@ -3,6 +3,7 @@ package com.example.whoiscomingalong.ui.theme.screens.profilescreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.whoiscomingalong.Network.Session.SessionManager
 import com.example.whoiscomingalong.database.Users.Users
 import com.example.whoiscomingalong.database.Users.UsersRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,12 +16,15 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileScreenViewModel @Inject constructor(
     application: Application,
-    private val usersRepository: UsersRepository
+    private val usersRepository: UsersRepository,
+    private val sessionManager: SessionManager
 ) : AndroidViewModel(application) {
 
-    fun getUserById(userId: Int): Flow<Users?> {
+    fun getUserFromSession(): Flow<Users?> {
         return flow {
-            emit(usersRepository.getUserById(userId).firstOrNull())
+            val userId = sessionManager.getUserId()
+            val user = usersRepository.getUserById(userId).firstOrNull()
+            emit(user)
         }
     }
 

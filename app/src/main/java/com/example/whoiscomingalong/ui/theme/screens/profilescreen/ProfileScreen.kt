@@ -53,7 +53,7 @@ fun ProfileScreen(
     Log.d("TAG", "ProfileScreen")
 
     var isEditing by remember { mutableStateOf(false) }
-    val user by profileScreenViewModel.getUserById(1).collectAsState(initial = null) // Assuming 1 is the userId of the current user
+    val user by profileScreenViewModel.getUserFromSession().collectAsState(initial = null)
 
     val dateFormatter = remember { SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) }
 

@@ -3,6 +3,7 @@ package com.example.whoiscomingalong.ui.theme.screens.centralscreen
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.whoiscomingalong.Network.Session.SessionManager
 import com.example.whoiscomingalong.database.Appointment.Appointment
 import com.example.whoiscomingalong.database.Appointment.AppointmentRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +16,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CentralScreenViewModel @Inject constructor(
     application: Application,
-    private val appointmentRepository: AppointmentRepository
+    private val appointmentRepository: AppointmentRepository,
+    private val sessionManager: SessionManager
 ) : AndroidViewModel(application) {
 
     private val _appointments = MutableStateFlow<List<Appointment>>(emptyList())
@@ -34,7 +36,7 @@ class CentralScreenViewModel @Inject constructor(
     }
 
     fun logout(onLogout: () -> Unit) {
-        // TODO: Implement the logic to logout the user (clearing the session or token)
+        sessionManager.clearSession()
         onLogout()
     }
 }
