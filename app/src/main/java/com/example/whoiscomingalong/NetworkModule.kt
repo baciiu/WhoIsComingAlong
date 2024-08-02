@@ -1,15 +1,19 @@
 package com.example.whoiscomingalong
 
+import android.content.Context
 import com.example.whoiscomingalong.Network.Api.AppointmentApiService
 import com.example.whoiscomingalong.Network.Api.AuthApiService
 import com.example.whoiscomingalong.Network.Api.GroupApiService
 import com.example.whoiscomingalong.Network.Api.RestaurantApiService
+import com.example.whoiscomingalong.Network.Api.UserToAppointmentApiService
+import com.example.whoiscomingalong.Network.Api.UserToGroupApiService
 import com.example.whoiscomingalong.Network.Api.UsersApiService
+import com.example.whoiscomingalong.Network.Session.SessionManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Credentials
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -86,9 +90,35 @@ object NetworkModule {
     fun provideUsersApiService(retrofit: Retrofit): UsersApiService {
         return retrofit.create(UsersApiService::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideUserToAppointmentApiService(retrofit: Retrofit): UserToAppointmentApiService {
+        return retrofit.create(UserToAppointmentApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserToGroupApiService(retrofit: Retrofit): UserToGroupApiService {
+        return retrofit.create(UserToGroupApiService::class.java)
+    }
+
+
     @Provides
     @Singleton
     fun provideAuthApiService(retrofit: Retrofit): AuthApiService {
         return retrofit.create(AuthApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideContext(@ApplicationContext context: Context): Context {
+        return context
+    }
+
+    @Singleton
+    @Provides
+    fun provideSessionManager(context: Context): SessionManager {
+        return SessionManager(context)
     }
 }

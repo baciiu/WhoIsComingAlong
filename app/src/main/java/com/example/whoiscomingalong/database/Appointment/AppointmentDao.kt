@@ -17,7 +17,6 @@ interface AppointmentDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(appointment: Appointment)
 
-
     @Delete
     suspend fun delete(appointment: Appointment)
 }

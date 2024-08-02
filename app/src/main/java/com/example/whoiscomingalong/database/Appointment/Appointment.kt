@@ -34,7 +34,4 @@ data class Appointment(
     val groupId: Int,
     val restaurantID: Int,
     val date: Date,
-    val hourMinute: Date,
-    val creatorId: Int,
-    val location: String
-)
+    val hourMinute: Date)

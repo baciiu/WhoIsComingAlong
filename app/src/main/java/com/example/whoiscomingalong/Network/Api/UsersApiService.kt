@@ -20,4 +20,10 @@ interface UsersApiService {
     @DELETE("/users/{id}")
     fun deleteUser(@Path("id") id: Int): Call<Void>
 
+    @POST("/users/register")
+    fun registerUser(@Body user: Users): Call<Users>
+
+    @POST("/users/login")
+    fun loginUser(@Body user: Users): Call<Void>
+
 }

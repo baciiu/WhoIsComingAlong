@@ -4,24 +4,13 @@ import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -33,6 +22,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.whoiscomingalong.R
 import com.example.whoiscomingalong.WhoIsComingAlongTheme
+import com.example.whoiscomingalong.database.Appointment.Appointment
 
 @Composable
 fun AllAppointmentsScreen(
@@ -47,7 +37,7 @@ fun AllAppointmentsScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(color = Color.White)
-            .verticalScroll(rememberScrollState()) // Enable scrolling
+            .verticalScroll(rememberScrollState())
     ) {
         Column(
             modifier = Modifier
@@ -83,30 +73,43 @@ fun AllAppointmentsScreen(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     appointments.forEach { appointment ->
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(8.dp)
-                                .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
-                                .padding(8.dp)
-                                .clickable {
-                                    navController.navigate("appointment_screen/${appointment.appointmentId}")
-                                }
-                        ) {
-                            Column {
-                                Text(appointment.appointmentName, color = Color.DarkGray)
-                                Text("Creator: ${appointment.creatorId}", color = Color.DarkGray)
-                                Row {
-                                  /*  participants.forEach { participant ->
-                                        Text("Participant: ${participant.nickName}", color = Color.DarkGray)
-                                    }*/
-                                    Text("Participant: ", color = Color.DarkGray)
-                                }
-                            }
-                        }
+                        AppointmentItem(
+                            appointment = appointment,
+                            navController = navController,
+                            allAppointmentsScreenViewModel = allAppointmentsScreenViewModel
+                        )
                     }
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun AppointmentItem(
+    appointment: Appointment,
+    navController: NavController,
+    allAppointmentsScreenViewModel: AllAppointmentsScreenViewModel
+) {
+    val creator by allAppointmentsScreenViewModel.getUserFromSession().collectAsState()
+
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
+            .padding(8.dp)
+            .clickable {
+                navController.navigate("appointment_screen/${appointment.appointmentId}")
+            }
+    ) {
+        Column {
+            Text(appointment.appointmentName, color = Color.DarkGray)
+            creator?.let {
+                Text("Creator: ${it.nickName}", color = Color.DarkGray)
+            }
+            Text("Date: ${appointment.date}", color = Color.DarkGray)
+            Text("Time: ${appointment.hourMinute}", color = Color.DarkGray)
         }
     }
 }

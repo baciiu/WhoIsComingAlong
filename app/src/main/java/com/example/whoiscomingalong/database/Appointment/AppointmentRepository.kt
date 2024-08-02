@@ -10,6 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
+import android.util.Log
 
 @Singleton
 class AppointmentRepository @Inject constructor(
@@ -17,28 +18,29 @@ class AppointmentRepository @Inject constructor(
     private val apiService: AppointmentApiService) {
 
     fun getAllAppointments(): Flow<List<Appointment>> {
-        fetchAppointmentsFromServer()
+        //fetchAppointmentsFromServer()
         return appointmentDao.getAll()
     }
 
     fun getAppointmentById(appointmentId: Int): Flow<Appointment> {
-        fetchAppointmentFromServer(appointmentId)
+        //fetchAppointmentFromServer(appointmentId)
         return appointmentDao.getById(appointmentId)
     }
 
     suspend fun insert(appointment: Appointment) {
+        Log.d("APPOINTMENT",appointment.toString())
         appointmentDao.insertAll(appointment)
-        syncAppointmentWithServer(appointment)
+        //syncAppointmentWithServer(appointment)
     }
 
     suspend fun insertAll(vararg appointments: Appointment) {
+        //syncAppointmentsWithServer(appointments.toList())
         appointmentDao.insertAll(*appointments)
-        syncAppointmentsWithServer(appointments.toList())
     }
 
     suspend fun delete(appointment: Appointment) {
         appointmentDao.delete(appointment)
-        deleteAppointmentFromServer(appointment)
+        //deleteAppointmentFromServer(appointment)
     }
 
     fun fetchAppointmentsFromServer() {
@@ -85,8 +87,6 @@ class AppointmentRepository @Inject constructor(
             date = appointment.date,
             hourMinute = appointment.hourMinute,
             restaurantID = appointment.restaurantID,
-            location = appointment.location,
-            creatorId = appointment.creatorId
             )
         apiService.createAppointment(newApp).enqueue(object : Callback<Appointment> {
             override fun onResponse(call: Call<Appointment>, response: Response<Appointment>) {
