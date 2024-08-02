@@ -90,4 +90,18 @@ Edit Restaurant Screen
 - UI Elements: Restaurant Name, Address, Latitude, Longitude fields, Update Restaurant button.
 - Logic: Fetches restaurant data for editing, updates restaurant information in the database.
 
+## Architecture
+
+![arhitecture drawio-2](https://github.com/user-attachments/assets/06e1941a-fa9b-4a98-8132-5ff09be36459)
+
+
+## Backend Project 
+
+Spring Boot Application : [WhoIsComingAlongBackend](https://github.com/baciiu/WhoIsComingAlongBackend) 
+
+
+### Prerequisites 
+
+- mySQL
+- gradle
 
