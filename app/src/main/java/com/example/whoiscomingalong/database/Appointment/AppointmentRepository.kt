@@ -18,29 +18,29 @@ class AppointmentRepository @Inject constructor(
     private val apiService: AppointmentApiService) {
 
     fun getAllAppointments(): Flow<List<Appointment>> {
-        fetchAppointmentsFromServer()
+        //fetchAppointmentsFromServer()
         return appointmentDao.getAll()
     }
 
     fun getAppointmentById(appointmentId: Int): Flow<Appointment> {
-        fetchAppointmentFromServer(appointmentId)
+        //fetchAppointmentFromServer(appointmentId)
         return appointmentDao.getById(appointmentId)
     }
 
     suspend fun insert(appointment: Appointment) {
         Log.d("APPOINTMENT",appointment.toString())
         appointmentDao.insertAll(appointment)
-        syncAppointmentWithServer(appointment)
+        //syncAppointmentWithServer(appointment)
     }
 
     suspend fun insertAll(vararg appointments: Appointment) {
-        syncAppointmentsWithServer(appointments.toList())
+        //syncAppointmentsWithServer(appointments.toList())
         appointmentDao.insertAll(*appointments)
     }
 
     suspend fun delete(appointment: Appointment) {
         appointmentDao.delete(appointment)
-        deleteAppointmentFromServer(appointment)
+        //deleteAppointmentFromServer(appointment)
     }
 
     fun fetchAppointmentsFromServer() {
